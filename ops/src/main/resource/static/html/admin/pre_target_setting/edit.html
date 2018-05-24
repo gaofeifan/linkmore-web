@@ -1,0 +1,43 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="pre-target-setting-edit-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		<input type="hidden" name="id"/>
+		<div class="layui-form-item">
+	        <label class="layui-form-label">目标车区</label>
+	        <div class="layui-input-block">
+	             <select name="prefectureId" disabled class="input-sm form-control" >
+	             	<option value="0">选择车区</option> 
+	             </select>
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">日目标用户</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="dayUserCount" placeholder="请输入日增用户数" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">月目标用户</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="mounthUserCount"  placeholder="请输入月增用户数" class="layui-input">
+	        </div>
+	    </div>  
+	     <div class="layui-form-item">
+	        <label class="layui-form-label">日目标订单</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="dayOrderCount" placeholder="请输入日增订单数" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">月目标订单</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="mounthOrderCount"  placeholder="请输入月增订单数" class="layui-input">
+	        </div>
+	    </div>  
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="pre-target-setting-update-button" type='button'>更新数据</button>
+        <button class="layui-btn layui-btn-danger" id="pre-target-setting-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

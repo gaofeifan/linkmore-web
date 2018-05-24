@@ -1,0 +1,50 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="task-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="name" placeholder="请输入名称" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">路径</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="path"  placeholder="请输入调用类的路径" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">方法名称</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="methodName" placeholder="请输入方法名称" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">cron</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="cron" placeholder="请输入cron表达式" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">状态</label>
+	         <div class="layui-input-block">
+	            <select name="status" class="layui-input">
+	            	<option value="1">启动</option>
+	            	<option value="0">关闭</option>
+	            </select>
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">描述</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="desc" placeholder="请输入描述" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="hr-line-dashed"></div>
+	    
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="task-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="task-cancel-button" type='button' data-confirm="纭畾瑕佸彇娑堢紪杈戝悧锛�" data-close>取消保存</button>
+    </div>
+</div>

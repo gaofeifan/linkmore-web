@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>凌猫停车</title>
+	<meta name="keywords" content="" />
+    <meta name="description" content="cms Version:1.09" />
+	<meta name="Author" content="view" />
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="Shortcut Icon" href="../favicon.ico" />  
+	<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/css/font/font.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/css/ztree/css.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/css/common.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/theme/default/css/datatable.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/theme/default/css/console.css" media="all">
+</head>
+<body> 
+<div class="linkmore-grid linkmore-wrapper"> 
+	<div style=" text-align:right;">  
+        <div class="layui-inline"> 
+			<button id="add-button" class="layui-btn linkmore-acl layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe608;</i> 添加</button>
+		</div> 
+		<div class="layui-inline"> 
+			<button id="export-button" class="layui-btn linkmore-acl  layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe61e;</i> 导出</button>
+		</div>
+   		</div>
+		 <div style="margin:10px 0px 10px 0px;">
+		    <form class="layui-form layui-inline" >
+			    <div class="layui-input-inline" style="widows: 10%">
+		             <input type="text"  id="search-nickname" value="" placeholder="用户名" class="layui-input">
+		        </div>
+			    <div class="layui-input-inline" style="widows: 10%">
+		             <input type="text"  id="search-mobile" value="" placeholder="手机号" onkeyup="value=value.replace(/[^\d]/g,'')" class="layui-input">
+		        </div>
+		        <div class="layui-input-inline" style="widows: 10%">
+		             <input type="text"  id="search-plateNo" value="" placeholder="车牌号" class="layui-input">
+		        </div>
+		        <div class="layui-input-inline" style="widows: 10%">
+	            		 <input type="text" id="search-order-count" value="" onkeyup="value=value.replace(/[^\d]/g,'')"  placeholder="交易次数" class="layui-input">
+	            </div>
+			 	<div class="layui-input-inline"  style="widows: 10%" >
+			          <select id="search-nature"  class="form-control" >
+					   	<option value="-1">账户性质</option>
+						<option value="1">自然注册</option>
+						<option value="2">4s店注册</option> 
+					  </select>
+			   	 </div>
+			<div class="layui-inline" >
+			   <button type="button" id="search-button" class="layui-btn layui-btn-small"><i class="layui-icon">&#xe615;</i> 搜索</button>
+		    </div> 	
+		      </form>
+		      <div class="layui-inline"  >
+			 <a style="padding-left: 20px;padding-right: 20px;" id="adv_query_but"><i class="layui-icon">&#xe630;</i> 高级搜索</a>
+		    </div>
+ 			<div class="layui-inline"> 
+				<button id="group-button" class="layui-btn layui-btn-small layui-btn-normal" style="background-color:#2E8B57">生成用户组</button>
+			</div>	    	  
+	   	 </div>
+	 	<div id="adv_query" style="border:2px solid #e2e2e2;margin: 15px 20% 15px 20%;background-color:#FFF;border-radius:10px;display: none;" data-status='1'>
+	    	<a id ="adv_close" style="float: right;"><i class="fa fa-2x fa-close" style="margin-right: 5px;color:#333"></i> </a>
+	     	<div style="margin:10px 0px 10px 0px;padding-top: 20px;" > 
+		    <a id ="adv_input_close" style="float: right;margin-right: 16%;">清空筛选</a>
+		    	</div>
+		 <form class="layui-form" id="adv-form">
+		    	<div style="margin:10px 0px 10px 0px;padding-top: 15px;display:none;" > 
+		    	<label class="layui-form-label">账户信息：</label>
+		        <div class="layui-inline ">
+	             <select id="search-userType" name="userType" class="input-sm form-control" >
+	             	<option value="">账户类型</option>
+	             </select>
+	       		</div>
+	       		 <div class="layui-inline" style="padding-left: 50px">
+	             <select id="search-userInd" name="userInd" class="input-sm form-control" >
+	             	<option value="">账户来源</option>
+	             </select>
+	       		</div>
+		    	</div>
+		    <div style="margin:10px 0px 10px 0px;">  
+		    <label class="layui-form-label">时间区间：</label>
+			    <div class="layui-inline">
+		       		<input style="width:167px;font:400 11px system-ui;" type="text" name="startTime" id="search-startTime"   placeholder="开始时间" autocomplete="off" class="input-sm form-control layui-input" >
+			  	</div>
+			  	<div class="layui-inline" style="padding-left: 50px">
+			        <input style="width:167px;font:400 11px system-ui;" type="text" name="endTime" id="search-endTime"  placeholder="结束时间" autocomplete="off" class="input-sm form-control layui-input" >
+			  	</div>
+			</div>
+		    <div style="margin:10px 0px 10px 0px;">  
+		    <label class="layui-form-label">优惠劵：</label>
+		        <div class="layui-inline ">
+	             <select id="search-couponMoney" name="couponMoney" class="input-sm form-control" >
+	             	<option value="">面值</option>
+	             </select>
+	       		</div> 
+	       		 <div class="layui-inline " style="padding-left: 50px">
+	             <select id="search-couponNumber" name = "couponNum"class="input-sm form-control" >
+	             	<option value="">持有数量</option>
+	             </select>
+	       		</div>
+		    	</div>
+		    	<div style="margin:10px 0px 10px 0px;">  
+		    <label class="layui-form-label">使用地：</label>
+		        <div class="layui-inline ">
+	             <select id="search-city" name="city" class="input-sm form-control" lay-filter="search-city-select" >
+	             	<option value="">市</option>
+	             </select>
+	       		</div>
+	       		 <div class="layui-inline " style="padding-left: 50px">
+	             <select id="search-pre" name="pre" lay-filter="filter-pre-name"  >
+	             	<option value="">停车场名称</option>
+	             </select>
+	       		</div>
+		    	</div>
+		    	<div style="margin:10px 0px 10px 0px;">  
+		    <label class="layui-form-label">登录次数：</label>
+		        <div class="layui-inline ">
+		         <input style="width:167px;font:400 11px system-ui;" type="text" id="search-loginStartNum"  onkeyup="value=value.replace(/[^\d]/g,'')" name="loginStartNum" placeholder="起始次数" class="input-sm form-control layui-input">
+	       		</div>
+	       		 <div class="layui-inline " style="padding-left: 50px">
+	             <input style="width:167px;font:400 11px system-ui;" type="text" id="search-loginEndNum"  onkeyup="value=value.replace(/[^\d]/g,'')" name="loginEndNum" placeholder="结束次数" class="input-sm form-control layui-input">
+	       		</div>
+		    	</div>
+		    	<div style="margin:10px 0px 10px 0px;">  
+		    <label class="layui-form-label">下单次数：</label>
+		        <div class="layui-inline ">
+	            <input style="width:167px;font:400 11px system-ui;" type="text" id="search-orederStartNum"  onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="起始次数" name="orederStartNum" class="input-sm form-control layui-input">
+	       		</div>
+	       		 <div class="layui-inline " style="padding-left: 50px">
+	            <input style="width:167px;font:400 11px system-ui;" type="text" id="search-orederEndNum"  onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="结束次数" name="orederEndNum"   class="input-sm form-control layui-input">
+	       		</div>
+		    	</div>
+		    <div style="margin:10px 0px 10px 0px;padding-bottom: 20px">  
+		    <label class="layui-form-label">4s店信息：</label>
+		        <div class="layui-inline ">
+	             <select id="search-fourDet" name="fourDet" class="input-sm form-control" lay-filter="search-region-select" >
+	             	<option value="-1">请选择</option>
+	             	<option value="200001">北京市</option>
+	             	<option value="200003">杭州市</option>
+	             	<option value="200008">湖州市</option>
+	             	<option value="200006">嘉兴市</option>
+	             	<option value="200009">金华市</option>
+	             	<option value="200012">丽水市</option>
+	             	<option value="200013">南京市</option>
+	             	<option value="200005">宁波市</option>
+	             	<option value="200010">衢州市</option>
+	             	<option value="200002">上海市</option>
+	             	<option value="200007">绍兴市</option>
+	             	<option value="200015">深圳市</option>
+	             	<option value="200014">石家庄市</option>
+	             	<option value="200011">台州市</option>
+	             	<option value="200004">温州市</option>
+	             </select>
+	       		</div>
+	       		 <div class="layui-inline " style="padding-left: 50px;">
+	             <select id="search-fourName" name="fourName" class="input-sm form-control" >
+	             	<option value="-1">4s店名称</option>
+	             </select>
+	       		</div>
+		    	</div>
+		</form> 
+	 	</div>
+   	<div class="row shortcut">
+    	<table class="table-box table-sort " id="user-table"></table>
+    </div>
+    <!-- 首页信息 -->
+</div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="/common/layui/layui.js"></script>    
+<script type="text/javascript" src="/js/biz/user.js"></script>
+</body>
+</html>

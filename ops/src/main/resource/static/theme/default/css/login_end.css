@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+html, body {height:100%;width:100%;overflow:hidden!important;overflow-y:hidden !important}
+
+.login-container {background-color:#1c77ac;overflow:hidden;font-family:'微软雅黑', serif;margin:0 auto;min-width:980px;font-size:9pt}
+.login-container ul {display:block;margin:0;padding:0;list-style:none}
+.login-container ul li {display:block;margin:0;padding:0;list-style:none}
+.login-container img {border:0}
+
+.login-container a,
+.login-container a:focus {text-decoration:none;color:#000;outline:none;blur:expression(this.onFocus=this.blur())}
+.login-container a:hover {color:#00a4ac;text-decoration:none}
+.login-container .header {background-color:rgba(54,64,74,0.4);height:47px;position:absolute;position:fixed;top:0;z-index:100;width:100%;}
+.login-container .header span {line-height:47px;text-indent:44px;float:left;font-family:"Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;color:#DDD;font-size:12px}
+.login-container .header ul {float:right;padding-right:30px}
+.login-container .header ul li {float:left;margin-left:20px;line-height:47px}
+.login-container .header ul li a {color:#afc5d2}
+.login-container .header ul li a:hover {color:#fff}
+.login-container .container {background:url(../img/login_end/loginbg.jpg) repeat center center ;width:100%;height:100%;overflow:hidden;position:relative;}
+
+/* 登录表单 */
+.login-container .content {border:1px solid #fff;background-color:#ffffff;border-radius:7px;width:380px;height:300px;margin:auto;position:absolute;top:0;left:0;bottom:0;right:0;}
+.login-container .padding-content{margin: 20px 40px 20px 40px;position:relitave;}
+.login-container .caption{font-family:'微软雅黑';font-size: 30px;color:#379bd7;line-height: 50px;margin-bottom:25px;letter-spacing:6px;text-align: center;}
+.login-container .content ul li {margin-bottom:20px;position:relative}
+.login-container .content ul li input.username {background:url(../img/login_end/loginuser.png) no-repeat;background-size:100%;}
+.login-container .content ul li input.password {background:url(../img/login_end/loginpassword.png) no-repeat;background-size:100%;}
+.login-container .login-input {display:block;width:100%;padding-left:65px;height:45px;line-height:45px;border:1px solid #ffffff;background-color:#fff;border-radius:2px}
+.login-container .button{width:100%;height:40px;margin-top:10px;border:1px solid #ffffff;letter-spacing:8px;font-size: 15px;background-color:#379bd7;color: #fff;border-radius:4px;position:relative}
+.login-container .button:hover {background-color: #278bc7}
+
+/* 底部版权 */
+.login-container .footer {background-color:rgba(54,64,74,0.4);height:47px;line-height:47px;text-align:center;position:fixed;_position:absolute;*position:absolute;bottom:0;width:100%;z-index:100;color:#ffffff;}
