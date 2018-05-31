@@ -42,7 +42,7 @@ layui.use(['layer','msg','form' , 'common'], function() {
 			return false;
 		}
 		layui.common.ajax({
-			url:'/admin/auth/login',
+			url:'http://192.168.1.222:9000/admin/auth/login',
 			data:{username:username,password:password,time:new Date().getTime()},
 			method:'POST',
 			success:function(msg){
