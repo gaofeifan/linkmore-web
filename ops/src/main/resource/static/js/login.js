@@ -12,6 +12,8 @@ layui.use(['layer','msg','form' , 'common'], function() {
 	} 
 	var storage = window.localStorage;
 	var session = window.sessionStorage; 
+	var ip= 'http://192.168.1.199:9000';
+	
 	$('[name="password"]').on(
 		'focus',
 		function() {
@@ -28,7 +30,6 @@ layui.use(['layer','msg','form' , 'common'], function() {
 					.removeClass('right_hand')
 		}
 	);
-	 
 	
 	var login = function(){
 		var username = $("#username").val();
@@ -42,7 +43,7 @@ layui.use(['layer','msg','form' , 'common'], function() {
 			return false;
 		}
 		layui.common.ajax({
-			url:'http://192.168.1.222:9000/admin/auth/login',
+			url: ip + '/admin/auth/login',
 			data:{username:username,password:password,time:new Date().getTime()},
 			method:'POST',
 			success:function(msg){
