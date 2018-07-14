@@ -1,5 +1,5 @@
 layui.config({
-        base: '/js/lib/'
+        base: 'js/lib/'
 }).extend({ 
         msg:'msg',
         common:'common', 

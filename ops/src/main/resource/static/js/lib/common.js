@@ -4,7 +4,7 @@
  * Date: 2017-08-01
  */
 layui.config({
-	base: '/js/lib/'
+	base: 'js/lib/'
 }).extend({  
 	validate:'validate'  
 });
