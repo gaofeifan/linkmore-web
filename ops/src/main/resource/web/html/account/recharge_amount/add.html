@@ -1,0 +1,45 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;height: 400px;overflow-y: scroll;">
+	<form id="amount-add-form" class="layui-form layui-box" style='padding:25px 30px 0 0;' action="#" data-auto="true" method="post">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">充值金额</label>
+	        <div class="layui-input-inline">
+	            <input type="text" id="payment-id" name=payment placeholder="请输入充值金额" class="layui-input">
+	        </div>
+	    </div>
+		<div class="layui-form-item">
+	        <label class="layui-form-label">赠送金额</label>
+	        <div class="layui-input-inline">
+	            <input type="text" id="gift-id" name="gift" placeholder="请输入赠送金额" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">选中状态</label>
+	        <div class="layui-input-inline">
+	             <select name="checked" id="checked-id" class="input-sm form-control">
+	             	<option value="0">未选中</option> 
+	             	<option value="1">选中</option> 
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">排序</label>
+	        <div class="layui-input-inline">
+              <input type="text" id="order_index-id" name="orderIndex" placeholder="请输入排序" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">状态</label>
+	        <div class="layui-input-inline">
+	             <select name="status" id="status-id" class="input-sm form-control">
+	             	<option value="1">启动</option> 
+	             	<option value="0">禁用</option> 
+	             </select>
+	        </div>
+	    </div>
+	</form>
+    <div class="hr-line-dashed"></div> 
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="amount-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

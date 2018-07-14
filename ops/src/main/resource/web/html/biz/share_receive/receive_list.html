@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>凌猫停车</title>
+	<meta name="keywords" content="" />
+    <meta name="description" content="cms Version:1.09" />
+	<meta name="Author" content="view" />
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="Shortcut Icon" href="../favicon.ico" />  
+	<link rel="stylesheet" type="text/css" href="/web/common/layui/css/layui.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/font/font.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/ztree/css.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/common.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/datatable.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/console.css" media="all">
+</head>
+<body> 
+<div class="linkmore-grid linkmore-wrapper"> 
+	<div style=" text-align:right;display:none" id="return">
+		<div class="layui-inline"> 
+			<button id="return-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon"></i> 返回</button>
+		</div>
+   	</div>
+
+
+   	<div class="row shortcut">
+    	<form class="layui-form" id="page-search-form">
+	    	<div style="margin:10px 0px 10px 0px;">  
+	    		<div class="layui-inline">
+		             <select id="lq_type" class="input-sm form-control"> 
+		             	<option value="-1">请选择类型</option>
+						<option value="1">分享领卷专题</option>
+						<option value="2">微信新用户领卷</option>
+						<option value="3">APP新用户领卷</option>
+						<option value="4">微信用户登录APP领卷</option>
+						<option value="5">车区分享领券</option>
+                     </select>
+		        </div>
+		        
+		        <div class="layui-inline" style="margin:0px 35px 0px 0px">
+		             <input type="text" id="title" placeholder="活动标题" class="form-control">
+		        </div>
+		        
+		        <div class="layui-inline" style="margin:0px 35px 0px 0px">
+		             <input type="text" id="username" placeholder="用户名" class="form-control">
+		        </div>
+		        <div class="layui-inline ">
+		             <select id="usage" class="input-sm form-control"> 
+                        <option value="-1">请选择使用状态</option>
+						<option value="0">未使用</option>
+						<option value="1">已使用</option>
+                     </select>
+		        </div>
+				 
+		        <div class="layui-inline" >
+		             <button type="button" id="search-button" class="layui-btn layui-btn-small"><i class="layui-icon">&#xe615;</i> 搜索</button>
+		        </div>  
+	    	</div>
+    	</form> 
+    	<table class="table-box table-sort " id="receive-table"></table>
+    </div>
+    <!-- 首页信息 -->
+</div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="/web/common/layui/layui.js"></script>    
+<script type="text/javascript" src="/web/js/biz/receive.js"></script>
+</body>
+</html>

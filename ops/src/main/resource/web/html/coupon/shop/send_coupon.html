@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>凌猫停车</title>
+<meta name="keywords" content="" />
+<meta name="description" content="cms Version:1.09" />
+<meta name="Author" content="view" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="Shortcut Icon" href="../favicon.ico" />
+<link rel="stylesheet" type="text/css"
+	href="/web/common/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="/web/css/font/font.css"
+	media="all">
+<link rel="stylesheet" type="text/css" href="/web/css/ztree/css.css"
+	media="all">
+<link rel="stylesheet" type="text/css" href="/web/css/common.css"
+	media="all">
+<link rel="stylesheet" type="text/css"
+	href="/web/theme/default/css/datatable.css" media="all">
+<link rel="stylesheet" type="text/css"
+	href="/web/theme/default/css/console.css" media="all">
+</head>
+<body>
+	<div class="linkmore-grid linkmore-wrapper">
+		<form id="temp-send-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		<input type="hidden" name="templateId" id="templateId"/>
+		<input type="hidden" name="status" id="status" value="0"/>
+		<input type="hidden" name="phoneJson" id="phoneJson"/>
+		<input type="hidden" name="phoneSet" id="phoneSet"/>
+		<div class="layui-tab layui-tab-card" id="send_coupon_tab">
+			<ul class="layui-tab-title">
+				<li>目标用户发放</li>
+				<li>批量用户发放</li>
+			</ul>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show" id="target-user-send">
+						<div id="add-target-user">
+							<div class="layui-form-item">
+								<label class="layui-form-label">目标用户</label>
+								<div class="layui-input-inline">
+									<input type="text" lay-verify="phone" name="phone" placeholder="请输入用户手机号"
+										class="layui-input">
+								</div>
+
+								<div class="layui-input-inline">
+									<div id="add-user" class="layui-btn layui-btn-sm">
+										<i class="layui-icon">&#xe654;</i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					 <div class="layui-tab-item">
+			    	<div class="linkmore-grid linkmore-wrapper">
+						<div class="layui-inline">
+							<button id="import-button" type="button" class="layui-btn">导入数据</button>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">导入用户总数</label>
+						<div class="layui-input-inline">
+							<input type="text" name="userCount" id="userCount" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label"></label>
+						<div class="layui-input-block" id="phoneList">
+						</div>
+					</div>
+			    </div>
+					 <div class="layui-form-item text-center">
+						<button class="layui-btn" id="send-button" type='button'>发送</button>
+						<button class="layui-btn layui-btn-danger" id="send-cancel-button"
+							type='button' data-confirm="确定要放弃发送吗？" data-close>放弃</button>
+					</div>
+				</div>
+		</div>
+		</form>
+	</div>
+	<!-- 首页信息 -->
+	<!-- 加载js文件 -->
+	<script type="text/javascript" src="/web/common/layui/layui.js"></script>
+	<script type="text/javascript" src="/web/js/coupon/send.js"></script>
+</body>
+</html>
