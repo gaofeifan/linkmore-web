@@ -193,7 +193,7 @@ layui.define(['jquery', 'layer', 'element', 'msg'], function(exports) {
 				ulHtml += '<dl class="layui-nav-child">';
 				for (var j = 0; j < data[i].children.length; j++) {
 					ulHtml += '<dd>';
-					ulHtml += '<a data-url="' + data[i].children[j].href + '">';
+					ulHtml += '<a data-url="/web' + data[i].children[j].href + '">';
 					if (data[i].children[j].icon !== undefined && data[i].children[j].icon !== '') {
 						if (data[i].children[j].icon.indexOf('fa-') !== -1) {
 							ulHtml += '<i class="fa ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true" ></i>'
@@ -209,7 +209,7 @@ layui.define(['jquery', 'layer', 'element', 'msg'], function(exports) {
 				}
 				ulHtml += '</dl>'
 			} else {
-				var dataUrl = (data[i].href !== undefined && data[i].href !== '') ? 'data-url="' + data[i].href + '"' : '';
+				var dataUrl = (data[i].href !== undefined && data[i].href !== '') ? 'data-url="/web' + data[i].href + '"' : '';
 				ulHtml += '<a ' + dataUrl + '>';
 				if (data[i].icon !== undefined && data[i].icon !== '') {
 					if (data[i].icon.indexOf('fa-') !== -1) {
