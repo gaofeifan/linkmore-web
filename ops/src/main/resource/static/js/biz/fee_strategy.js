@@ -111,7 +111,9 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          			case 3: html = '<label style="color:#009688">按照时段封顶计费</label>';break;
 	          			case 4: html = '<label style="color:rgb(95, 184, 120);">24小时封顶计费</label>';break; 
 	          			case 7: html = '<label style="color:rgb(90, 104, 100);">湖滨银泰计费</label>';break;
-	          			case 8: html = '<label style="color:rgb(50, 154, 60);">西城广场计费</label>';break; 
+	          			case 8: html = '<label style="color:rgb(50, 154, 60);">西城广场计费</label>';break;
+						case 9: html = '<label style="color:rgb(50, 154, 60);">杭州无封顶计费</label>';break; 
+						case 10: html = '<label style="color:rgb(50, 154, 60);">天洋D32时尚购物计费</label>';break; 						
 	          		}
 	          		return html;
 	          	}
@@ -172,7 +174,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			$('#top-daily-div').hide();
 			$('#top-day-input').val('');
 			console.info(type);
-			if(type==2||type==4||type==8){
+			if(type==2||type==4||type==8||type==10){
 				$('#top-daily-div').show();
 			}else if(type==3||type==7){
 				$('#top-day-input').val('0');
@@ -316,14 +318,14 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			$('#top-night-div').hide();
 			$('#top-daily-div').hide();
 			$('#top-day-input').val(''); 
-			if(type==2||type==4||type==8){
+			if(type==2||type==4||type==8||type==10){
 				$('#top-daily-div').show();
 			}else if(type==3||type==7){
 				$('#top-day-input').val('0');
 				$('#top-night-div').show();
 			}
         });
-		if(list[0].type==2||list[0].type==4||list[0].type==8){
+		if(list[0].type==2||list[0].type==4||list[0].type==8 || list[0].type==10){
 			$('#top-daily-div').show();
 		}else if(list[0].type==3||list[0].type==7){
 			$('#top-day-input').val('0');

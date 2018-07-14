@@ -125,6 +125,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			url:'/admin/biz/prefecture/district_list',
 			data:JSON.stringify(cityId),
 			contentType:'application/json; charset=utf-8',
+			dataType:"json",
 			async:false,
 			success:function(list){
 				districtHtml = '<option value="0">选择区域</option>';
@@ -363,13 +364,13 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		laydate.render({
 		    elem: '#add-contract-time',
 		    min: '2015-06-16 23:59:59',
-		    max: new Date(new Date().getTime()+1000*60*60*24*1000).format('yyyy-MM-dd'),
+		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		});
 		laydate.render({
 		    elem: '#add-valid-time',
 		    min: '2015-06-16 23:59:59',
-		    max: new Date(new Date().getTime()+1000*60*60*24*1000).format('yyyy-MM-dd'),
+		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		}); 
 		// 城市切换
@@ -434,6 +435,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			},
     		cityId:{required: true},
     		districtId:{required: true},
+			runtime:{
+		 		required: true,
+		 		digits:true,
+				rangelength: [0,4]
+		 	},
 			address: {
 		 		required: true,
 		 		rangelength: [1,255]
@@ -460,6 +466,20 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 		digits:true,
 		 		rangelength: [0,3]
 		 	},
+			monthRent:{
+		 		required: true,
+		 		digits:true,
+		 		rangelength: [0,6]
+		 	},
+			increase:{
+		 		required: true,
+		 		number:true,
+		 		rangelength: [0,3]
+		 	},
+			strategyDescription:{
+		 		required: true,
+		 		rangelength: [1,72]
+		 	},
 		 	routeDescription:{
 		 		required: true,
 		 		rangelength: [1,72]
@@ -478,6 +498,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     			required: '请填写名称',
     			remote:'名称已经存在'
     		},
+			runtime:{
+		 		required: "请输入运营时长（分钟）",
+		 		digits:"请输入正整数",
+				rangelength: "长度必须是1-4之间"
+		 	},
     		strategyId:{
     			required:"请选择计费策略"
     		},
@@ -516,6 +541,20 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 		required: "请输入离场警示时间",
 		 		digits:"请输入正整数",
 		 		rangelength: "长度必须是1-3之间"
+		 	},
+			monthRent:{
+		 		required: "请输入月租金",
+		 		digits:"请输入正整数",
+		 		rangelength: "长度必须是1-6之间"
+		 	},
+			increase:{
+				required: "请输入租金涨幅",
+				number: "请输入正确的格式",
+				rangelength: "长度必须是1~3之间"
+			},
+			strategyDescription:{
+		 		required: "请输入计费策略描述",
+		 		rangelength: "文字长度必须是1~72之间"
 		 	},
 		 	routeDescription:{
 		 		required: "请输入路线指引描述",
@@ -601,13 +640,13 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     	laydate.render({
 		    elem: '#edit-contract-time',
 		    min: '2015-06-16 23:59:59',
-		    max: new Date(new Date().getTime()+1000*60*60*24*1000).format('yyyy-MM-dd'),
+		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		});
 		laydate.render({
 		    elem: '#edit-valid-time',
 		    min: '2015-06-16 23:59:59',
-		    max: new Date(new Date().getTime()+1000*60*60*24*1000).format('yyyy-MM-dd'),
+		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		}); 
     	// 计费系统
@@ -618,22 +657,22 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     	form.render('select');
     	// 详情
 		pre_detail(datatable.selected()[0].id,function(data){
-			var list = data;  
-			getDistrict(list[0].cityId);
+			var preDetail = data;  
+			getDistrict(preDetail.cityId);
 			$('#prefecture-edit-form select[name=districtId]').html(districtHtml);
 			
     		layui.common.set({
     			id:'prefecture-edit-form',
-    			data:list[0]
+    			data:preDetail
     		});
     		form.render('checkbox');
     		form.render('select');
     		// 格式化日期
-    		$('#prefecture-edit-form input[name=dateContract]').val(dataf(list[0].dateContract));
-    		$('#prefecture-edit-form input[name=validTime]').val(dataf(list[0].validTime));
+    		$('#prefecture-edit-form input[name=dateContract]').val(dataf(preDetail.dateContract));
+    		$('#prefecture-edit-form input[name=validTime]').val(dataf(preDetail.validTime));
     		// 图片显示
-    		$("#edit_route_guidance_img").attr('src',list[0].routeGuidance);
-    		$("#edit_pre_image_img").attr('src',list[0].imageUrl);
+    		$("#edit_route_guidance_img").attr('src',preDetail.routeGuidance);
+    		$("#edit_pre_image_img").attr('src',preDetail.imageUrl);
     	});
 		// 城市切换绑定
 		form.on('select(pre_edit_city)', function(data) {
@@ -695,9 +734,15 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			},
     		cityId:{required: true},
     		districtId:{required: true},
+			
 			address: {
 		 		required: true,
 		 		rangelength: [1,255]
+		 	},
+			runtime:{
+		 		required: true,
+		 		digits:true,
+				rangelength: [0,4]
 		 	},
 		 	longitude: {
 				required: true,
@@ -721,6 +766,20 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 		digits:true,
 		 		rangelength: [0,3]
 		 	},
+			monthRent:{
+		 		required: true,
+		 		digits:true,
+		 		rangelength: [0,6]
+		 	},
+			increase:{
+		 		required: true,
+		 		number:true,
+		 		rangelength: [0,3]
+		 	},
+			strategyDescription:{
+		 		required: true,
+		 		rangelength: [1,72]
+		 	},
 		 	routeDescription:{
 		 		required: true,
 		 		rangelength: [1,72]
@@ -739,6 +798,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     			required: '请填写名称',
     			remote:'名称已经存在'
     		},
+			runtime:{
+		 		required: "请输入运营时长（分钟）",
+		 		digits:"请输入正整数",
+				rangelength: "长度必须是1-4之间"
+		 	},
     		strategyId:{
     			required:"请选择计费策略"
     		},
@@ -777,6 +841,20 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 		required: "请输入离场警示时间",
 		 		digits:"请输入正整数",
 		 		rangelength: "长度必须是1-3之间"
+		 	},
+			monthRent:{
+		 		required: "请输入月租金",
+		 		digits:"请输入正整数",
+		 		rangelength: "长度必须是1-6之间"
+		 	},
+			increase:{
+				required: "请输入租金涨幅",
+				number: "请输入正确的格式",
+				rangelength: "长度必须是1~3之间"
+			},
+			strategyDescription:{
+		 		required: "请输入计费策略描述",
+		 		rangelength: "文字长度必须是1~72之间"
 		 	},
 		 	routeDescription:{
 		 		required: "请输入路线指引描述",

@@ -51,14 +51,14 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		if(searchPersonName!=''){
 			filter = new Object();
 			filter.property = 'personName';
-			filter.value = '%'+searchName +'%';
+			filter.value = '%'+searchPersonName +'%';
 			filters.push(filter);
 		} 
 		var searchInterfaceName = $('#search-interface-name').val();
 		if(searchInterfaceName!=''){
 			filter = new Object();
 			filter.property = 'interfaceName';
-			filter.value = '%'+searchLockSn +'%';
+			filter.value = '%'+searchInterfaceName +'%';
 			filters.push(filter);
 		}
 		var searchStartTime = $('#search-startTime').val();

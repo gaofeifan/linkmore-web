@@ -73,7 +73,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          		return html;
 	          	}
 			},
-			{ sTitle: '描述',   mData: 'desc'}
+			{ sTitle: '描述',   mData: 'description'}
 			
 		],
 		orderIndex:4,

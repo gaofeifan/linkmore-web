@@ -34,7 +34,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	var prefList = null;
 	var prefMap = layui.common.map();
 	layui.common.ajax({
-		url:'/admin/account/order/prefecture_list',
+		url:'/admin/biz/prefecture/selectList',
 		data:{time:new Date().getTime()}, 
 		async:false,
 		success:function(list){

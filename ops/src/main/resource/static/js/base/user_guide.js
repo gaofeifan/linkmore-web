@@ -69,7 +69,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	});
 	  
 	var addServerParams = function(data){  
-		
 		var filters = new Array();
 		var filter = new Object();
 		filter.property = 'parentId';
@@ -133,6 +132,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          		return html;
 	          	}
 			},
+			{ sTitle: '路径', bVisible:true,  mData: 'url'}, 
 			{
 				sTitle: '创建时间',
 	          	mData: 'createTime' ,
@@ -197,6 +197,13 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		$('#user-guide-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
+		form.on('select(type)', function(data) {
+			if(data.value == 0){
+				$("#hide-url").hide();
+			}else{
+				$("#hide-url").show();
+			}
+		})
 		$('#user-guide-add-button').bind('click',function(){
         	if(validate.valid()){  
         		layui.common.ajax({
@@ -264,16 +271,26 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     
     
     var editInit = function(validate,lindex){  
-		var list = datatable.selected();   
+		var list = datatable.selected();
+		if(list[0].type == 1){
+			$("#hide-url").show();
+		}
 		layui.common.set({
 			id:'user-guide-edit-form',
 			data:list[0]
 		}); 
-		form.render('checkbox');
+		form.render('checkbox');	
 		form.render('select');
 		$('#user-guide-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
+		form.on('select(type)', function(data) {
+			if(data.value == 0){
+				$("#hide-url").hide();
+			}else{
+				$("#hide-url").show();
+			}
+		})
 		$('#user-guide-update-button').bind('click',function(){
         	if(validate.valid()){  
         		layui.common.ajax({

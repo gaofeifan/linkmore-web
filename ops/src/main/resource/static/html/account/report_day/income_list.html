@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>凌猫停车</title>
+	<meta name="keywords" content="" />
+    <meta name="description" content="cms Version:1.09" />
+	<meta name="Author" content="view" />
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="Shortcut Icon" href="../favicon.ico" />  
+	<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/css/font/font.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/css/ztree/css.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/css/common.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/theme/default/css/datatable.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/theme/default/css/console.css" media="all">
+</head>
+<body> 
+<div class="linkmore-grid linkmore-wrapper"> 
+	<!--
+	<div style=" text-align:right;">   
+		<div class="layui-inline"> 
+			<button id="export-button" class="layui-btn linkmore-acl layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe61e;</i> 导出</button>
+		</div>
+   	</div>
+	-->
+	<form class="layui-form" id="clazz-search-form">
+		<div style="margin:10px 0px 10px 0px;"> 
+			<div class="layui-input-inline" style="width:80px;">
+				城市：
+			</div>
+			<div class="layui-inline " style="width:160px;">
+				 <select id="search-city" class="input-sm form-control" lay-filter="city" >
+					<option value="0">选择城市</option> 
+				 </select>
+			</div>
+			<div class="layui-input-inline" style="width:80px;">
+				车区：
+			</div>
+			<div class="layui-inline " style="width:160px;">
+				 <select id="search-prefecture" class="input-sm form-control"  lay-filter="pre">
+					<option value="0">选择车区</option> 
+				 </select>
+			</div>  
+			
+			<div class="layui-inline " style="width:50%">
+				<div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+				  <ul class="layui-tab-title">
+					
+				  </ul>
+				</div>
+			</div>  
+			<div class="layui-input-inline" style="width:80px;">
+				开始时间：
+			</div>
+			<div class="layui-input-inline" style="width:160px;">
+				<input readonly class="layui-input" placeholder="请输入开始时间" id="search-start">
+			</div>
+			<div class="layui-input-inline" style="width:80px;">
+				截止时间：
+			</div>
+			<div class="layui-input-inline" style="width:160px;">
+				<input readonly class="layui-input" placeholder="请输入截止时间" id="search-end">
+			</div>
+			
+			<div class="layui-inline" >
+				 <button type="button" class="layui-btn layui-btn-small search_btn"><i class="layui-icon">&#xe615;</i> 搜索</button>
+			</div>  
+		</div>
+	</form> 
+		
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+	  <legend>收入信息</legend>
+	</fieldset>
+		 
+		<div class="layui-tab layui-tab-card" lay-filter="detail">
+		  <ul class="layui-tab-title">
+			<li class="layui-this" lay-id-tab="1">成本</li>
+			<li lay-id-tab="2">交易额</li>
+			<li lay-id-tab="3">交易额占成本</li>
+			<li lay-id-tab="4">现金收入</li>
+			<li lay-id-tab="5">现金收入占交易额</li>
+			<li lay-id-tab="6">现金收入占成本</li>
+			<li lay-id-tab="7">费用</li>
+			<li lay-id-tab="8">拉新成本</li>
+		  </ul>
+		  <div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<table class="table-box table-sort" id="costTable"></table>		
+			</div>
+			<div class="layui-tab-item">
+				<table class="table-box table-sort" id="dealTable"></table>
+			</div>
+			<div class="layui-tab-item">
+				<table class="table-box table-sort" id="dealCostTable"></table>
+			</div>
+			<div class="layui-tab-item">
+				<table class="table-box table-sort" id="cashTable"></table>
+			</div>
+			<div class="layui-tab-item">
+				<table class="table-box table-sort" id="cashDealTable"></table>
+			</div>
+			<div class="layui-tab-item">
+				<table class="table-box table-sort" id="cashCostTable"></table>
+			</div>
+			<div class="layui-tab-item">
+				<table class="table-box table-sort" id="feeTable"></table>
+			</div>
+			<div class="layui-tab-item">
+				<table class="table-box table-sort" id="pullCostTable"></table>
+			</div>
+		</div>
+		
+    </div>
+    <!-- 首页信息 -->
+</div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="/common/layui/layui.js"></script>    
+<script type="text/javascript" src="/js/account/income_analysis.js"></script>
+</body>
+</html>

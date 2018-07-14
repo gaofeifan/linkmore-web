@@ -158,10 +158,10 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          	bSortable: true,
 	          	mRender:function(mData,type,full){ 
 	          		var html = ''; 
-	          		if(full.isDefault==0){
+	          		if(full.isDefault==1){
+						html = '<label style="color:red;">是</label>'; 
+	          		} else {
 	          			html = '<label style="color:green;">否</label>'; 
-	          		} else if(full.isDefault==1){
-	          			html = '<label style="color:red;">是</label>'; 
 	          		}
 	          		return html;
 	          	}

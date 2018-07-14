@@ -48,7 +48,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 	var prefList = null;
 	var prefMap = layui.common.map();
 	layui.common.ajax({
-		url:'/admin/account/order/prefecture_list',
+		url:'/admin/admin/stall_assign/prefecture_list',
 		data:{time:new Date().getTime()}, 
 		async:false,
 		success:function(list){
@@ -68,7 +68,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 	});
 	var initStall = function(id){
 		layui.common.ajax({
-			url:'/admin/account/order/stall_list',
+			url:'/admin/admin/stall_assign/stall_list',
 			data:{time:new Date().getTime(),pid:id}, 
 			async:false,
 			success:function(list){ 
