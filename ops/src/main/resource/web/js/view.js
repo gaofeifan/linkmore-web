@@ -380,7 +380,7 @@ layui.use(['elements','common','msg', 'jquery', 'layer', 'navbar', 'navtab', 'fo
 	}
 	$('#changePassword').unbind('click').bind('click',function(){
 		var param = new Object();
-    	param.url = '../html/updatePassword.html';
+    	param.url = '/web/html/updatePassword.html';
     	param.title = '修改密码'; 
     	param.width = 500;
     	param.init = updateInit;
