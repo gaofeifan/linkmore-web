@@ -3881,7 +3881,7 @@ layui.define(['jquery','common'], function(exports) {
 				if(xhr.status==401){
 					window.sessionStorage.removeItem('linkmore-login-status');
                 	layui.msg.alert('您还未登录,请先登录',function(){
-                		window.location.href = '/login.html';
+                		window.location.href = '/web/login.html';
                 	});
                 	return false;
 				}

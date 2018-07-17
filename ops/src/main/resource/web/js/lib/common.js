@@ -121,7 +121,7 @@ layui.define(['layer','validate','jquery'], function(exports) {
 	                401: function(){
 	                	window.sessionStorage.removeItem('linkmore-login-status');
 	                	layui.msg.alert('您还未登录,请先登录',function(){
-	                		window.location.href = '/login.html';
+	                		window.location.href = '/web/login.html';
 	                	});
 	                },
 	                403: function(){
@@ -162,7 +162,7 @@ layui.define(['layer','validate','jquery'], function(exports) {
 	                401: function(){
 	                	window.sessionStorage.removeItem('linkmore-login-status');
 	                	layui.msg.alert('您还未登录,请先登录',function(){
-	                		window.location.href = '/login.html';
+	                		window.location.href = '/web/login.html';
 	                	});
 	                },
 	                403: function(){
