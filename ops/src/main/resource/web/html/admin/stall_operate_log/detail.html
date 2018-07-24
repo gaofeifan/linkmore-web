@@ -1,0 +1,53 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="stall-operate-detail-form" class="layui-form layui-box" style='padding:25px 30px 0 0;' action="#" data-auto="true" method="post">
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">车位名称</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="stallName" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">操作人</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="operator" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">来源</label>
+	        <div class="layui-input-inline">
+	             <select name="source" class="input-sm form-control" >
+		             	<option value="1">后台</option>
+		             	<option value="2">APP电池更换</option> 
+		             	<option value="3">APP车区管理</option> 
+	             </select>
+	        </div>
+	        <label class="layui-form-label">操作</label>
+	        <div class="layui-input-inline">
+	             <select name="operation" class="input-sm form-control" >
+	             	<option value="1">上线</option> 
+	             	<option value="2">下线</option> 
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">状态</label>
+	        <div class="layui-input-inline">
+	        	<select name="status" class="input-sm form-control" >
+	             	<option value="1">成功</option> 
+	             	<option value="0">失败</option> 
+	             </select>
+	        </div>
+	        <label class="layui-form-label">创建时间</label>
+	        <div class="layui-input-inline">
+	        	<input type="text" name="createTime" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">描述</label>
+		    <div class="layui-input-block">
+		      <textarea name="remark" class="layui-textarea" ></textarea>
+		    </div>
+		</div>
+	</form>
+	<div class="layui-form-item text-center">
+        <button class="layui-btn layui-btn-danger" id="stall-operate-cancel-detail-button" type='button' data-close>关闭</button>
+    </div>
+</div>

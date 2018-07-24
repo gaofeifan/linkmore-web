@@ -1,0 +1,132 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;height: 400px;overflow-y: scroll;">
+	<form id="application-add-form" class="layui-form layui-box" style='padding:25px 30px 0 0;' action="#" data-auto="true" method="post">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">应用名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" id="name" name="name" placeholder="请输入名称" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">用户组</label>
+	        <div class="layui-input-inline">
+	             <select name="userGroupId" id="userGroupId" class="input-sm form-control">
+	             	<option value="">请选择</option> 
+	             </select>
+	        </div>
+	        <label class="layui-form-label">控制属性</label>
+	        <div class="layui-input-inline">
+	             <select name="controlAttribute" id="controlAttribute" class="input-sm form-control" >
+	             	<option value="1">禁止用户约车，显示车位紧张</option> 
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">受控区域</label>
+	        <div class="layui-input-inline">
+	             <select name="controlArea" id="controlArea" class="input-sm form-control" lay-filter="area">
+	             	<option value="1">所有停车场</option> 
+	             	<option value="2">停车场组</option> 
+	             	<option value="3">停车场</option> 
+	             </select>
+	        </div>
+	        <!-- 2停车场组 -->
+	        <div id="pre_group" style="display: none;">
+		        <label class="layui-form-label">停车场组</label>
+		        <div class="layui-input-inline">
+		             <select name="preGroupId" id="preGroupId" class="input-sm form-control" >
+		             	<option value="">请选择</option> 
+		             </select>
+		        </div>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	    	<!-- 3停车场 -->
+	        <div id="pre" style="display: none;">
+	        	<label class="layui-form-label">城市</label>
+		        <div class="layui-input-inline">
+		             <select name="cityId" class="input-sm form-control" lay-filter="city">
+		             	<option value="-1">请选择</option> 
+		             </select>
+		        </div>
+		        <label class="layui-form-label">专区</label>
+		        <div class="layui-input-inline">
+		             <select name="preId" id="preId" class="input-sm form-control" >
+		             	<option value="">请选择</option> 
+		             </select>
+		        </div>
+	        </div>
+	    </div>
+	    
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">时间周期</label>
+	        <div class="layui-input-inline">
+	             <select name="cycleTime" id="cycleTime" class="input-sm form-control" lay-filter="cycle_time">
+	             	<option value="1">所有时间</option> 
+	             	<option value="2">自定义时间</option> 
+	             </select>
+	        </div>
+	        <div>
+		    	<label class="layui-form-label cycle-time" style="display: none;">
+		    		<a style="javascript:;" id="add_cycle_time">添加时间段</a>
+		    	</label>
+	        </div>
+	    </div>
+	    <div id="time">
+	    	<div class='cycle-time' style="display: none;"><hr>
+			    <div class="layui-form-item">
+			        <label class="layui-form-label">开始</label>
+			        <div class="layui-input-inline">
+			             <select name="start" class="input-sm form-control start" lay-filter="start">
+			             	<option value="1">周一</option> 
+			             	<option value="2">周二</option> 
+			             	<option value="3">周三</option> 
+			             	<option value="4">周四</option> 
+			             	<option value="5">周五</option> 
+			             	<option value="6">周六</option> 
+			             	<option value="7">周日</option> 
+			             </select>
+			        </div>
+			        <label class="layui-form-label">结束</label>
+			        <div class="layui-input-inline">
+			             <select name="end" class="input-sm form-control end" lay-filter="end">
+			             	<option value="7">周日</option> 
+			             	<option value="1">周一</option> 
+			             	<option value="2">周二</option> 
+			             	<option value="3">周三</option> 
+			             	<option value="4">周四</option> 
+			             	<option value="5">周五</option>
+			             	<option value="6">周六</option>
+			             </select>
+			        </div>
+			    </div>
+			    <div class="layui-form-item">
+			    	<label class="layui-form-label">开始时间</label>
+			        <div class="layui-input-inline">
+			             <input type="text" name="startTime" class="layui-input startTime" value="00:00:00" onclick="WdatePicker({skin:'whyGreen',dateFmt:'H:mm:ss'})">
+			        </div>
+			        <label class="layui-form-label">结束时间</label>
+			        <div class="layui-input-inline">
+			             <input type="text" name="endTime" class="layui-input endTime" value="23:59:59" onclick="WdatePicker({skin:'whyGreen',dateFmt:'H:mm:ss'})">
+			        </div>
+			    </div>
+	    	</div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">停车概率</label>
+	        <div class="layui-input-inline">
+	            <select name="probability" id="probability" class="input-sm form-control" >
+	             	<option value="10">10%</option> 
+	             	<option value="20">20%</option> 
+	             	<option value="30">30%</option> 
+	             	<option value="50">50%</option> 
+	             	<option value="80">80%</option> 
+	             </select>
+	        </div>
+	    </div>
+	</form>
+    <div class="hr-line-dashed"></div> 
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="application-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="application-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

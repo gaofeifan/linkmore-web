@@ -1,0 +1,49 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="menu-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	    <input type="hidden" name="level"/>
+	     <input type="hidden" name="parentId"/>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="name" placeholder="请输入名称" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">样式</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="icon"  placeholder="请输入样式名" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">排序</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="orderIndex"  placeholder="请输入排序数字" value="10" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">页面</label>
+	        <div class="layui-input-inline">
+	             <select name="categoryId" lay-filter="categoryId" class="input-sm form-control" >
+	             	<option value="0">选择分类</option> 
+	             </select>
+	        </div>  
+	        <div class="layui-input-inline">
+	             <select name="pageId" lay-filter="pageId" class="input-sm form-control" >
+	             	<option value="0">选择页面</option> 
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">状态</label>
+		    <div class="layui-input-block">
+		    	<input type="checkbox" name="status" value="1" checked=""  lay-skin="switch" lay-text="启用|禁用">
+			</div>
+	    </div>
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="menu-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="menu-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

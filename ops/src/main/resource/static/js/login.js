@@ -1,5 +1,5 @@
 layui.config({
-	base: '/js/lib/'
+	base: '/web/js/lib/'
 }).extend({ 
 	msg:'msg',
 	common:'common'
@@ -43,7 +43,7 @@ layui.use(['layer','msg','form' , 'common'], function() {
 			return false;
 		}
 		layui.common.ajax({
-			url: ip + '/admin/auth/login',
+			url: '/admin/auth/login',
 			data:{username:username,password:password,time:new Date().getTime()},
 			method:'POST',
 			success:function(msg){
@@ -52,7 +52,7 @@ layui.use(['layer','msg','form' , 'common'], function() {
 		            storage.setItem("username",msg.map.username);
 					layui.msg.success('登录成功');
 					window.setTimeout(function(){
-						window.location.href = '/main.html';
+						window.location.href = '/web/main.html';
 					},1000);
 					
 				}else{
