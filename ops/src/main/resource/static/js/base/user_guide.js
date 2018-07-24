@@ -69,7 +69,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	});
 	  
 	var addServerParams = function(data){  
-		
 		var filters = new Array();
 		var filter = new Object();
 		filter.property = 'parentId';
@@ -196,6 +195,9 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		}); 
 		$('#user-guide-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
+		});
+		$('select[name="type"').bind('click',function(){
+			alert($("select[name='type']").val());
 		});
 		$('#user-guide-add-button').bind('click',function(){
         	if(validate.valid()){  

@@ -12,7 +12,7 @@ layui.use(['layer','msg','form' , 'common'], function() {
 	} 
 	var storage = window.localStorage;
 	var session = window.sessionStorage; 
-	var ip= 'http://192.168.1.199:9000';
+	var ip= 'http://192.168.1.222:9000';
 	
 	$('[name="password"]').on(
 		'focus',
