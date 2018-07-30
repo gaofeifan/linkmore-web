@@ -1,0 +1,41 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="admin-staff-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">目标企业</label>
+	        <div class="layui-input-block">
+	        	<select id="enterprise-id"  lay-filter="enterpriseId" name="entId" class="layui-input">
+	        		<option value="">请选择企业</option>
+	        	</select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">手机号</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="mobile" placeholder="请输入手机号" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">姓名</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="realname"  placeholder="请输入姓名" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">状态</label>
+		    <div class="layui-input-block">
+		    	<input type="checkbox" name="status" value="1" checked=""  lay-skin="switch" lay-text="启用|禁用">
+			</div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">类型</label>
+		    <div class="layui-input-block">
+		    	<input type="checkbox" name="type" value="1" checked=""  lay-skin="switch" lay-text="普通员工|运营人员">
+			</div>
+	    </div>
+	    <div class="hr-line-dashed"></div>
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="admin-staff-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="admin-staff-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>
