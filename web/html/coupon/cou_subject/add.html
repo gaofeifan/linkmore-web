@@ -1,0 +1,53 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="subject-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">标题</label>
+	        <div class="layui-input-inline">
+	        	 <input type="text" name="title" placeholder="请输入标题" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">状态</label>
+	        <div class="layui-input-inline">
+	             <select name="status" class="input-sm form-control" disabled>
+	             	<option value="0">下线</option>
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">摘要</label>
+	        <div class="layui-input-inline">
+	        	 <input type="text" name="intro" placeholder="请输入摘要" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">类别</label>
+	        <div class="layui-input-inline">
+	             <select name="type" class="input-sm form-control" >
+	             	<option value="0">请选择</option>
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">专题停车券</label>
+	        <div class="layui-input-block">
+	             <select name="templateId" class="input-sm form-control" >
+	             	<option value="0">请选择</option>
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	       <label class="layui-form-label">活动url</label>
+	        <div class="layui-input-block">
+	        	 <input type="text" name="url" placeholder="请输入摘要" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">图片url</label>
+	        <div class="layui-input-block">
+	        	 <input type="text" name="imgUrl" placeholder="请输入摘要" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="hr-line-dashed"></div> 
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="subject-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="subject-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

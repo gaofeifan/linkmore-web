@@ -1,0 +1,44 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="menu-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	     <input id="enterpriseId" type="hidden" name="enterpriseName"/>
+	     <input id="isCreate" type="hidden" name="isCreate" value="0"/>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">企业名称</label>
+	        <div class="layui-input-block">
+	        	<select id="enterprise-name" name="enterpriseId" class="layui-input">
+	        		<option value="">请选择企业</option>
+	        	</select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">合同编号</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="serialNumber" placeholder="请输入合同编号" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">订单金额</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="dealPayAmount"  placeholder="请输入订单金额"  class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">赠送金额</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="dealGiftAmount"  placeholder="请输入赠送金额"  class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">备注</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="remark"  placeholder="请输入备注" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="menu-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="menu-cancel-button" type='button' data-confirm="" data-close>取消保存</button>
+    </div>
+</div>
