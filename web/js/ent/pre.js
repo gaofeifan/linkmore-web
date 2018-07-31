@@ -109,11 +109,11 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		url:'/admin/ent/prefectrue/list', 
 		key:'id',
 		columns:[
-			{ sTitle: 'ID',   mData: 'id'}, 
-			{ sTitle: '企业ID',   mData: 'entId'}, 
+			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
+			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
 			{ sTitle: '企业名称',   mData: 'entName'}, 
 			{ sTitle: '车区ID',   
-			  mData: 'preId'
+			  mData: 'preId', bVisible:false
 			}, 
 			{ sTitle: '车区名称',   mData: 'preName'}, 
 			{
@@ -158,17 +158,10 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		form.render('select');
 		$("#prefectrue-id").html(preHtml);
 		form.render('select');
-		form.on('select(enterpriseId)', function(data){
-			$.each(enterpriseList,function(index){
-				if($(this).id == data.value){
-					$("input[name='entName']").val($(this).name);
-				}
-			})
-		})
 		form.on('select(prefectrueId)', function(data){
-			$.each(enterpriseList,function(index){
-				if($(this).id == data.value){
-					$("input[name='preName']").val($(this).name);
+			$.each(preList,function(index,pre){
+				if(pre.id == data.value){
+					$("#preName").val(pre.name);
 				}
 			})
 		})
@@ -248,17 +241,17 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		$('#admin-pre-cancel-edit-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
-		form.on('select(enterpriseId)', function(data){
+		/*form.on('select(enterpriseId)', function(data){
 			$.each(enterpriseList,function(index,ent){
 				if($(this).id == data.value){
-					$("input[name='entName']").val($(this).name);
+					$("#preName").val($(this).name);
 				}
 			})
-		})
+		})*/
 		form.on('select(prefectrueId)', function(data){
-			$.each(enterpriseList,function(index){
-				if($(this).id == data.value){
-					$("input[name='preName']").val($(this).name);
+			$.each(preList,function(index,pre){
+				if(pre.id == data.value){
+					$("#preName").val(pre.name);
 				}
 			})
 		})

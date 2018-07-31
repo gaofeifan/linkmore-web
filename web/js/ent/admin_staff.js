@@ -152,8 +152,9 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		url:'/admin/ent/staff/list', 
 		key:'id',
 		columns:[
-			{ sTitle: 'ID',   mData: 'id'}, 
-			{ sTitle: '企业ID',   mData: 'entId'}, 
+			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
+			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
+			{ sTitle: '企业名称',   mData: 'entName'}, 
 			{ sTitle: '手机号',   mData: 'mobile'}, 
 			{ sTitle: '类型',   
 			  mData: 'type',
@@ -392,12 +393,76 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			});
 		}); 
     });
-	/*
-	 * 删除
-	 */
 	$('#delete-button').bind('click',function(){
 		var list = datatable.selected(); 
 		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,menu){
+			ids.push(menu.id);
+		});
+		layui.msg.confirm('您确定要删除',function(){
+			layui.common.ajax({
+				url:'/admin/ent/staff/delete',
+				data:JSON.stringify(ids),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(function(){
+    						location.reload(false);
+    					},1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					
+				}
+			});
+		}); 
+	});
+	/*
+	 * 删除
+	 */
+	/*$('#delete-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length != 1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids;
+		$.each(list,function(index,page){
+			ids = page.id;
+		});
+		console.log(ids);
+		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
+			layui.common.ajax({
+				url:'/admin/ent/staff/delete',
+				data:{time:new Date().getTime(),id:ids},  
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});*/
+	/*
+	 * 启动
+	 */
+	$('#start-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length != 1){
 			layui.msg.error('请至少选择一条记录');
 			return false;
 		}
@@ -407,7 +472,39 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		});
 		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
 			layui.common.ajax({
-				url:'/admin/ent/staff/delete',
+				url:'/admin/ent/staff/start',
+				data:JSON.stringify(ids),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});
+	/*
+	 * 禁用
+	 */
+	$('#stop-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length != 1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,page){
+			ids.push(page.id);
+		});
+		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
+			layui.common.ajax({
+				url:'/admin/ent/staff/stop',
 				data:JSON.stringify(ids),
 				contentType:'application/json; charset=utf-8',
 				success:function(res){

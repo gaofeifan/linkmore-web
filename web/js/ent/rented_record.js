@@ -85,17 +85,17 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	var lastCheckedId = null;
 	
 	var datatable = layui.datatable.init({
-		id:'pre-table',
+		id:'record-table',
 		url:'/admin/ent/rented-record/list', 
 		key:'id',
 		columns:[
-			{ sTitle: 'ID',   mData: 'id'}, 
+			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
 			{ sTitle: '车牌',   mData: 'plateNo'}, 
-			{ sTitle: '企业ID',   mData: 'entId'}, 
+			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
 			{ sTitle: '企业名称',   mData: 'entName'}, 
-			{ sTitle: '车区ID',  mData: 'preId'}, 
+			{ sTitle: '车区ID',  mData: 'preId', bVisible:false}, 
 			{ sTitle: '车区名称',   mData: 'preName'}, 
-			{ sTitle: '车位ID',  mData: 'stallId'}, 
+			{ sTitle: '车位ID',  mData: 'stallId', bVisible:false}, 
 			{ sTitle: '车位名称',   mData: 'stallName'}, 
 			{
 				sTitle: '创建时间',

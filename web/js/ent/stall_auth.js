@@ -116,10 +116,10 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 					url: "/admin/ent/operate-auth/resource",
 					data:{time:new Date().getTime(),id:this.value},  
 					success: function(data) {
-						var userAuths = data.pres;
+						var userAuths = data.stas;
 						$.each(userAuths,function(index,ua){ 
 							console.log(ua)
-	        				nodes = tree.getNodesByParam("id",ua.id,null);
+	        				nodes = tree.getNodesByParam("id",ua.stallId,null);
 	        				if(nodes.length>0){
 		        				tree.checkNode(nodes[0], true, true);
 	        				} 
@@ -138,8 +138,8 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		url:'/admin/ent/operate-auth/list', 
 		key:'id',
 		columns:[
-			{ sTitle: 'ID',   mData: 'id'}, 
-			{ sTitle: '企业ID',   mData: 'entId'}, 
+			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
+			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
 			/*{ sTitle: '企业名称',   mData: 'entName',
 				  bSortable: true,
 		          mRender:function(mData,type,full){
@@ -336,17 +336,31 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			return false;
 		}
 		var nodes = tree.getCheckedNodes(true);
+		console.log(nodes);
 		var authids = '';
+		var bindObj = new Object();
+		bindObj.id = list[0].id;
+		var objs=new Array()
 		for(var i=0;i<nodes.length;i++){
-			if(nodes[i].level==1){
-				authids += ","+nodes[i].mId;
+			var children = nodes.children
+			/*for(var y=0;y<children.length;y++){
+				if(checked == true){
+					
+				}
+			}*/
+			if(nodes[i].level==2){
+				var obj = new Object();
+				obj.stallId = nodes[i].mId;
+				obj.preId = nodes[i].pId;
+				objs.push(obj);
 			}
 		}  
+		bindObj.stallList = objs;
 		
 		layui.msg.confirm('您确定要绑定吗',function(){
 			layui.common.ajax({
 				url:'/admin/ent/operate-auth/bind',
-				data:{staffId:list[0].id,authIds:authids.substring(1)}, 
+				data:{auth:JSON.stringify(bindObj)}, 
 				success:function(res){
 					if(res.success){
 						layui.msg.success(res.content);
@@ -375,6 +389,70 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
 			layui.common.ajax({
 				url:'/admin/ent/operate-auth/delete',
+				data:JSON.stringify(ids),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});
+	/*
+	 * 启动
+	 */
+	$('#start-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length != 1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,page){
+			ids.push(page.id);
+		});
+		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
+			layui.common.ajax({
+				url:'/admin/ent/operate-auth/start',
+				data:JSON.stringify(ids),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});
+	/*
+	 * 禁用
+	 */
+	$('#stop-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length != 1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,page){
+			ids.push(page.id);
+		});
+		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
+			layui.common.ajax({
+				url:'/admin/ent/operate-auth/stop',
 				data:JSON.stringify(ids),
 				contentType:'application/json; charset=utf-8',
 				success:function(res){
