@@ -32,7 +32,6 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
         
         var laydate = layui.laydate; 
 
-        var url = "192.168.1.222:9000"
     	laydate.render({
     	    elem: '#search-startTime',
     	    min: '2015-06-16 23:59:59',
@@ -91,7 +90,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 	
 	var datatable = layui.datatable.init({
         id:'user-table',
-        url: url+'/admin/biz/user/list', 
+        url:'/admin/biz/user/list', 
         key:'id',
         columns:[ 
                 { sTitle: '用户名',   mData: 'nickName'},  
