@@ -140,18 +140,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		columns:[
 			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
 			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
-			/*{ sTitle: '企业名称',   mData: 'entName',
-				  bSortable: true,
-		          mRender:function(mData,type,full){
-		          		$.each(enterpriseList,function(index){
-		          			if($(this).id == full.entId){
-		          				return '<label style="color:red;">'+$(this).name+'</label>';
-		          			}
-		          			
-		          		})
-		          }
-					
-			}, */
+			{ sTitle: '企业名称',   mData: 'entName'}, 
 			{ sTitle: '名称',   mData: 'name'	}, 
 			{ sTitle: '状态',   
 				  mData: 'status',
