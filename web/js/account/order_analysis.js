@@ -214,7 +214,7 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 		});	
 		
 		getHeaderData();
-		//getYlHeaderData();
+		getYlHeaderData();
 	} ;  
 	
 	element.on('tab(detail)', function(data){
@@ -232,15 +232,15 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 			url:'/admin/account/report_day_order/title',
 			data:{startTime: startTime,endTime:endTime,preIds:preIds,cityId:searchCity},
 			success:function(data){ 
-				//order("#orderTable",data,"/admin/account/report_day_order/order");
+				order("#orderTable",data,"/admin/account/report_day_order/order");
 				newUserOrder("#newUserOrderTable",data,"/admin/account/report_day_order/newuser_order");
 				oldUserOrder("#oldUserOrderTable",data,"/admin/account/report_day_order/olduser_order");
 				
-				//runtime("#runtimeTable",data,"/admin/account/report_day_order/runtime");
-				//runtimeRate("#runtimeRateTable",data,"/admin/account/report_day_order/runtime_rate");
-				//rdl("#rdlTable",data,"/admin/account/report_day_order/rdl");
-				//jtsc("#jtscTable",data,"/admin/account/report_day_order/jtsc");
-				//averagePrice("#averagePriceTable",data,"/admin/account/report_day_order/average_price");
+				runtime("#runtimeTable",data,"/admin/account/report_day_order/runtime");
+				runtimeRate("#runtimeRateTable",data,"/admin/account/report_day_order/runtime_rate");
+				rdl("#rdlTable",data,"/admin/account/report_day_order/rdl");
+				jtsc("#jtscTable",data,"/admin/account/report_day_order/jtsc");
+				averagePrice("#averagePriceTable",data,"/admin/account/report_day_order/average_price");
 			}   
 	  });    
     }
