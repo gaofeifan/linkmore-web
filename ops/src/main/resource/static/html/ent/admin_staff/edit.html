@@ -20,16 +20,22 @@
 	            <input type="text" name="realname"  placeholder="请输入姓名" class="layui-input">
 	        </div>
 	    </div> 
-	    <div class="layui-form-item">
+	   <div class="layui-form-item">
 	        <label class="layui-form-label">状态</label>
-		    <div class="layui-input-block">
-		    	<input type="checkbox" name="status" value="1" checked=""  lay-skin="switch" lay-text="启用|禁用">
+	    	<div class="layui-input-block">
+		   		 <select id="status" name="status" class="layui-input">
+	        		<option value="0">禁用</option>
+	        		<option value="1">启动</option>
+	        	</select>
 			</div>
 	    </div>
 	    <div class="layui-form-item">
 	        <label class="layui-form-label">类型</label>
 		    <div class="layui-input-block">
-		    	<input type="checkbox" name="type" value="1" checked=""  lay-skin="switch" lay-text="普通员工|运营人员">
+		   		 <select id="type" name="type" class="layui-input">
+	        		<option value="0">普通员工</option>
+	        		<option value="1">运营人员</option>
+	        	</select>
 			</div>
 	    </div>
 	    <div class="hr-line-dashed"></div>

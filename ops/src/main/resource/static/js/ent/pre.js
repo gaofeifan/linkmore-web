@@ -64,7 +64,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	var preList = null;
 	var preMap = layui.common.map();
 	layui.common.ajax({
-		url:'/admin/biz/prefecture/selectList',
+		url:'/admin/ent/prefectrue/find-ent-pre',
 		data:{time:new Date().getTime()}, 
 		async:false,
 		success:function(list){

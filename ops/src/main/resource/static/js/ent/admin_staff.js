@@ -29,7 +29,21 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	var layer = layui.layer;  
 	var $ = layui.jquery; 
 	var form = layui.form;   
-	
+	var selectedPageId = null; 
+	var level = 0;
+	var lastNode = null;
+ 	var treeClick = function(event, treeId, treeNode, clickFlag){ 
+ 		level = treeNode.level;
+ 		if(level==1){
+ 			selectedPageId = treeNode.id; 
+ 			lastNode  = treeNode;
+ 			query();
+ 		} else{
+ 			tree.selectNode(lastNode);  
+ 			layui.msg.error('请选择第二组页面树');
+ 			return true;
+ 		}
+	};
 	var setting = {
 		check: {
 			enable: true
@@ -38,6 +52,9 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			simpleData: {
 				enable: true
 			}
+		},
+		callback: {
+			onClick: treeClick
 		}
 	};
 	var tree = null;
@@ -46,6 +63,14 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		data:{time:new Date().getTime()},  
 		success: function(data) {
 			tree = $.fn.zTree.init($("#resource-tree"), setting, data); 
+			var allNodes=tree.getNodes();//这里只能找到最外层所有的节点
+			if(allNodes.length>0){
+			    for(var i=0;i<allNodes.length;i++){
+			        if(allNodes[i].isParent){//找到父节点
+			            allNodes[i].nocheck=true;//nocheck为true表示没有选择框
+			        }
+			    }
+			}
 		},
 		error:function(){}
 	});
@@ -248,15 +273,15 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	var valid = new Object();
     	valid.id = "admin-staff-add-form";
     	valid.rules = {
-    		cellphone:{
+    		mobile:{
     			rangelength:[11,11],
     			required: true,
     			digits:true,
     			remote:{
     				url:"/admin/ent/staff/check",  
     				data:{
-    					property:"cellphone",
-    					value:function(){return $('#admin-staff-add-form input[name=cellphone]').val();},
+    					property:"mobile",
+    					value:function(){return $('#admin-staff-add-form input[name=mobile]').val();},
     					id:function(){return new Date().getTime();}
     				}
     			}
@@ -266,11 +291,11 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     		}  
     	};
     	valid.messages = {
-    		cellphone:{
+    		mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
     			remote:'手机号已经存在',
-    			digits:'手机号格式有误',
+    			digits:'手机号格式有误'
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
     			required: '请填写姓名'
@@ -327,15 +352,15 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	var valid = new Object();
     	valid.id = "admin-staff-edit-form";
     	valid.rules = {
-    		cellphone:{
+    		mobile:{
     			rangelength:[11,11],
     			required: true,
     			digits:true,
     			remote:{
     				url:"/admin/ent/staff/check",  
     				data:{
-    					property:"cellphone",
-    					value:function(){return $('#admin-staff-edit-form input[name=cellphone]').val();},
+    					property:"mobile",
+    					value:function(){return $('#admin-staff-edit-form input[name=mobile]').val();},
     					id:function(){return $('#admin-staff-edit-form input[name=id]').val();}
     				}
     			}
@@ -345,11 +370,11 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     		}  
     	};
     	valid.messages = {
-    		cellphone:{
+    		mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
     			remote:'手机号已经存在',
-    			digits:'手机号格式有误',
+    			digits:'手机号格式有误'
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
     			required: '请填写姓名'
@@ -470,24 +495,22 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		$.each(list,function(index,page){
 			ids.push(page.id);
 		});
-		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
-			layui.common.ajax({
-				url:'/admin/ent/staff/start',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					layui.msg.error("网络异常");
+		layui.common.ajax({
+			url:'/admin/ent/staff/start',
+			data:JSON.stringify(ids),
+			contentType:'application/json; charset=utf-8',
+			success:function(res){
+				if(res.success){  
+					layui.msg.success(res.content);
+					window.setTimeout(query,1000);
+				}else{
+					layui.msg.error(res.content);
 				}
-			});
-		}); 
+				
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
 	});
 	/*
 	 * 禁用
@@ -502,23 +525,21 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		$.each(list,function(index,page){
 			ids.push(page.id);
 		});
-		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
-			layui.common.ajax({
-				url:'/admin/ent/staff/stop',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					layui.msg.error("网络异常");
+		layui.common.ajax({
+			url:'/admin/ent/staff/stop',
+			data:JSON.stringify(ids),
+			contentType:'application/json; charset=utf-8',
+			success:function(res){
+				if(res.success){  
+					layui.msg.success(res.content);
+					window.setTimeout(query,1000);
+				}else{
+					layui.msg.error(res.content);
 				}
-			});
-		}); 
+				
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
 	});
 });

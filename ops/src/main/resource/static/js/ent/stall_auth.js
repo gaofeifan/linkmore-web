@@ -140,18 +140,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		columns:[
 			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
 			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
-			/*{ sTitle: '企业名称',   mData: 'entName',
-				  bSortable: true,
-		          mRender:function(mData,type,full){
-		          		$.each(enterpriseList,function(index){
-		          			if($(this).id == full.entId){
-		          				return '<label style="color:red;">'+$(this).name+'</label>';
-		          			}
-		          			
-		          		})
-		          }
-					
-			}, */
+			{ sTitle: '企业名称',   mData: 'entName'}, 
 			{ sTitle: '名称',   mData: 'name'	}, 
 			{ sTitle: '状态',   
 				  mData: 'status',
@@ -418,24 +407,22 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		$.each(list,function(index,page){
 			ids.push(page.id);
 		});
-		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
-			layui.common.ajax({
-				url:'/admin/ent/operate-auth/start',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					layui.msg.error("网络异常");
+		layui.common.ajax({
+			url:'/admin/ent/operate-auth/start',
+			data:JSON.stringify(ids),
+			contentType:'application/json; charset=utf-8',
+			success:function(res){
+				if(res.success){  
+					layui.msg.success(res.content);
+					window.setTimeout(query,1000);
+				}else{
+					layui.msg.error(res.content);
 				}
-			});
-		}); 
+				
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
 	});
 	/*
 	 * 禁用
@@ -450,23 +437,21 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		$.each(list,function(index,page){
 			ids.push(page.id);
 		});
-		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
-			layui.common.ajax({
-				url:'/admin/ent/operate-auth/stop',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					layui.msg.error("网络异常");
+		layui.common.ajax({
+			url:'/admin/ent/operate-auth/stop',
+			data:JSON.stringify(ids),
+			contentType:'application/json; charset=utf-8',
+			success:function(res){
+				if(res.success){  
+					layui.msg.success(res.content);
+					window.setTimeout(query,1000);
+				}else{
+					layui.msg.error(res.content);
 				}
-			});
-		}); 
+				
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
 	});
 });
