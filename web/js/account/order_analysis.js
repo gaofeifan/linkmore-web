@@ -177,6 +177,16 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 	    endTime = $('#search-end').val();
 	    searchCity = $('#search-city').val();
 		
+		
+		preIds = "";
+		$.each($(".layui-tab-title li[lay-id]"), function () {
+			preIds = preIds + $(this).attr("lay-id") +",";
+		});
+		if(preIds == ""){
+			layui.msg.error("请选择车区");
+			return false;
+		}
+		
 		if(startTime == ''){
 			layui.msg.error("请输入开始日期");
 			return false;
@@ -196,15 +206,6 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 		var time = parseInt(days / (1000 * 60 * 60 * 24));
 		if(time>31){
 			layui.msg.error("日期时间差不能超过31天");
-			return false;
-		}
-		preIds = "";
-		$.each($(".layui-tab-title.pre li[lay-id]"), function () {
-			preIds = preIds + $(this).attr("lay-id") +",";
-		});	
-		
-		if(preIds == ""){
-			layui.msg.error("请选择车区");
 			return false;
 		}
 		
