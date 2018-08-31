@@ -124,7 +124,11 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 						case 0:html+='<label>账户余额</label>';break;
 						case 1:html+='<label style="color:#009688;">支付宝</label>';break;
 						case 2:html+='<label style="color:#0099CC;">微信</label>';break; 
-						case 3:html+='<label style="color:#0099CC;">银联</label>';break; 
+						case 3:html+='<label style="color:#0099CC;">Apple Pay</label>';break; 
+						case 4:html+='<label style="color:#0099CC;">微信支付</label>';break; 
+						case 5:html+='<label style="color:#0099CC;">银联云闪付</label>';break; 
+						case 6:html+='<label style="color:#0099CC;">Huawei Pay</label>';break; 
+						case 7:html+='<label style="color:#0099CC;">Mi Pay</label>';break; 
 					}
 					return html;
 	          	}

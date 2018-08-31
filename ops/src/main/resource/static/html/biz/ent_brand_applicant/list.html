@@ -22,57 +22,40 @@
 </head>
 <body> 
 <div class="linkmore-grid linkmore-wrapper"> 
-	<div style=" text-align:right;">   
-		<div class="layui-inline"> <!-- linkmore-acl -->
-			<button id="export-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe61e;</i> 导出</button>
+	<div style=" text-align:right;">  
+		<div class="layui-inline">
+			<button type="button" id="delete-button"  class="layui-btn linkmore-acl layui-btn-small layui-btn-danger "><i class="layui-icon">&#xe640;</i>删除</button>
 		</div>
    	</div>
-    	<form class="layui-form" id="report-search-form">
+   	<div class="row shortcut">
+    	<form class="layui-form" id="page-search-form">
 	    	<div style="margin:10px 0px 10px 0px;"> 
-				<div class="layui-input-inline" style="width:80px;">
-			    	城市：
-			    </div>
-	    		<div class="layui-inline " style="width:160px;">
-		             <select id="search-city" class="input-sm form-control" lay-filter="city" >
-		             	<option value="0">选择城市</option> 
+	    		
+				<div class="layui-inline ">
+		             <select id="search-ent-id" lay-search="" class="input-sm form-control" >
+		             	<option value="0">选择企业</option> 
 		             </select>
 		        </div>
-				<div class="layui-input-inline" style="width:80px;">
-			    	车区：
-			    </div>
-	    		<div class="layui-inline " style="width:160px;">
-		             <select id="search-prefecture" class="input-sm form-control"  lay-filter="pre">
+				<div class="layui-inline ">
+		             <select id="search-pre-id" lay-search="" class="input-sm form-control" >
 		             	<option value="0">选择车区</option> 
 		             </select>
+		        </div>
+				<div class="layui-inline" style="margin:0px 35px 0px 5px">
+		             <input type="text"  id="search-mobile" value="" placeholder="搜索手机号" class="form-control">
+		        </div> 
+		
+		        <div class="layui-inline" >
+		             <button type="button" class="layui-btn layui-btn-small search_btn"><i class="layui-icon">&#xe615;</i> 搜索</button>
 		        </div>  
-				
-				<div class="layui-inline " style="width:50%">
-					<div class="layui-tab" lay-filter="demo" lay-allowclose="true">
-					  <ul class="layui-tab-title">
-						
-					  </ul>
-					</div>
-				</div>  
-				<div class="layui-input-inline" style="width:80px;">
-			    	开始时间：
-			    </div>
-		        <div class="layui-input-inline" style="width:160px;">
-			    	<input readonly class="layui-input" placeholder="请输入开始时间" id="search-start">
-			    </div>
-				<div class="layui-input-inline" style="width:80px;">
-			    	截止时间：
-			    </div>
-			    <div class="layui-input-inline" style="width:160px;">
-			    	<input readonly class="layui-input" placeholder="请输入截止时间" id="search-end">
-			    </div>
-				
 	    	</div>
     	</form> 
+    	<table class="table-box table-sort " id="applicant-table"></table>
     </div>
     <!-- 首页信息 -->
 </div>
 <!-- 加载js文件 -->
 <script type="text/javascript" src="/web/common/layui/layui.js"></script>    
-<script type="text/javascript" src="/web/js/account/user_report.js"></script>
+<script type="text/javascript" src="/web/js/biz/ent_brand_applicant.js"></script>
 </body>
 </html>

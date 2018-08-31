@@ -26,46 +26,41 @@
         <div class="layui-inline"> 
 			<button id="add-button" class="layui-btn linkmore-acl layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe608;</i> 添加</button>
 		</div>
-		<div class="layui-inline">
-			<button type="button" id="edit-button"  class="layui-btn linkmore-acl layui-btn-small recommend" style="background-color:#5FB878"><i class="layui-icon">&#xe642;</i>编辑</button>
-		</div> 
+		<div class="layui-inline"> <!--linkmore-acl-->
+			<button id="import-button" class="layui-btn layui-btn-small layui-btn-normal" style="background-color:#5FB878"><i class="layui-icon">&#xe642;</i> 导入授权用户</button>
+		</div>
 		<div class="layui-inline">
 			<button type="button" id="delete-button"  class="layui-btn linkmore-acl layui-btn-small layui-btn-danger "><i class="layui-icon">&#xe640;</i>删除</button>
 		</div>
    	</div>
    	<div class="row shortcut">
-    	<form class="layui-form" id="clazz-search-form">
-	    	<div style="margin:10px 0px 10px 0px;">  
-				<div class="layui-inline ">
-		        	<select id="search-type" class="input-sm form-control" >
-		        		<option value="-1">全部分类</option>
-		             	<option value="0">北京无封顶</option>
-		             	<option value="1">无封顶计费</option>
-                        <option value="2">按天封顶计费</option>
-                        <option value="3">按照时段封顶计费</option>
-                        <option value="4">24小时封顶计费</option>
-                        <option value="7">湖滨银泰计费</option>
-			            <option value="8">西城广场计费</option>
-						<option value="9">杭州无封顶计费</option>
-						<option value="10">天阳D32时尚购物计费</option>
-						<option value="11">广州海印和中州计费</option>
-						<option value="12">广州维多利计费</option>
+    	<form class="layui-form" id="page-search-form">
+	    	<div style="margin:10px 0px 10px 0px;"> 
+	    		<div class="layui-inline ">
+		             <select id="search-ent-id" lay-search="" class="input-sm form-control" >
+		             	<option value="0">选择企业</option> 
 		             </select>
 		        </div>
+				
 				<div class="layui-inline" style="margin:0px 35px 0px 5px">
-		             <input type="text"  id="search-name" value="" placeholder="搜索类名称" class="form-control">
+		             <input type="text"  id="search-mobile" value="" placeholder="搜索手机号" class="form-control">
 		        </div> 
+				
+				<div class="layui-inline" style="margin:0px 35px 0px 5px">
+		             <input type="text"  id="search-realname" value="" placeholder="搜索名称" class="form-control">
+		        </div> 
+		
 		        <div class="layui-inline" >
 		             <button type="button" class="layui-btn layui-btn-small search_btn"><i class="layui-icon">&#xe615;</i> 搜索</button>
 		        </div>  
 	    	</div>
     	</form> 
-    	<table class="table-box table-sort " id="fee-strategy-table"></table>
+    	<table class="table-box table-sort " id="user-table"></table>
     </div>
     <!-- 首页信息 -->
 </div>
 <!-- 加载js文件 -->
 <script type="text/javascript" src="/web/common/layui/layui.js"></script>    
-<script type="text/javascript" src="/web/js/biz/fee_strategy.js"></script>
+<script type="text/javascript" src="/web/js/biz/ent_brand_user.js"></script>
 </body>
 </html>
