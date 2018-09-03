@@ -55,7 +55,8 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 		url:'/admin/account/report_day_order/city_list',
 		async:false,
 		success:function(list){
-			cityHtml = '<option value="0">All</option>';
+			cityHtml = '<option value="-1">请选择</option>';
+			cityHtml += '<option value="0">All</option>';
 			$.each(list,function(index,city){
 				cityHtml += '<option value="'+city.id+'">';
 				cityHtml += city.cityName;
@@ -74,22 +75,39 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 	var preIdHtml= '';
 	form.on('select(pre)', function(data) {
 		var preId = data.value;	
-		if(preId != 0){
-			var preName = prefectureMap.get(preId);
+		if(preId != -1){
+			
 			preSelectMap = layui.common.map();
 			$.each($(".layui-tab-title li[lay-id]"), function () {
 				var preId2 = $(this).attr("lay-id");
 				var preName2 = prefectureMap.get(preId2);
 				preSelectMap.put(preId2,preName2);
 			});
+						
+			if(preId == 0){
 		
-			if(preSelectMap.get(preId)=='' || 
-				preSelectMap.get(preId)==undefined ){
-				element.tabAdd('demo', {
-				   title: preName
-				  ,content: preName //支持传入html
-				  ,id: preId
-				});
+				var preIds = prefectureMap['keys'];
+				for(var i=0;i<preIds.length;i++){
+					var preId3= preIds[i];
+					var preName3 = prefectureMap.get(preIds[i]);
+					if(preSelectMap.get(preId3)=='' ||  preSelectMap.get(preId3)==undefined ){
+						element.tabAdd('demo', {
+						   title: preName3
+						  ,content: preName3 //支持传入html
+						  ,id: preId3
+						});
+					}
+				}
+			}else{
+				var preName = prefectureMap.get(preId);
+				if(preSelectMap.get(preId)=='' || 
+					preSelectMap.get(preId)==undefined ){
+					element.tabAdd('demo', {
+					   title: preName
+					  ,content: preName //支持传入html
+					  ,id: preId
+					});
+				}
 			}
 		}		
 	});
@@ -127,12 +145,14 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 	
 	var preHtml = '';
 	function preList(cityId){
+		prefectureMap = layui.common.map();
 		layui.common.ajax({
 			url:'/admin/account/report_day_order/pre_list?cityId='+ cityId,
 			contentType:'application/json; charset=utf-8',
 			async:false,
 			success:function(list){
-				preHtml = '<option value="0">All</option>';
+				preHtml = '<option value="-1">请选择</option>';
+				preHtml += '<option value="0">All</option>';
 				$.each(list,function(index,pre){
 					prefectureMap.put(pre.id,pre.name);
 					preHtml += '<option value="'+pre.id+'">';
@@ -157,6 +177,16 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 	    endTime = $('#search-end').val();
 	    searchCity = $('#search-city').val();
 		
+		
+		preIds = "";
+		$.each($(".layui-tab-title li[lay-id]"), function () {
+			preIds = preIds + $(this).attr("lay-id") +",";
+		});
+		if(preIds == ""){
+			layui.msg.error("请选择车区");
+			return false;
+		}
+		
 		if(startTime == ''){
 			layui.msg.error("请输入开始日期");
 			return false;
@@ -178,10 +208,6 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 			layui.msg.error("日期时间差不能超过31天");
 			return false;
 		}
-		preIds = "";
-		$.each($(".layui-tab-title.pre li[lay-id]"), function () {
-			preIds = preIds + $(this).attr("lay-id") +",";
-		});	
 		
 		statuIds ="";
 		$.each($(".layui-tab-title.order li[lay-id]"), function () {
@@ -210,12 +236,12 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 				order("#orderTable",data,"/admin/account/report_day_order/order");
 				newUserOrder("#newUserOrderTable",data,"/admin/account/report_day_order/newuser_order");
 				oldUserOrder("#oldUserOrderTable",data,"/admin/account/report_day_order/olduser_order");
+				
 				runtime("#runtimeTable",data,"/admin/account/report_day_order/runtime");
 				runtimeRate("#runtimeRateTable",data,"/admin/account/report_day_order/runtime_rate");
 				rdl("#rdlTable",data,"/admin/account/report_day_order/rdl");
 				jtsc("#jtscTable",data,"/admin/account/report_day_order/jtsc");
 				averagePrice("#averagePriceTable",data,"/admin/account/report_day_order/average_price");
-				
 			}   
 	  });    
     }
@@ -239,7 +265,7 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 			where: {startTime: startTime,endTime:endTime,preIds:preIds,cityId:searchCity,statuIds:statuIds},
 			cellMinWidth: 240, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 			cols: [data]
-		});    
+		});  
     }
 	
 	function ylOrder(element,data,url){

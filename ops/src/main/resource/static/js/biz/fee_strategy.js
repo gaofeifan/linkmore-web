@@ -113,7 +113,9 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          			case 7: html = '<label style="color:rgb(90, 104, 100);">湖滨银泰计费</label>';break;
 	          			case 8: html = '<label style="color:rgb(50, 154, 60);">西城广场计费</label>';break;
 						case 9: html = '<label style="color:rgb(50, 154, 60);">杭州无封顶计费</label>';break; 
-						case 10: html = '<label style="color:rgb(50, 154, 60);">天洋D32时尚购物计费</label>';break; 						
+						case 10: html = '<label style="color:rgb(50, 154, 60);">天阳D32时尚购物计费</label>';break; 	
+                        case 11: html = '<label style="color:rgb(50, 154, 60);">广州海印和中州计费</label>';break;     
+                        case 12: html = '<label style="color:rgb(50, 154, 60);">广州维多利计费</label>';break;  		
 	          		}
 	          		return html;
 	          	}
@@ -173,13 +175,25 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			$('#top-night-div').hide();
 			$('#top-daily-div').hide();
 			$('#top-day-input').val('');
+
+            $('#topDaily-layui-input').attr('placeholder',"请输入全天封顶时间[分钟]");
+            $('#topNight-layui-input').attr('placeholder',"请输入夜间封顶时间[分钟]");
 			console.info(type);
 			if(type==2||type==4||type==8||type==10){
 				$('#top-daily-div').show();
+                  $('#topDaily-layui-input').attr('placeholder',"请输入全天封顶时间[分钟]");
 			}else if(type==3||type==7){
 				$('#top-day-input').val('0');
 				$('#top-night-div').show();
-			}
+                 $('#topNight-layui-input').attr('placeholder',"请输入夜间封顶时间[分钟]");
+			}else if( type==11||type==12){
+                $('#top-night-div').show();
+                $('#top-daily-div').show();
+                $('#topDaily-layui-input').attr('placeholder',"请输入全天封顶金额[元]");
+                $('#topNight-layui-input').attr('placeholder',"请输入夜间封顶金额[元]");
+                $('#topDaily-layui-input').attr('placeholder',"请输入全天封顶金额[元]");
+                $('#topNight-layui-input').attr('placeholder',"请输入夜间封顶金额[元]");
+            }
         });
 		$('#fee-strategy-add-button').bind('click',function(){
         	if(validate.valid()){  
@@ -318,19 +332,31 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			$('#top-night-div').hide();
 			$('#top-daily-div').hide();
 			$('#top-day-input').val(''); 
+            $('#topDaily-layui-input').attr('placeholder',"请输入全天封顶时间[分钟]");
+            $('#topNight-layui-input').attr('placeholder',"请输入夜间封顶时间[分钟]");
 			if(type==2||type==4||type==8||type==10){
 				$('#top-daily-div').show();
+                $('#topDaily-layui-input').attr('placeholder',"请输入全天封顶时间[分钟]");
 			}else if(type==3||type==7){
 				$('#top-day-input').val('0');
 				$('#top-night-div').show();
-			}
+                $('#topNight-layui-input').attr('placeholder',"请输入夜间封顶时间[分钟]");
+			}else if(type == 11 || type ==12){
+                $('#top-night-div').show();
+                $('#top-daily-div').show();
+                $('#topDaily-layui-input').attr('placeholder',"请输入全天封顶金额[元]");
+                $('#topNight-layui-input').attr('placeholder',"请输入夜间封顶金额[元]");
+            }
         });
 		if(list[0].type==2||list[0].type==4||list[0].type==8 || list[0].type==10){
 			$('#top-daily-div').show();
 		}else if(list[0].type==3||list[0].type==7){
 			$('#top-day-input').val('0');
 			$('#top-night-div').show();
-		}
+		}else if(list[0].type==11 || list[0].type==12 ){
+            $('#top-night-div').show();
+            $('#top-daily-div').show();
+        }
 		$('#fee-strategy-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});

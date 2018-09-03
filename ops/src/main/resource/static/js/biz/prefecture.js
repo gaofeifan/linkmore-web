@@ -636,7 +636,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			},error:function(){layui.msg.error("网络异常");}
 		});
     }
-    var editInit = function(validate,lindex){
+    var editInit = function(validate,lindex){		
     	laydate.render({
 		    elem: '#edit-contract-time',
 		    min: '2015-06-16 23:59:59',
@@ -705,6 +705,23 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
         	}
         });
 	};
+	
+	$('#download-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length!=1){
+			layui.msg.error('请选择一条记录');
+			return false;
+		}
+        var url = '/admin/biz/prefecture/download';
+        var data = new Object(); 
+        data.id = datatable.selected()[0].id;
+        layui.common.download({
+          url:url,
+          data: data
+        });
+	});
+	
+	
 	$('#edit-button').bind('click',function(){
 		var list = datatable.selected(); 
 		if(list.length!=1){

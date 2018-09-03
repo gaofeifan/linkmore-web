@@ -53,7 +53,8 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 		url:'/admin/account/report_day/city_list',
 		async:false,
 		success:function(list){
-			cityHtml = '<option value="0">All</option>';
+			cityHtml = '<option value="-1">请选择</option>';
+			cityHtml += '<option value="0">All</option>';
 			$.each(list,function(index,city){
 				cityHtml += '<option value="'+city.id+'">';
 				cityHtml += city.cityName;
@@ -72,7 +73,7 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 	var preIdHtml= '';
 	form.on('select(pre)', function(data) {
 		var preId = data.value;	
-		if(preId != 0){
+		/*if(preId != 0){
 			var preName = prefectureMap.get(preId);
 			preSelectMap = layui.common.map();
 			$.each($(".layui-tab-title li[lay-id]"), function () {
@@ -89,6 +90,42 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 				  ,id: preId
 				});
 			}
+		}*/
+
+		if(preId != -1){
+			
+			preSelectMap = layui.common.map();
+			$.each($(".layui-tab-title li[lay-id]"), function () {
+				var preId2 = $(this).attr("lay-id");
+				var preName2 = prefectureMap.get(preId2);
+				preSelectMap.put(preId2,preName2);
+			});
+						
+			if(preId == 0){
+		
+				var preIds = prefectureMap['keys'];
+				for(var i=0;i<preIds.length;i++){
+					var preId3= preIds[i];
+					var preName3 = prefectureMap.get(preIds[i]);
+					if(preSelectMap.get(preId3)=='' ||  preSelectMap.get(preId3)==undefined ){
+						element.tabAdd('demo', {
+						   title: preName3
+						  ,content: preName3 //支持传入html
+						  ,id: preId3
+						});
+					}
+				}
+			}else{
+				var preName = prefectureMap.get(preId);
+				if(preSelectMap.get(preId)=='' || 
+					preSelectMap.get(preId)==undefined ){
+					element.tabAdd('demo', {
+					   title: preName
+					  ,content: preName //支持传入html
+					  ,id: preId
+					});
+				}
+			}
 		}		
 	});
 	
@@ -98,13 +135,15 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 	
 	var preHtml = '';
 	function preList(cityId){
+		prefectureMap = layui.common.map();
 		layui.common.ajax({
 			url:'/admin/account/report_day/pre_list?cityId='+ cityId,
 			//data:JSON.stringify(cityId),
 			contentType:'application/json; charset=utf-8',
 			async:false,
 			success:function(list){
-				preHtml = '<option value="0">All</option>';
+				preHtml = '<option value="-1">请选择</option>';
+				preHtml += '<option value="0">All</option>';
 				$.each(list,function(index,pre){
 					prefectureMap.put(pre.id,pre.name);
 					preHtml += '<option value="'+pre.id+'">';
@@ -128,6 +167,16 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 	    endTime = $('#search-end').val();
 	    searchCity = $('#search-city').val();
 		
+		preIds = "";
+		$.each($(".layui-tab-title li[lay-id]"), function () {
+			preIds = preIds + $(this).attr("lay-id") +",";
+		});		
+		
+		if(preIds == ""){
+			layui.msg.error("请选择车区");
+			return false;
+		}
+		
 		if(startTime == ''){
 			layui.msg.error("请输入开始日期");
 			return false;
@@ -148,11 +197,7 @@ layui.use(['layer','table','element','msg','form', 'common','validate','datatabl
 		if(time>31){
 			layui.msg.error("日期时间差不能超过31天");
 			return false;
-		}
-		preIds = "";
-		$.each($(".layui-tab-title li[lay-id]"), function () {
-			preIds = preIds + $(this).attr("lay-id") +",";
-		});		
+		}	
 		
 		createUserTable();
 
