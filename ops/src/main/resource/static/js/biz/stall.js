@@ -163,6 +163,21 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          	}
 			},
 			{
+				sTitle: '车位类型',
+	          	mData: 'type',
+	          	mRender:function(mData,type,full){
+	          		var html = '';
+	          		if(0== mData){
+	          			html += '<label style="color:#FF00FF;">自营车位</label>';
+	          		}else if(1== mData){
+	          			html += '<label style="color:#FF4500;">临停车位</label>';
+	          		}else if(2== mData){
+	          			html += '<label style="color:#FF4500;">固定车位</label>';
+	          		}
+	          		return html;
+	          	}
+			},
+			{
 				sTitle: '车位标识',
 	          	mData: 'brand',
 	          	mRender:function(mData,type,full){

@@ -304,7 +304,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     function addRoute(){
     	var formData = new FormData($("#route-guidance-form")[0]); 
 		 $.ajax({
-			url: '/admin/base/attachment/image_upload',
+			url: '/api/common/attach/image_upload',
 			type: "POST",
 			data: formData,  
 			enctype: 'multipart/form-data',
@@ -326,7 +326,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     function addImage(){
     	var formData = new FormData($("#pre-image-form")[0]); 
 		 $.ajax({
-			url: '/admin/base/attachment/image_upload',
+			url: '/api/common/attach/image_upload',
 			type: "POST",
 			data: formData,  
 			enctype: 'multipart/form-data',
@@ -579,9 +579,10 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 	 */
     // 修改路线指引图片
     function editRoute(){
+		
     	var formData = new FormData($("#edit-route-guidance-form")[0]); 
 		 $.ajax({
-			url: '/admin/base/attachment/image_upload',
+			url: '/api/common/attach/image_upload',
 			type: "POST",
 			data: formData,  
 			enctype: 'multipart/form-data',
@@ -603,7 +604,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     function editImage(){
     	var formData = new FormData($("#edit-pre-image-form")[0]); 
 		 $.ajax({
-			url: '/admin/base/attachment/image_upload',
+			url: '/api/common/attach/image_upload',
 			type: "POST",
 			data: formData,  
 			enctype: 'multipart/form-data',
