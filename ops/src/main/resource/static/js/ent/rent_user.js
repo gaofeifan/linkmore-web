@@ -156,7 +156,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			},
 			{
 				sTitle: '更新时间',
-				mData: 'updateTime' ,
+				mData: 'endTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
 					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm'):'未设置时间';
