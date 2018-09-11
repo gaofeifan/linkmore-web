@@ -25,36 +25,13 @@ Date.prototype.format =function(format){
     }
     return format;
 };
-layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], function() {
+layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate'], function() {
 	var session = window.sessionStorage;
 	var layer = layui.layer;  
 	var $ = layui.jquery; 
 	var form = layui.form;   
 	var laydate = layui.laydate; 
-
-	laydate.render({
-	    elem: '#start-time',
-	    min: '2015-06-16 23:59:59',
-	    max: new Date().format('yyyy-MM-dd'),
-		istoday: false
-	});
-	laydate.render({
-	    elem: '#end-time',
-	    min: '2015-06-16 23:59:59',
-	    max: new Date().format('yyyy-MM-dd'),
-		istoday: false
-	}); 
-	
-	var setting = {
-		check: {
-			enable: true
-		},
-		data: {
-			simpleData: {
-				enable: true
-			}
-		}
-	};
+	var element = layui.element;
 	var enterpriseHtml = '';
 	var enterpriseList = null;
 	var enterpriseMap = layui.common.map();
@@ -107,6 +84,42 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			
 		}
 	});
+	//一些事件监听
+	 var index =0;
+	//一些事件监听
+	element.on('tab(rent-user_tab)', function(data){
+		index = data.index;
+		if(index == 0){
+			$("#type").val(0);
+		}else if(index == 1){
+			$("#type").val(1);
+		}
+	});
+
+	laydate.render({
+	    elem: '#start-time',
+	    min: '2015-06-16 23:59:59',
+	    max: new Date().format('yyyy-MM-dd'),
+		istoday: false
+	});
+	laydate.render({
+	    elem: '#end-time',
+	    min: '2015-06-16 23:59:59',
+	    max: new Date().format('yyyy-MM-dd'),
+		istoday: false
+	}); 
+	
+	var setting = {
+		check: {
+			enable: true
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+	
 	
 	var addServerParams = function(data){  
 		var filters = new Array();
@@ -151,15 +164,15 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 				mData: 'startTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm'):'未设置时间';
+					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'未设置时间';
 				}
 			},
 			{
-				sTitle: '更新时间',
+				sTitle: '结束时间',
 				mData: 'endTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm'):'未设置时间';
+					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'未设置时间';
 				}
 			}
 		],
@@ -192,14 +205,24 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		}); 
-		form.render('checkbox'); 
+		form.render('checkbox');
 		$('#admin-pre-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
+		$("input [name='mobile']").val('13716164118');
 		$("#enterprise-id").html(enterpriseHtml);
 		form.render('select');
 		form.on('select(enterpriseId)', function(data){
 		$("#ent-pre-id").html(preHtml);
+		form.render('select');
+		var tarStallHtml = '';
+		$.each(stallList,function(index,stall){
+				tarStallHtml += '<option value="'+stall.id+'">';
+				tarStallHtml += stall.stallName;
+				tarStallHtml += '</option>';
+		})
+		console.log(tarStallHtml)
+		$("#tab-stallId").html(tarStallHtml);
 		form.render('select');
 //		preHtml = '<option value="">选择企业车区</option>';
 		$.each(enterpriseList,function(index,ent){
@@ -224,7 +247,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 					$("#preId").val(pre.preId);
 					var stallHtml = '<option value="">选择车区车位</option>';
 					$.each(stallList,function(index,stall){
-						if(stall.preId == pre.preId){
+						if(stall.preId == pre.preId && stall.type == 2){
 							stallHtml += '<option value="'+stall.id+'">';
 							stallHtml += stall.stallName;
 							stallHtml += '</option>';
@@ -242,6 +265,8 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 				}
 			})
 		})
+		form.render('select');
+//		$("#stallId").html(stallHtml);
 	$('#admin-rent-add-button').bind('click',function(){
     	if(validate.valid()){
     		layui.common.ajax({
@@ -268,15 +293,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     		mobile:{
     			rangelength:[11,11],
     			required: true,
-    			digits:true,
-    			remote:{
-    				url:"/admin/ent/rent/check",  
-    				data:{
-    					property:"mobile",
-    					value:function(){return $('#admin-rent-add-form input[name=mobile]').val();},
-    					id:function(){return new Date().getTime();}
-    				}
-    			}
+    			digits:true
     		},realname:{
     			rangelength:[1,12],  
     			required: true
@@ -286,7 +303,6 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     		mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
-    			remote:'手机号已经存在',
     			digits:'手机号格式有误',
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
@@ -302,7 +318,15 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
      * 编辑
      */
     var editInit = function(validate,lindex){
-    	laydate.render({
+		var list = datatable.selected();
+		layui.common.set({
+			id:'admin-rent-edit-form',
+			data:list[0]
+		});
+		$("#start-time").val(new Date(list[0].startTime).format('yyyy-MM-dd'));
+		$("#end-time").val(new Date(list[0].endTime).format('yyyy-MM-dd'));
+		form.render('checkbox');
+		laydate.render({
 		    elem: '#start-time',
 		    min: '2015-06-16 23:59:59',
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
@@ -314,12 +338,6 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		}); 
-		var list = datatable.selected();
-		layui.common.set({
-			id:'admin-rent-edit-form',
-			data:list[0]
-		});
-		form.render('checkbox');
 		$("#enterprise-id").html(enterpriseHtml);
 		form.render('select');
 		$("#enterprise-id").val(list[0].entId);
@@ -439,15 +457,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     		mobile:{
     			rangelength:[11,11],
     			required: true,
-    			digits:true,
-    			remote:{
-    				url:"/admin/ent/rent/check",  
-    				data:{
-    					property:"mobile",
-    					value:function(){return $('#admin-rent-edit-form input[name=mobile]').val();},
-    					id:function(){return $('#admin-rent-edit-form input[name=id]').val();}
-    				}
-    			}
+    			digits:true
     		},realname:{
     			rangelength:[1,12],  
     			required: true
@@ -457,8 +467,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     		mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
-    			remote:'手机号已经存在',
-    			digits:'手机号格式有误',
+    			digits:'手机号格式有误'
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
     			required: '请填写姓名'
