@@ -254,6 +254,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		$('#stall-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
+		form.render('radio');
+		form.on('radio', function(data){
+			console.log(data.value); //被点击的radio的value值
+		});  
+
 		$('#stall-add-button').bind('click',function(){
         	if(validate.valid()){
         		layui.common.ajax({
@@ -313,6 +318,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		});
 		$('#stall-edit-form select[name=id]').html(list[0].id);
 		form.render('checkbox');
+		form.render('radio');
 		$('#stall-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
@@ -326,7 +332,9 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
         					layui.layer.close(lindex);
         					layui.msg.success(res.content);
         					window.setTimeout(query,1000);
-        				}
+        				}else{
+							layui.msg.error(res.content);
+						}
         			} 
         		});
           }
