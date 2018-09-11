@@ -1,0 +1,180 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="prefecture-add-form" class="layui-form layui-box" style='padding:25px 30px 0 0;' action="#" data-auto="true" method="post">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">车区类型</label>
+	        <div class="layui-input-inline">
+	             <select name="category" class="input-sm form-control">
+	             	<option value="0">普通专区</option>
+	             	<option value="1">测试专区</option>
+	             	<option value="2">共享专区</option>
+	             </select>
+	        </div> 
+			<label class="layui-form-label">网关分组</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="gateway" placeholder="请输入网关分组编号" class="layui-input">
+	        </div>
+	    </div>
+		<div class="layui-form-item">
+	        <label class="layui-form-label">专区名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="name" placeholder="请输入专区名称" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">计费策略</label>
+	        <div class="layui-input-inline">
+	             <select name="strategyId" class="input-sm form-control">
+	             	<option value="-1">请选择</option> 
+	             </select>
+	        </div>
+	        <label class="layui-form-label">计费系统</label>
+	        <div class="layui-input-inline">
+	             <select name="baseDictId" class="input-sm form-control" >
+	             	<option value="-1">请选择</option> 
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">城市</label>
+	        <div class="layui-input-inline">
+	             <select name="cityId" class="input-sm form-control" lay-filter="pre_add_city">
+	             	<option value="-1">请选择</option> 
+	             </select>
+	        </div>
+	        <label class="layui-form-label">区域</label>
+	        <div class="layui-input-inline">
+	             <select name="districtId" class="input-sm form-control" >
+	             	<option value="-1">请选择</option> 
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">专区地址</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="address" placeholder="请输入地址" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">经度</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="longitude" placeholder="请输入经度" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">纬度</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="latitude" placeholder="请输入纬度" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">签约时间</label>
+	        <div class="layui-input-inline">
+	        	<input type="text" name="dateContract" id="add-contract-time" placeholder="请选择签约时间" autocomplete="off" class="layui-input"/>
+	        </div>
+	        <label class="layui-form-label">有效期</label>
+	        <div class="layui-input-inline">
+	        	<input type="text" name="validTime" id="add-valid-time"  placeholder="请选择有效期" autocomplete="off" class="layui-input"/>
+	        </div>
+	    </div>
+	     <div class="layui-form-item">
+	        <label class="layui-form-label">计费价格</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="chargePrice" placeholder="请输入计费价格" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">计费时间</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="chargeTime" placeholder="计费时间" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">排序等级</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="orderIndex" placeholder="排序等级(0~N)" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">离场提示时间</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="leaveTime" placeholder="结账离场提示时间(单位分钟)" class="layui-input">
+	        </div>
+	    </div>
+		<div class="layui-form-item">
+	        <label class="layui-form-label">月租金成本</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="monthRent" placeholder="月租金成本" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">租金涨幅</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="increase" placeholder="租金涨幅（百分比）" class="layui-input">
+	        </div>
+	    </div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">运营时长</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="runtime" placeholder="请输入运营时长" class="layui-input">
+	        </div>
+	    </div>
+		<div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">计费策略描述</label>
+		    <div class="layui-input-block">
+		      <textarea name="strategyDescription" placeholder="请输入计费策略描述" rows="4" class="layui-textarea" ></textarea>
+		    </div>
+		</div>
+	    <div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">路线指引描述</label>
+		    <div class="layui-input-block">
+		      <textarea name="routeDescription" placeholder="请输入指引描述" rows="4" class="layui-textarea" ></textarea>
+		    </div>
+		</div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">状态</label>
+		    <div class="layui-input-inline">
+		    	<input type="checkbox" name="status" value="0" checked=""  lay-skin="switch" lay-text="启用|禁用">
+			</div>
+			<label class="layui-form-label">定制车区</label>
+		    <div class="layui-input-inline">
+		    	<input type="checkbox" name="type" value="0" checked=""  lay-skin="switch" lay-text="普通|定制" lay-filter="switch_add_ent">
+			</div>
+	    </div>
+	     <div class="layui-form-item" id="select_ent" style="display:none;">
+	        <label class="layui-form-label">选择定制企业</label>
+	        <div class="layui-input-inline">
+	             <select name="enterpriseId" class="input-sm form-control"  >
+	             	<option value="-1">请选择</option> 
+	             </select>
+	        </div>
+	    </div>
+	    <input type="hidden" id="add_route_guidance" name="routeGuidance" />
+	    <input type="hidden" id="add_pre_image_url" name="imageUrl" />
+	</form>
+	<div class="layui-form layui-box">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">路线指引</label>
+		    <div class="layui-input-inline">
+		    	<div style="width:155px;height:155px;border:1px solid #f0f0f0;padding:5px;">
+				<!-- <input type="text" id="add_route_guidance" name="routeGuidance" class="layui-input" style="display:none;" value="" /> -->
+				<img src="" id="add_route_guidance_img" style="width:150px;height:150px;"/>
+				<input class="layui-btn layui-btn-small" style="margin-left:-110px;margin-top:60px;position:absolute;" type="button" value="上传图片" onclick="add_route_guidance_file.click();" name="get_file" />
+	            </div>
+			</div>
+			<form id="route-guidance-form" method="post" enctype="multipart/form-data"> 
+				<input type="file" id="add_route_guidance_file" name="file" style="display:none;"/>
+			</form>
+			
+			<label for="" class="layui-form-label">场区图片：</label>
+            <div class="layui-input-inline">
+                <div style="width:155px;height:155px;border:1px solid #f0f0f0;padding:5px;">
+				<!-- <input type="text" id="add_pre_image_url" name="imageUrl" class="layui-input" style="display:none;" value="" /> -->
+				<img src="" id="add_pre_image_img" style="width:150px;height:150px;"/>
+				<input class="layui-btn layui-btn-small" style="margin-left:-110px;margin-top:60px;position:absolute;"  type="button" value="上传图片" onclick="add_pre_image_file.click();" name="get_file" />
+                </div>
+            </div>
+            <br><br>
+            <div style="font-size:10px;color:#CCCCCC;">图片尺寸为<br>1280*692</div>
+            <form id="pre-image-form" method="post" enctype="multipart/form-data"> 
+				<input type="file" size="2" id="add_pre_image_file" name="file" style="display:none;"/>
+			</form>
+	    </div>
+	</div>  
+    <div class="hr-line-dashed"></div> 
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="prefecture-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="prefecture-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

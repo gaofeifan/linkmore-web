@@ -1,0 +1,40 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="temp-detail-form" class="layui-form layui-box" style='padding:25px 30px 0 0;' action="#" data-auto="true" method="post">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">停车套餐名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="name" class="layui-input" disabled="disabled">
+	        </div>
+	    </div> 
+	    
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">停车券类型</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="type" class="layui-input" disabled="disabled">
+	        </div>
+	    </div>
+	    
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">投放时间</label>
+	        <div class="layui-input-block">
+	            <input type="text" id="time-market" name="timeMarket" class="layui-input" disabled="disabled">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">有效期</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="validity" id="validity" class="layui-input" disabled="disabled">
+	        </div>
+	    </div>
+	    
+	   <div class="layui-form-item">
+	        <label class="layui-form-label">停车券内容</label>
+	        <div class="layui-input-block">
+	        	<div id="discount"></div>
+	        </div>
+	    </div>
+	</form>
+	<div class="layui-form-item text-center">
+        <button class="layui-btn layui-btn-danger" id="temp-cancel-detail-button" type='button' data-close>关闭</button>
+    </div>
+</div>

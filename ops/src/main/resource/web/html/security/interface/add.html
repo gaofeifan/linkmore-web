@@ -1,0 +1,30 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="interface-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	    <input type="hidden" name="clazzId"/>
+	   <div class="layui-form-item">
+	        <label class="layui-form-label">名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="name" placeholder="请输入接口名称" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">路径</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="path"  placeholder="请输入接口访问路径" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">权限/日志</label>
+		    <div class="layui-input-block" >
+		    	<input type="checkbox" name="authorize" value="1" checked="" style="width:80px;"  lay-skin="switch" lay-text="授权|公开"> 
+		    	<input type="checkbox" name="logStatus" value="1" checked=""  style="width:80px;"  lay-skin="switch" lay-text="记日志|无日志">
+			</div>
+	    </div>
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="interface-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="interface-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

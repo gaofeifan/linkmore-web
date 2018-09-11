@@ -1,0 +1,35 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="clazz-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		<div class="layui-form-item">
+	        <label class="layui-form-label">模块</label>
+	        <div class="layui-input-block">
+	             <select name="packageId" class="input-sm form-control" >
+	             	<option value="0">选择分类</option>
+	             	<option value="1">系统设置</option>
+	             	<option value="2">车区管理</option>
+	             	<option value="3">客户管理</option>
+	             	<option value="4">企业运营</option>
+	             	<option value="5">运营管理</option>
+	             </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="name" placeholder="请输入类名称" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">路径</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="path"  placeholder="请输入相对路径" class="layui-input">
+	        </div>
+	    </div>  
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="clazz-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="clazz-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>
