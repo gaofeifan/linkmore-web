@@ -98,19 +98,19 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			{ sTitle: '车位ID',  mData: 'stallId', bVisible:false}, 
 			{ sTitle: '车位名称',   mData: 'stallName'}, 
 			{
-				sTitle: '创建时间',
+				sTitle: '降锁时间',
 				mData: 'downTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return new Date(mData).format('yyyy-MM-dd hh:mm');
+					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm'):'';
 				}
 			},
 			{
-				sTitle: '离开时间',
+				sTitle: '升锁时间',
 				mData: 'leaveTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm'):'暂未登录';
+					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm'):'';
 				}
 			}
 		],

@@ -184,34 +184,38 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		}
 	});
 
-	laydate.render({
-	    elem: '#start-time',
-	    min: '2015-06-16 23:59:59',
-	    max: new Date().format('yyyy-MM-dd'),
-		istoday: false
-	});
-	laydate.render({
-	    elem: '#end-time',
-	    min: '2015-06-16 23:59:59',
-	    max: new Date().format('yyyy-MM-dd'),
-		istoday: false
-	});
-	
 	var addServerParams = function(data){  
 		var filters = new Array();
 		var filter = null; 
 		var searchEntName = $('#search-ent-name').val();
+		var searchPreName = $('#search-pre-name').val();
+		var searchMobile = $('#search-mobile').val();
+		var searchRealname = $('#search-realname').val();
 		if(searchEntName!=''){
 			filter = new Object();
 			filter.property = 'entName';
 			filter.value = '%'+searchEntName +'%';
 			filters.push(filter);
 		}
-		var searchPreName = $('#search-pre-name').val();
+		
 		if(searchPreName!=''){
 			filter = new Object();
 			filter.property = 'preName';
 			filter.value = '%'+searchPreName +'%';
+			filters.push(filter);
+		}
+		
+		if(searchMobile!=''){
+			filter = new Object();
+			filter.property = 'mobile';
+			filter.value = '%'+searchMobile +'%';
+			filters.push(filter);
+		}
+		
+		if(searchRealname!=''){
+			filter = new Object();
+			filter.property = 'realname';
+			filter.value = '%'+searchRealname +'%';
 			filters.push(filter);
 		}
 		if(filters.length>0){
@@ -283,13 +287,13 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	var addInit = function(validate,lindex){
 		laydate.render({
 		    elem: '#start-time',
-		    min: '2015-06-16 23:59:59',
+		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		});
 		laydate.render({
 		    elem: '#end-time',
-		    min: '2015-06-16 23:59:59',
+		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		}); 
@@ -312,6 +316,8 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	    		var stallId = $('#stallId').val();
 	    		var entId = $('#entId').val();
 	    		var entPreId = $('#entPreId').val();
+	    		var startTime = $('#start-time').val();
+	    	    var endTime = $('#end-time').val();
         		if(type == 0){
         			if(preId ==""){
             			layui.msg.tips('请选择车区!');
@@ -336,6 +342,10 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     				return;
         		}
         		$("#stallName").val(stallMap.get(stallId));
+        		if(startTime > endTime){
+        			layui.msg.error("开始日期不能大于结束日期");
+        			return false;
+        		}
 	    		layui.common.ajax({
 	    			url:'/admin/ent/rent/save',
 	    			data:$('#admin-rent-add-form').serialize(),
@@ -401,13 +411,13 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     var editInit = function(validate,lindex){
     	laydate.render({
 		    elem: '#start-time',
-		    min: '2015-06-16 23:59:59',
+		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		});
 		laydate.render({
 		    elem: '#end-time',
-		    min: '2015-06-16 23:59:59',
+		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false
 		}); 
@@ -467,8 +477,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				$("#ent-pre-id").val(list[0].preId);
 				form.render('select');
 			}
-		})*/
-		
+		})
 		
 		form.on('select(enterpriseId)', function(data){
 		preHtml = '<option value="">选择企业车区</option>';
@@ -504,14 +513,15 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			})
 			$("#stallId").html(stallHtml);
 			form.render('select');
-		})
+		});
+		
 		form.on('select(stallId)', function(data){
 			$.each(stallList,function(index,stall){
 				if(stall.id == data.value){
 					$("#stallName").val(stall.stallName)
 				}
 			})
-		})
+		})*/
 		$('#admin-rent-edit-button').bind('click',function(){
         	if(validate.valid()){  
         		layui.common.ajax({
@@ -542,24 +552,38 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     	var valid = new Object();
     	valid.id = "admin-rent-edit-form";
     	valid.rules = {
-    		mobile:{
+			mobile:{
     			rangelength:[11,11],
     			required: true,
     			digits:true
     		},realname:{
     			rangelength:[1,12],  
     			required: true
-    		}  
+    		},plate:{
+    			required: true,
+    			isPlateNo:true
+    		},startDate:{
+    			required: true
+    		},endDate:{
+    			required: true
+    		}
     	};
     	valid.messages = {
-    		mobile:{
+			mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
-    			digits:'手机号格式有误'
+    			digits:'手机号格式有误',
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
     			required: '请填写姓名'
-    		} 
+    		},plate:{
+    			required: '请填写车牌号',
+    			isPlateNo:'请输入正确的车牌号'
+    		},startDate:{
+    			required: '请填写开始日期'
+    		},endDate:{
+    			required: '请填写结束日期'
+    		}
     	}; 
     	param.validate = valid;
     	param.width = 600;
