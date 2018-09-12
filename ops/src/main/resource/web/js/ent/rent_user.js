@@ -619,7 +619,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		$.each(list,function(index,page){
 			ids.push(page.id);
 		});
-		layui.msg.confirm('管理员的权限也将被删除,确认删除？',function(){
+		layui.msg.confirm('您确定要删除该长租用户吗？确定删除请点击是，放弃删除请点击否。',function(){
 			layui.common.ajax({
 				url:'/admin/ent/rent/delete',
 				data:JSON.stringify(ids),
