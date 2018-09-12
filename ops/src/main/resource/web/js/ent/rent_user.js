@@ -252,6 +252,22 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			{ sTitle: '姓名',   mData: 'realname'}, 
 			{ sTitle: '车辆',   mData: 'plate'}, 
 			{
+				sTitle: '车位状态',
+	          	mData: 'status',
+	          	bSortable: true,
+	          	mRender:function(mData,type,full){
+	          		var html = '';
+	          		if(1== mData){
+	          			html += '<label style="color:#FF00FF;">空闲</label>';
+	          		}else if(2== mData){
+	          			html += '<label style="color:#FF4500;">使用中</label>';
+	          		}else{
+	          			html += '<label style="color:#666666;">下线</label>';
+	          		}
+	          		return html;
+	          	}
+			},
+			{
 				sTitle: '开始时间',
 				mData: 'startTime' ,
 				bSortable: true,
