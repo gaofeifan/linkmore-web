@@ -69,7 +69,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		async:false,
 		success:function(list){
 			preList = list;
-			preHtml = '<option value="">选择企业</option>';
+			preHtml = '<option value="">选择车区</option>';
 			$.each(list,function(index,pre){
 				preMap.put(pre.id,pre.name);
 				preHtml += '<option value="'+pre.id+'">';
@@ -226,6 +226,11 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
      * 编辑
      */
     var editInit = function(validate,lindex){
+    	
+    	$('#admin-pre-cancel-button').bind('click',function(){
+			layui.layer.close(lindex);
+		});
+    	
 		var list = datatable.selected();
 		layui.common.set({
 			id:'admin-pre-edit-form',

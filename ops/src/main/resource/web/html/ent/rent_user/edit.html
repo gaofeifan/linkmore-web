@@ -1,29 +1,39 @@
 <div style="width:100%;margin:0 auto;padding:0 auto;">
 	<form id="admin-rent-edit-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
-	    <input type="hidden" name="entName" id="entName">
 	    <input type="hidden" name="id" id="id">
-	     <input type="hidden" name="preName" id="preName">
-	     <input type="hidden" name="stallName" id="stallName">
-	     <input type="hidden" name="preId" id="preId">
-	     <div class="layui-form-item">
+	    <input type="hidden" name="stallId" id="stallId">
+	    <input type="hidden" name="entName" id="entName">
+	    <input type="hidden" name="preName" id="preName">
+	    <input type="hidden" name="stallName" id="stallName">
+	    <input type="hidden" name="type" id="type">
+	    
+	    <div class="layui-form-item" id="user-pre" style="display:none">
+			<label class="layui-form-label">车区</label>
+			<div class="layui-input-block">
+				<select id="preId" lay-filter="preId" disabled name="preId" class="layui-input">
+				</select>
+			</div>
+		</div>
+	    <div class="layui-form-item" id="com-ent" style="display:none">
 	        <label class="layui-form-label">企业</label>
 	        <div class="layui-input-block">
-	        	<select id="enterprise-id"  lay-filter="enterpriseId" name="entId" class="layui-input">
+	        	<select id="entId" lay-filter="entId" disabled name="entId" class="layui-input">
 	        	</select>
 	        </div>
 	    </div>
-	     <div class="layui-form-item">
+	     <div class="layui-form-item" id="com-ent-pre" disabled style="display:none">
 	        <label class="layui-form-label">企业车区</label>
 	        <div class="layui-input-block">
-	        	<select id="ent-pre-id"  lay-filter="ent-pre-id" name="entPreId" class="layui-input">
+	        	<select id="entPreId"  lay-filter="entPreId" disabled name="entPreId" class="layui-input">
 	        	</select>
 	        </div>
 	    </div>
 	    <div class="layui-form-item">
-            <label class="layui-form-label">车位ID</label>
+            <label class="layui-form-label">车位</label>
             <div class="layui-input-block">
-	        	<select id="stallId"  lay-filter="stallId" name="stallId" class="layui-input">
-	        	</select>
+	        	<!-- <select id="stallId" lay-filter="stallId" name="stallId" disabled class="layui-input">
+	        	</select> -->
+	        	 <input type="text" name="stallName" disabled class="layui-input">
 	        </div>
 	    </div>
 	      <div class="layui-form-item">
