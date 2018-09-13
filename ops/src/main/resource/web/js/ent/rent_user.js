@@ -57,6 +57,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	var entPreHtml = '';
 	var entPreList = null;
 	var entPreMap = null;
+	var entPreIdMap = null;
 	form.on('select(entId)', function(data) {
 		initEntPre(data.value);
 	}); 
@@ -64,6 +65,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	function initEntPre(entId){
 		entPreHtml = '';
 		entPreMap = layui.common.map();
+		entPreIdMap = layui.common.map();
 		//var entId = data.value; 
 		layui.common.ajax({
 			url:'/admin/ent/prefectrue/all',
@@ -74,6 +76,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				entPreHtml = '<option value="">选择企业车区</option>';
 				$.each(list,function(index,entPre){
 					entPreMap.put(entPre.id,entPre.preName);
+					entPreIdMap.put(entPre.id,entPre.preId);
 					entPreHtml += '<option value="'+entPre.id+'">';
 					entPreHtml += entPre.preName;
 					entPreHtml += '</option>';
@@ -272,7 +275,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				mData: 'startTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'未设置时间';
+					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm:ss'):'';
 				}
 			},
 			{
@@ -280,7 +283,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				mData: 'endTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'未设置时间';
+					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm:ss'):'';
 				}
 			}
 		],
@@ -301,22 +304,24 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	 * 添加
 	 */
 	var addInit = function(validate,lindex){
+		$('#admin-rent-cancel-button').bind('click',function(){
+			layui.layer.close(lindex);
+		});
 		laydate.render({
 		    elem: '#start-time',
 		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false
+			istoday: false,
+			type: 'datetime'
 		});
 		laydate.render({
 		    elem: '#end-time',
 		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false
+			istoday: false,
+			type: 'datetime'
 		}); 
 		form.render('checkbox');
-		$('#admin-pre-cancel-button').bind('click',function(){
-			layui.layer.close(lindex);
-		});
 		//普通车区
 		$('#preId').html(preHtml);
 		//企业
@@ -349,6 +354,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
             			layui.msg.tips('请选择企业车区!');
         				return;
             		}
+            		$("#preId").val(entPreIdMap.get(entPreId));
             		$("#entName").val(enterpriseMap.get(entId));
         			$("#preName").val(entPreMap.get(entPreId));
         		}
@@ -429,13 +435,15 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		    elem: '#start-time',
 		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false
+			istoday: false,
+			type: 'datetime'
 		});
 		laydate.render({
 		    elem: '#end-time',
 		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false
+			istoday: false,
+			type: 'datetime'
 		}); 
     	
     	$('#admin-rent-cancel-button').bind('click',function(){
@@ -461,9 +469,10 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		}else{
 			$("#com-ent").css('display','block');
 			$("#com-ent-pre").css('display','block');
+			$("#preId").val(list[0].preId);
 		}
-		$("#start-time").val(new Date(list[0].startTime).format('yyyy-MM-dd'));
-		$("#end-time").val(new Date(list[0].endTime).format('yyyy-MM-dd'));
+		$("#start-time").val(new Date(list[0].startTime).format('yyyy-MM-dd hh:mm:ss'));
+		$("#end-time").val(new Date(list[0].endTime).format('yyyy-MM-dd hh:mm:ss'));
 		form.render('checkbox');
 		
 		$("#entId").val(list[0].entId);
