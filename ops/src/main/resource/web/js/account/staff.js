@@ -110,8 +110,13 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         					layui.layer.close(lindex);
         					layui.msg.success(res.content);
         					window.setTimeout(query,1000);
+        				}else{
+        					layui.msg.error(res.content);
+        					window.setTimeout(query,1000);
         				}
-        			} 
+        			} ,error:function(){
+    					layui.msg.error("网络异常");
+    				}
         		});
         	}
         });
