@@ -68,14 +68,14 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		if(searchEntName!=''){
 			filter = new Object();
 			filter.property = 'entName';
-			filter.value = searchEntName;
+			filter.value = '%'+searchEntName +'%';
 			filters.push(filter);
 		}
 		var searchPreName = $('#search-pre-name').val();
 		if(searchPreName!=''){
 			filter = new Object();
 			filter.property = 'preName';
-			filter.value = searchPreName;
+			filter.value = '%'+searchPreName +'%';
 			filters.push(filter);
 		}
 		if(filters.length>0){
