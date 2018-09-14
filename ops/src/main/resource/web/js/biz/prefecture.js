@@ -713,6 +713,10 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			layui.msg.error('请选择一条记录');
 			return false;
 		}
+		if(list[0].status == 1){
+			layui.msg.error('当前车区已禁用！');
+			return false;
+		}
         var url = '/admin/biz/prefecture/download';
         var data = new Object(); 
         data.id = datatable.selected()[0].id;
