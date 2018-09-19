@@ -41,7 +41,7 @@ layui.use(['elements','common','msg', 'jquery', 'layer', 'navbar', 'navtab', 'fo
 				 });
 				 session.put('auth-page-element',map);
 			},error:function(){
-				
+				window.location.href = '/web/login.html';
 			}
 		});  
 		layui.common.ajax({
