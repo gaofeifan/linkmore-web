@@ -1414,7 +1414,8 @@ layui.define("jquery", function(exports) {
 	},"请正确车牌号"); 
 	jQuery.validator.addMethod("mobile", function(value, element) { 
 	  var length = value.length; 
-	  var mobile = /^(((13[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(15[0-9]{1}))+\d{8})$/; 
+	  var mobile = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[0-9]{1})|(18[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
+	  //var mobile = /^(((13[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(15[0-9]{1}))+\d{8})$/; 
 	  return this.optional(element) || (length == 11 && mobile.test(value)); 
 	}, "请正确填写手机号码"); 
 	jQuery.validator.addMethod("tellphone", function(value, element) { 

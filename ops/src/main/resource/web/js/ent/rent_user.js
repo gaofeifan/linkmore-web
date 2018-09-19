@@ -392,7 +392,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     		mobile:{
     			rangelength:[11,11],
     			required: true,
-    			digits:true
+    			mobile:true
     		},realname:{
     			rangelength:[1,12],  
     			required: true
@@ -409,7 +409,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     		mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
-    			digits:'手机号格式有误',
+    			mobile:'请输入有效手机号'
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
     			required: '请填写姓名'
@@ -580,7 +580,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			mobile:{
     			rangelength:[11,11],
     			required: true,
-    			digits:true
+    			mobile:true
     		},realname:{
     			rangelength:[1,12],  
     			required: true
@@ -597,7 +597,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
-    			digits:'手机号格式有误',
+    			mobile:'手机号格式有误',
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
     			required: '请填写姓名'
