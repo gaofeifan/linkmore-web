@@ -474,7 +474,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		var id = $(this).attr('data-open-id');
 		layui.msg.confirm('您确定要启用',function(){
 			layui.common.ajax({
-				url:'/admin/coupon_template_pull/start',
+				url:'/admin/coupon_template_subject/start',
 				data:JSON.stringify(id),
 				contentType:'application/json; charset=utf-8',
 				success:function(res){
@@ -497,7 +497,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		var id = $(this).attr('data-start-id');
 		layui.msg.confirm('您确定要启用',function(){
 			layui.common.ajax({
-				url:'/admin/coupon_template_pull/start',
+				url:'/admin/coupon_template_subject/start',
 				data:JSON.stringify(id),
 				contentType:'application/json; charset=utf-8',
 				success:function(res){
