@@ -1,0 +1,55 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;height: 400px;overflow-y: scroll;">
+	<form id="add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	    <input type="hidden" name="timeGroup" >
+		    <div style="float:left;width:50%;">
+		    	<div class="layui-form-item">
+			        <label class="layui-form-label">策略名称</label>
+			        <div class="layui-input-block">
+			            <input type="text" name="name" placeholder="请输入时段策略名称" class="layui-input">
+			        </div>
+			    </div>
+		    </div>
+
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label"><b>每日运营时段:</b></label>
+        </div>
+
+        
+		<div id="time_div" style="width:100%;">
+		   <div id="time_line_div">
+			<div style="float:left;width:40%;">
+				<div class="layui-form-item">
+			        <label class="layui-form-label">开始时刻</label>
+			        <div class="layui-input-block">
+			            <input type="text" name="beginTime"  placeholder="请输入开始时刻[如00:00:00]"  class="layui-input beginTime">
+			        </div>
+			    </div> 
+		    </div>
+		    <div style="float:left;width:40%;">
+		    	<div class="layui-form-item">
+			        <label class="layui-form-label">结束时刻</label>
+			         <div class="layui-input-block">
+			            <input type="text"  name="endTime"  placeholder="请输入结束时刻[如12:00:00]" class="layui-input endTime">
+			        </div>
+			    </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="layui-form-item layui-form-text">
+			<a class="layui-form-label" id="add-time">添加<i class="layui-icon" style="font-size: 20px; color: #1E9FFF;">&#xe608;</i> </a>
+		</div>
+		<div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">策略简介</label>
+            <div class="layui-input-block">
+              <textarea name="detail" placeholder="请输入策略简介" class="layui-textarea"></textarea>
+            </div>
+        </div>
+		
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="strategy-time-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="strategy-time-cancel-button" type='button' data-close>取消保存</button>
+    </div>
+</div>
