@@ -41,6 +41,7 @@ layui.use(['elements','common','msg', 'jquery', 'layer', 'navbar', 'navtab', 'fo
 				 });
 				 session.put('auth-page-element',map);
 			},error:function(){
+				window.sessionStorage.removeItem('linkmore-login-status');
 				window.location.href = '/web/login.html';
 			}
 		});  
