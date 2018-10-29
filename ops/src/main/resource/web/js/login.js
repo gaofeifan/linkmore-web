@@ -69,6 +69,7 @@ layui.use(['layer','msg','form' , 'common'], function() {
 	
 	$("#loginForm").bind('keydown',function(){ 
 		if(event.keyCode==13){ 
+			login();
 		}
 	});
 	$('#login-button').bind('click',login);   
