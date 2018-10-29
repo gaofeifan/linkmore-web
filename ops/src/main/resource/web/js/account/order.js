@@ -211,7 +211,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 	          	mRender:function(mData,type,full){
 	          		 return new Date(mData).format('yyyy-MM-dd hh:mm');
 	          	}
-			} 
+			}, { sTitle: '所属商家名称',   mData: 'createUserName'}
 		],
 		orderIndex:9,
 		orderType:'desc',

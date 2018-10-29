@@ -247,7 +247,8 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 				mRender:function(mData,type,full){
 					return new Date(mData).format('yyyy-MM-dd');
 				}
-			}
+			},/*{ sTitle: '软件版本',   mData: 'version'},*/
+			{ sTitle: '创建用户',   mData: 'createUserName'}
 		],
 		orderIndex:12,
 		orderType:'desc',
