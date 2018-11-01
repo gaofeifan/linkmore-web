@@ -53,7 +53,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	var initStrategyGroup=function(){
 		layui.common.ajax({
 			url:'/admin/biz/strategy/group/find_list',
-			contentType:'application/json; charset=utf-8',
+			//contentType:'application/json; charset=utf-8',
 			success:function(data){
 				if(data!=null){
 					$("#strategyGroup").empty();
@@ -72,9 +72,10 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	var arrayStrategyDate=null;
 	//初使化分期策略下拉框
 	var initStrategyDate=function(){
+		
 		layui.common.ajax({
 			url:'/admin/biz/strategy/date/find_list',
-			contentType:'application/json; charset=utf-8',
+			//contentType:'application/json; charset=utf-8',
 			success:function(data){
 				if(data!=null){
 					arrayStrategyDate=data;
@@ -96,7 +97,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	var initStrategyFee=function(){
 		layui.common.ajax({
 			url:baseUrl+'strategy_fee/find_list',
-			
 			contentType:'application/json; charset=utf-8',
 			success:function(data){
 				if(data!=null){

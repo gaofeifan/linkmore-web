@@ -55,7 +55,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	var initStrategyTime=function(){
 		layui.common.ajax({
 			url:'/admin/biz/strategy/time/find_list',
-			contentType:'application/json; charset=utf-8',
+			//contentType:'application/json; charset=utf-8',
 			success:function(data){
 				if(data!=null){
 					$("#strategyLockTime").empty();

@@ -267,11 +267,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
     	var len=$('.beginWeek').length;
     	for(var i=0;i<len;i++){
     		if( $(".beginWeek").eq(i).val().trim().length<=0 || $(".endWeek").eq(i).val().trim().length<=0 ){
-				layui.msg.error("开使周或结束周不能为空");
+				layui.msg.error("开使日或结束日不能为空");
 				return false;
 			}
     		if( $(".beginWeek").eq(i).val().trim() > $(".endWeek").eq(i).val().trim() ){
-				layui.msg.error("开使周不能大于结束周");
+				layui.msg.error("开使日不能大于结束日");
 				return false;
 			}
     		for(var j=0;j<len;j++){
