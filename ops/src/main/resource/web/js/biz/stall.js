@@ -116,6 +116,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		key:'id',
 		columns:[ 
 			{ sTitle: '名称',   mData: 'stallName'}, 
+			{ sTitle: '车区分组名称',   bSortable: true, mData: 'areaName'}, 
 			{
 				sTitle: '序列号',
 	          	mData: 'lockSn',
@@ -293,7 +294,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
 				required:true 
-		}
+    		},
+    		areaName:{
+				required:true ,
+				rangelength: [1,10]
+    		}
     	};
     	valid.messages = {
     		stallName:{
@@ -302,7 +307,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
     			required:"请填写位置描述"
+    		},
+    		areaName:{
+    			required:"请填写车区分组名称",
+    			rangelength:'分组名称长度应在[1,10]内'
     		}
+    		
     	}; 
     	param.validate = valid;
     	param.width = 500;
@@ -368,7 +378,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
 				required:true 
-		}
+    		},
+    		areaName:{
+				required:true ,
+				rangelength: [1,10]
+    		}
     	};
     	valid.messages = {
     		stallName:{
@@ -377,6 +391,10 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
     			required:"请填写位置描述"
+    		},
+    		areaName:{
+    			required:"请填写车区分组名称",
+    			rangelength:'分组名称长度应在[1,10]内'
     		}
     	}; 
     	param.validate = valid;
