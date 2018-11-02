@@ -133,7 +133,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 		layui.common.ajax({
 			url: "/admin/biz/strategy/group/tree",
 			//contentType:'application/json; charset=utf-8',
-			data:{preId:prefectureId,parkingInterval:parkingInterval},
+			data:{parkingInterval:parkingInterval},
 			success: function(data) {
 				tree = $.fn.zTree.init($("#pre-tree"), setting, data);
 				var nodes = tree.getNodes();
@@ -303,7 +303,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 	        });
 	        layui.common.ajax({
 				url:'/admin/biz/strategy/group/save',
-				data:{name:stragegyGroupName,prefectureId:2,prefectureName:'爱国停车专区',stallGroup:JSON.stringify(stallGroup)},
+				data:{name:stragegyGroupName,prefectureId:prefectureId,prefectureName:'爱国停车专区',stallGroup:JSON.stringify(stallGroup)},
 				success:function(res){
 					if(res.success){
 						layui.msg.success(res.content);

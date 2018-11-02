@@ -196,8 +196,9 @@ layui.use(['layer','msg','form', 'common','element'], function() {
         
 			layui.common.ajax({
 				url:'/admin/biz/strategy/group/stall/delete',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
+				//data:JSON.stringify(ids),
+				data:{strategyGroupId:strategyGroupId,"ids":JSON.stringify(ids)},
+				//contentType:'application/json; charset=utf-8',
 				success:function(res){
 					if(res.success){
 						layui.msg.success(res.content);
