@@ -79,7 +79,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 	}
 	var stragegyGroupName=decodeURI(request.QueryString("name"))
 	var parkingInterval=decodeURI(request.QueryString("parkingInterval"))
-	var prefectureId=2;
+	var prefectureId=decodeURI(request.QueryString("prefectureId"));
 	//alert(stragegyGroupName+'--'+parkingInterval);
 	
  	var treeClick = function(event, treeId, treeNode, clickFlag){
@@ -105,7 +105,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 		layui.common.ajax({
 			url: "/admin/biz/strategy/group/findAreaStall",
 			//contentType:'application/json; charset=utf-8',
-			data:{preId:prefectureId,areaName:areaName,startName:startName,endName:endName},
+			data:{prefectureId:prefectureId,areaName:areaName,startName:startName,endName:endName},
 			success: function(data) {
 				$("#select1").empty();
 				for (var i=0;i<data.length;i++){
@@ -133,7 +133,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 		layui.common.ajax({
 			url: "/admin/biz/strategy/group/tree",
 			//contentType:'application/json; charset=utf-8',
-			data:{parkingInterval:parkingInterval},
+			data:{prefectureId:prefectureId,parkingInterval:parkingInterval},
 			success: function(data) {
 				tree = $.fn.zTree.init($("#pre-tree"), setting, data);
 				var nodes = tree.getNodes();
@@ -303,7 +303,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 	        });
 	        layui.common.ajax({
 				url:'/admin/biz/strategy/group/save',
-				data:{name:stragegyGroupName,prefectureId:prefectureId,prefectureName:'爱国停车专区',stallGroup:JSON.stringify(stallGroup)},
+				data:{name:stragegyGroupName,prefectureId:prefectureId,stallGroup:JSON.stringify(stallGroup)},
 				success:function(res){
 					if(res.success){
 						layui.msg.success(res.content);

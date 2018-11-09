@@ -352,56 +352,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	};
 	
     $('#add-button').bind('click',function(){
-        
     	location.href='add1.html';
-    	return false;
-    	var param = new Object();
-    	param.url = 'add.html';
-    	param.title = '添加信息'; 
-    	var valid = new Object();
-    	valid.id = "add-form";
-    	valid.rules = {
-    		name:{
-    			rangelength:[1,10] ,
-    			required: true
-    		},beginTime:{
-    			custom: function (value, elemen){
-					var a = /^(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/;
-					return a.test(value.value);
-				},
-    			required: true
-    		},endTime:{ 
-    			custom: function (value, elemen){
-					var a = /^(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/;
-					return a.test(value.value);
-				},
-    			required: true
-    		
-    		},detail:{
-    			rangelength:[1,30] ,
-    			required: false
-    		}
-    	};
-    	valid.messages = {
-    		name:{
-    			rangelength:'名称长度应在[1,10]内', 
-    			required: '请填写名称',
-    			remote:'名称已经存在'
-    		},beginTime:{ 
-    			custom:'正确的开始时间如[00:00:00]',
-    			required: '请填写开始时间如[00:00:00]'
-    		},endTime:{ 
-    			custom:'正确的结束时间如[19:00:00]',
-    			required: '请填写结束时间如[19:00:00]'
-    		} ,detail:{
-    			rangelength:'简介长度应在[1,30]内', 
-    			required: '请填写名称',
-    		} 
-    	}; 
-    	param.validate = valid;
-    	param.width = 800;
-    	param.init = addInit;
-    	layui.common.modal(param);
     });
 
     var editInit = function(validate,lindex){
