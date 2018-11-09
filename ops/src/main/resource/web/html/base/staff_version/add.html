@@ -1,0 +1,57 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="staff-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="name" placeholder="请输入名称" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">版本</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="version"  placeholder="请输入版本" class="layui-input">
+	        </div>
+	    </div>  
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">编号</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="code"  placeholder="请输入编号" class="layui-input">
+	        </div>
+	    </div> 
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">链接</label>
+	         <div class="layui-input-block">
+	            <input type="text" name="url"  placeholder="请输入下载地址" class="layui-input">
+	        </div>
+	    </div>  
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">分类</label>
+	         <div class="layui-input-block">
+	            <select name="type" lay-filter="type" class="input-sm form-control" >
+	            	<option value="1">Android系统</option>
+	            	<option value="2">iOS系统</option>
+	            </select>
+	        </div>
+	    </div>  
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">状态</label>
+	         <div class="layui-input-block"> 
+	         	<input type="checkbox" name="status" value="1" checked=""  lay-skin="switch" lay-text="启用|禁用">
+	         	<input type="checkbox" name="updateStatus" value="1" checked=""  lay-skin="switch" lay-text="强更|选更">
+	        </div>
+	    </div>  
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">描述</label>
+	         <div class="layui-input-block">
+	            <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+	        </div>
+	    </div> 
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="staff-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="staff-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

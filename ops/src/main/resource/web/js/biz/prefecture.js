@@ -195,7 +195,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 					switch(mData){
 	          			case 0: html = '<label style="color:#1E9FFF">普通车区</label>';break;
 	          			case 1: html = '<label style="color:#FF5722">测试车区</label>';break;
-	          			case 2: html = '<label style="color:#5FB878">共享车区</label>';break; 
+	          			case 2: html = '<label style="color:#5FB878">合作车区</label>';break; 
 	          		}
 	          		return html; 
 	          	}
@@ -247,7 +247,8 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 				mRender:function(mData,type,full){
 					return new Date(mData).format('yyyy-MM-dd');
 				}
-			}
+			},/*{ sTitle: '软件版本',   mData: 'version'},*/
+			{ sTitle: '创建用户',   mData: 'createUserName'}
 		],
 		orderIndex:12,
 		orderType:'desc',

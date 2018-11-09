@@ -68,7 +68,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          	mRender:function(mData,type,full){
 	          		 return new Date(mData).format('yyyy-MM-dd hh:mm');
 	          	}
-			} 
+			},{ sTitle: '创建用户',   mData: 'createUserName'} 
 		],
 		orderIndex:3,
 		orderType:'desc',

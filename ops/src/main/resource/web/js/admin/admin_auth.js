@@ -147,6 +147,10 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	          		}
 	          		return html;
 	          	}
+			},
+			{
+				sTitle: '编码',
+				mData: 'code' 
 			}
 		],
 		orderIndex:2,

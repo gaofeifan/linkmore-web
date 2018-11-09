@@ -42,7 +42,7 @@ layui.use(['layer','msg','form' , 'common'], function() {
 			return false;
 		}
 		layui.common.ajax({
-			url: '/admin/auth/login',
+			url: '/admin/auth/login?d='+ new Date().getTime(),
 			data:{username:username,password:password,time:new Date().getTime()},
 			method:'POST',
 			success:function(msg){
@@ -58,11 +58,14 @@ layui.use(['layer','msg','form' , 'common'], function() {
 					layui.msg.error(msg.message);
 				}
 			},error:function(){
-				
+				login();
 			}
 		});
 		
 	};
+	var onsubmit = function(){
+		return false;
+	}
 	
 	$("#loginForm").bind('keydown',function(){ 
 		if(event.keyCode==13){ 

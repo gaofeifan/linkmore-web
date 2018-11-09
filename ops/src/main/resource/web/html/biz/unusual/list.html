@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>凌猫停车</title>
+	<meta name="keywords" content="" />
+    <meta name="description" content="cms Version:1.09" />
+	<meta name="Author" content="view" />
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="Shortcut Icon" href="../favicon.ico" />  
+	<link rel="stylesheet" type="text/css" href="/web/common/layui/css/layui.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/font/font.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/ztree/css.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/common.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/datatable.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/console.css" media="all">
+</head>
+<body> 
+<div class="linkmore-grid linkmore-wrapper"> 
+   	<div class="row shortcut">
+    	<form class="layui-form" id="clazz-search-form">
+	    	<div style="margin:10px 0px 10px 0px;">  
+		        <div class="layui-inline ">
+		             <select id="search-type" class="input-sm form-control" >
+		             	<option value="0">选择系统</option>
+		             	<option value="1">个人版</option>
+		             	<option value="2">物业版</option>
+		             	<option value="3">管理版</option>
+		             </select>
+		        </div> 
+		        <div class="layui-inline" >
+		             <button type="button" class="layui-btn layui-btn-small search_btn"><i class="layui-icon">&#xe615;</i> 搜索</button>
+		        </div>  
+	    	</div>
+    	</form> 
+    	<table class="table-box table-sort " id="unusual-table"></table>
+    </div>
+    <!-- 首页信息 -->
+</div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="/web/common/layui/layui.js"></script>    
+<script type="text/javascript" src="/web/js/biz/unusual.js"></script>
+</body>
+</html>

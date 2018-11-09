@@ -166,8 +166,8 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 					var html = '';
 					switch(mData){
 						case null:html += '<span style="color:gray;">未操作'+'</span>';break;
-						case 0:html+='<span style="color:red;">失败 '+new Date(full.endTime).format('hh:mm')+'</span>';break;
-						case 1:html+='<span style="color:green;">成功 '+new Date(full.endTime).format('hh:mm')+'</span>';break;
+						case 0:html+='<span style="color:red;">失败 '+new Date(full.lockDownTime).format('hh:mm')+'</span>';break;
+						case 1:html+='<span style="color:green;">成功 '+new Date(full.lockDownTime).format('hh:mm')+'</span>';break;
 					}
 					return html;
 	          	}
@@ -211,7 +211,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 	          	mRender:function(mData,type,full){
 	          		 return new Date(mData).format('yyyy-MM-dd hh:mm');
 	          	}
-			} 
+			}, { sTitle: '所属商家名称',   mData: 'createUserName'}
 		],
 		orderIndex:9,
 		orderType:'desc',
