@@ -212,7 +212,7 @@ layui.use(['element','layer','msg','form', 'common','validate','datatable','layd
 	});
     
     function isPhoneNo(phone){
-    	var pattern = /^1[34578]\d{9}$/;
+    	var pattern = /^1[3456789]\d{9}$/;
         return pattern.test(phone);
     }
 });
