@@ -58,6 +58,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		key:'id',
 		columns:[
 			{ sTitle: '编号',   mData: 'id'},
+			{ sTitle: '车区',   mData: 'prefectureName'} ,
 			{ sTitle: '策略名称',   mData: 'name'},
 			{ sTitle: '策略简介',   mData: 'detail'},
 			{ sTitle: '操作人',   mData: 'updateUserName'} ,
