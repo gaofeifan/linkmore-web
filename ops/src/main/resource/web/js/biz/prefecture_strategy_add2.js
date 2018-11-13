@@ -48,12 +48,13 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		}
 	};
 	var dynamic_line_div='';
-	
+	var pageData1=layui.sessionData('prefecture_strategy_add').pageData1;
 	//初使化分组策略下拉框
 	var initStrategyGroup=function(){
 		layui.common.ajax({
 			url:'/admin/biz/strategy/group/find_list',
 			//contentType:'application/json; charset=utf-8',
+			data:{prefectureId:pageData1.prefectureId},
 			success:function(data){
 				if(data!=null){
 					$("#strategyGroup").empty();
@@ -165,7 +166,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	
 	//提交
 	$('#submit-button').bind('click',function(){
-		var pageData1=layui.sessionData('prefecture_strategy_add').pageData1;
+		
 		var len=$('.strategyDate').length;
 		var datetype=getDateType($(".strategyDate").eq(0).val());
 		for(var i=0;i<len;i++){
