@@ -37,7 +37,16 @@
 	<form id="add-form" class="layui-form" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
 		<input type="hidden" name="timeGroup" >
 		<div class="layui-form-item layui-form-text ppyx-div-card" >
-		    
+		
+		<div style="float:left;width:60%;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">当前车区</label>
+				<div class="layui-input-block">
+				<input type="text" id="prefectureName" name="prefectureName" lay-verify="required"  class="layui-input" disabled/>
+				</div>
+			</div>
+		</div>
+		
 		<div style="float:left;width:60%;">
 		    <div class="layui-form-item">
 			    <label class="layui-form-label">策略名称</label>

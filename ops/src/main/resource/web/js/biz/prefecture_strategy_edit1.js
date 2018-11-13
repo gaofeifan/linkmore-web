@@ -74,6 +74,29 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			}
 		});
 	}();
+	
+	var arrayPrefecture=null;
+	var initPrefectureId=function(){
+		layui.common.ajax({
+			url:'/admin/biz/prefecture/selectListByUser',
+			//contentType:'application/json; charset=utf-8',
+			async:false,
+			success:function(data){
+				if(data!=null){
+					arrayPrefecture=data;
+					$("#prefectureId").empty();
+					for(var i=0;i<data.length;i++){
+						$("#prefectureId").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+					}
+					form.render('select');
+					//form.render();
+					//initStrategyFee();
+				}
+			},error:function(){
+				
+			}
+		});
+	};
 
 	$(".add-line-button").unbind("click").bind("click",function(){
 		$(this).parent().parent().find("#time_div").append(time_line_div);
@@ -226,7 +249,14 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 					pageData=res;
 					$('#name').val(pageData.name);
 					$('#detail').val(pageData.detail);
-
+					
+					initPrefectureId();
+					for(var i=0;i<arrayPrefecture.length;i++){
+						if ( arrayPrefecture[i].id == pageData.prefectureId){
+							$('#prefectureName').val(arrayPrefecture[i].name);
+							break;
+						}
+					}
 					var lockGroup = new Array();
 					var lockGroupObj=new Object();
 					

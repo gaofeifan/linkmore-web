@@ -193,8 +193,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			}
 		}
 
-		
-		
 		var strategyGroupArray = new Array();
 		for(var i=0;i<len;i++){
 			var obj = new Object();

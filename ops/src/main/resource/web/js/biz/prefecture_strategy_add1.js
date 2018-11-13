@@ -75,6 +75,28 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			}
 		});
 	}();
+	
+	var initPrefectureId=function(){
+		layui.common.ajax({
+			url:'/admin/biz/prefecture/selectListByUser',
+			//contentType:'application/json; charset=utf-8',
+			success:function(data){
+				if(data!=null){
+					arrayStrategyDate=data;
+					$("#prefectureId").empty();
+					for(var i=0;i<data.length;i++){
+						$("#prefectureId").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+					}
+					form.render('select');
+					//form.render();
+					//initStrategyFee();
+				}
+			},error:function(){
+				
+			}
+		});
+	}();
+	
 	//添加一行时段
 	$(".add-line-button").unbind("click").bind("click",function(){
 		$(this).parent().parent().find("#time_div").append(time_line_div);
@@ -113,6 +135,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	$('#next-button').bind('click',function(){
 		var name=$('#name').val();
 		var detail=$('#detail').val();
+		var prefectureId=$('#prefectureId').val();
+		
+		if (prefectureId == null){
+			layui.msg.error('请选择车区');
+			return false;
+		}
 		
 		if (name.trim().length<=0 || name.trim().length>10){
 			layui.msg.error('策略名称长度应该为【1-10】');
@@ -181,6 +209,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		}
 
 		var pageData1= new Object();
+		pageData1.prefectureId=prefectureId;
 		pageData1.name=name;
 		pageData1.detail=detail;
 		pageData1.strategyLockTime=strategyLockTimeArray;
