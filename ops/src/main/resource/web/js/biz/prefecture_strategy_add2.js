@@ -169,7 +169,21 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		
 		var len=$('.strategyDate').length;
 		var datetype=getDateType($(".strategyDate").eq(0).val());
+		
+		if($('.strategyGroup').val()==null){
+			layui.msg.error('【车区分组】不能为空');
+			return false;
+		}
+		
 		for(var i=0;i<len;i++){
+			if($(".strategyDate").eq(i).val() == null){
+				layui.msg.error('【分期策略】不能为空');
+				return false;
+			}
+			if($(".strategyFee").eq(i).val() == null){
+				layui.msg.error('【计费策略】不能为空');
+				return false;
+			}
 			for(var j=0;j<len;j++){
 				if(i!=j){
 					if($(".strategyDate").eq(i).val() == $(".strategyDate").eq(j).val()){
