@@ -465,4 +465,20 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
     	return false;
 
     });
+    
+    /**
+	 * 查看按钮
+	 */
+    $('#view-button').bind('click',function(){
+
+    	var list = datatable.selected(); 
+		if(list.length!=1){
+			layui.msg.error('请选择一条记录');
+			return false;
+		}
+		
+    	location.href="view.html?strategyGroupId=" + list[0].id + "&stragegyGroupName=" + list[0].name + "&prefectureId=" + list[0].prefectureId  ;
+    	return false;
+
+    });
 });

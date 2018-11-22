@@ -62,7 +62,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 					for(var i=0;i<data.length;i++){
 						$("#strategyLockTime").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
 					}
-					form.render('select');
+					//form.render('select');
 					//form.render();
 					time_line_div=$("#time_div").html();
 					$("#close_time").remove();
@@ -88,7 +88,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 					for(var i=0;i<data.length;i++){
 						$("#prefectureId").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
 					}
-					form.render('select');
+					//form.render('select');
 					//form.render();
 					//initStrategyFee();
 				}
@@ -98,149 +98,84 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		});
 	};
 
-	$(".add-line-button").unbind("click").bind("click",function(){
-		$(this).parent().parent().find("#time_div").append(time_line_div);
-		form.render();
-		
-		$(".delete_item").click(function(){
-			$(this).parent().remove();
+	var dynamic_line_div='';
+	//初使化分组策略下拉框
+	var initStrategyGroup=function(){
+		layui.common.ajax({
+			url:'/admin/biz/strategy/group/find_list',
+			//contentType:'application/json; charset=utf-8',
+			success:function(data){
+				if(data!=null){
+					$("#strategyGroup").empty();
+					for(var i=0;i<data.length;i++){
+						$("#strategyGroup").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+					}
+					//form.render('select');
+					//form.render();
+					//layui.render("#strategyTime");
+					initStrategyDate();
+				}
+			},error:function(){
+				
+			}
 		});
-	});
-
-	$(".add-lock-button").unbind("click").bind("click",function(){
-		$(this).parent().parent().find("#lock_div").append(lock_line_div);
-		form.render();
-		
-		$(".delete_item").click(function(){
-			$(this).parent().remove();
-		});
-		$(".delete_lock").click(function(){
-			$(this).parent().parent().remove();
-		});
-		
-		$(".add-line-button").unbind("click").bind("click",function(){
-			$(this).parent().parent().find("#time_div").append(time_line_div);
-			form.render();
-			$(".delete_item").click(function(){
-				$(this).parent().remove();
-			});
-		});
-		
-	});	
+	}();
 	
-	var bindClick=function(){
-		$(".add-line-button").each(function(){
-			$(this).unbind("click").bind("click",function(){
-				$(this).parent().parent().find("#time_div").append(time_line_div);
-				form.render();
-				$(".delete_item").click(function(){
-					$(this).parent().remove();
-				});
-			});
+	var arrayStrategyDate=null;
+	//初使化分期策略下拉框
+	var initStrategyDate=function(){
+		layui.common.ajax({
+			url:'/admin/biz/strategy/date/find_list',
+			//contentType:'application/json; charset=utf-8',
+			success:function(data){
+				if(data!=null){
+					arrayStrategyDate=data;
+					$("#strategyDate").empty();
+					for(var i=0;i<data.length;i++){
+						$("#strategyDate").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+					}
+					//form.render('select');
+					//form.render();
+					initStrategyFee();
+/*					dynamic_line_div=$("#dynamic_div").html();
+					$("#close_div").remove();
+					init();*/
+				}
+			},error:function(){
+				
+			}
 		});
-		
-		$(".delete_lock").each(function(){
-			$(this).unbind("click").bind("click",function(){
-				$(this).parent().parent().remove();
-			});
-		});
-		
-		$(".delete_item").each(function(){
-			$(this).unbind("click").bind("click",function(){
-				$(this).parent().remove();
-			});
-		});
-		
 	};
+	
+	//初使化计费策略下拉框
+	var initStrategyFee=function(){
+		layui.common.ajax({
+			url:baseUrl+'strategy_fee/find_list',
+			//contentType:'application/json; charset=utf-8',
+			success:function(data){
+				if(data!=null){
+					$("#strategyFee").empty();
+					for(var i=0;i<data.length;i++){
+						$("#strategyFee").append("<option value='"+data[i].parkCode+"'>"+data[i].parkName+"</option>");
+					}
+					form.render('select');
+					//form.render();
+					dynamic_line_div=$("#dynamic_div").html();
+					$("#close_div").remove();
+					init();
+				}
+			},error:function(){
+				
+			}
+		});
+	};
+	
 	
 	//返回
 	$('#back-button').bind('click',function(){
 		location.href='list.html';
 	});
-	//下一步
-	$('#next-button').bind('click',function(){
-		var name=$('#name').val();
-		var detail=$('#detail').val();
-		
-		if (name.trim().length<=0 || name.trim().length>10){
-			layui.msg.error('策略名称长度应该为【1-10】');
-			return false;
-		}
-		if (detail.trim().length>30){
-			layui.msg.error('简介长度应该为【0-30】');
-			return false;
-		}
-		
-		var len=$(".lockStatus").length;
-		for(var i=0;i<len;i++){
-			for(var j=0;j<len;j++){
-				if(i!=j){
-					if($(".lockStatus").eq(i).val() == $(".lockStatus").eq(j).val()){
-						layui.msg.error('【车位锁运营状态】不能重复');
-						return false;
-					}
-				}
-			}
-		}
-		
-		len=$(".strategyLockTime").length;
-		for(var i=0;i<len;i++){
-			if($(".strategyLockTime").eq(i).val() ==null){
-				layui.msg.error('【运营时段】不能为空');
-				return false;
-			}
-			for(var j=0;j<len;j++){
-				if(i!=j){
-					if($(".strategyLockTime").eq(i).val() == $(".strategyLockTime").eq(j).val()){
-						layui.msg.error('【运营时段】不能重复');
-						return false;
-					}
-				}
-			}
-		}
-		
-		var strategyLockTimeArray = new Array();
-		$(".lock_line_div").each(function(){
-			var lockStatus=$(this).find(".lockStatus").val();
-			$(this).find(".strategyLockTime").each(function(){
-				var obj = new Object();
-				obj.lockStatus=lockStatus;
-				obj.strategyTimeId=$(this).val();
-				strategyLockTimeArray.push(obj);
-			});
-		});
-
-		var isError=false;
-		if ($(".lock_line_div").length>1 || $(".strategyLockTime").length>1){
-			//console.log(JSON.stringify(data,null,4));
-			layui.common.ajax({
-				url: baseUrl+"validate/time",
-				//contentType:'application/json; charset=utf-8',
-				//contentType:'application/x-www-form-urlencoded; charset=utf-8',
-				async : false,
-				data:{p:JSON.stringify(strategyLockTimeArray)},
-				success: function(data) {
-					if(data!=0){
-						layui.msg.error('您所选择【运营时段】中的时间段有交叉，请重新选择。');
-						isError=true;
-					}
-				},
-			error:function(){}
-			});
-		}
-		if(isError){
-			return false;
-		}
-		
-		pageData.name=name;
-		pageData.detail=detail;
-		pageData.strategyLockTime=strategyLockTimeArray;
-		pageData.jsonLockTime=JSON.stringify(strategyLockTimeArray);
-		//alert(JSON.stringify(pageData1));
-		//return false;
-		layui.sessionData('prefecture_strategy_edit', { key: 'pageData' ,value: pageData });
-		location.href='edit2.html';
-	});
+	
 	
 	var init=function(){
 		
@@ -254,6 +189,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 					$('#name').val(pageData.name);
 					$('#detail').val(pageData.detail);
 					
+					$('.updateTime').val(new Date(res.updateTime).format("yyyy-MM-dd hh:mm:ss"));
+					$('.updateUserName').val(res.updateUserName);
+					$('.createTime').val(new Date(res.createTime).format("yyyy-MM-dd hh:mm:ss"));
+					$('.createUserName').val(res.createUserName);
+					$('.status').val(res.status==1?"关闭":"开启");
+					
 					initPrefectureId();
 					
 					for(var i=0;i<arrayPrefecture.length;i++){
@@ -263,6 +204,21 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 							break;
 						}
 					}
+					
+					if (pageData.strategyGroup[0]!=null){
+						$('#strategyGroup').val(pageData.strategyGroup[0].strategyGroupId);
+					}
+					
+					$.each(pageData.strategyGroup,function(i,val){
+						if (i>0){
+							$("#dynamic_div").append(dynamic_line_div);
+						}
+						$(".strategyDate").eq(i).val(val.strategyDateId);
+						$(".strategyFee").eq(i).val(val.parkCode);
+						
+					});
+					//form.render('select');
+
 					var lockGroup = new Array();
 					var lockGroupObj=new Object();
 					
@@ -292,16 +248,17 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 							$(".lock_line_div").eq(i).find("#time_div").find(".time_line_div").eq(j).find("#strategyLockTime").val(v);
 						});
 					});
-					form.render("select");
-					bindClick();
+					//form.render("select");
+					//bindClick();
 				}
 			},error:function(){
 				
 			}
 		});
+		form.render("select");
 		//alert(pageData1);
 		//alert(JSON.stringify(pageData1));
-	}();
+	};
 
 
 });

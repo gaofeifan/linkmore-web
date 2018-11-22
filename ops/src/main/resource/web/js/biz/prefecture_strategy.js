@@ -216,7 +216,23 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
     $('#add-button').bind('click',function(){
     	location.href='add1.html';
     });
+    
+	/**
+	 * 查看
+	 */
+    $('#view-button').bind('click',function(){
 
+    	var list = datatable.selected(); 
+		if(list.length!=1){
+			layui.msg.error('请选择一条记录');
+			return false;
+		}
+		layui.sessionData('prefecture_strategy_edit', { key: 'pageData' ,value: list[0] });
+    	location.href="view.html" ;
+    	return false;
+
+    });
+    
 	/**
 	 * 编辑
 	 */
