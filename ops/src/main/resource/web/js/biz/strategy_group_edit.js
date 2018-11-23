@@ -104,7 +104,8 @@ layui.use(['layer','msg','form', 'common','element'], function() {
 
 			var html='<div style="width:30%;margin:5px 5px 5px 5px ;padding:5 auto;height: 300px;float:left;display:inline; border:1px solid #009688;">';
 			html+='<div class="layui-row" style="width:100%;margin:0px auto;padding:0 auto;height: 30px;text-align:center; background:#009688;color:#fff;">';
-			html+=res[i].areaName+'区';
+			
+			html+=(res[i].areaName==null || res[i].areaName=='null' ?'默认':res[i].areaName) +'&nbsp;区';
 			html+='</div>';
 			html+='<div style="width:100%;margin:0px auto;padding:0 auto;height: 90%;text-align:left;overflow-y: scroll;">';
 			

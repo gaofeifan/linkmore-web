@@ -165,6 +165,10 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		
 		len=$(".strategyLockTime").length;
 		for(var i=0;i<len;i++){
+			if($(".strategyLockTime").eq(i).val() ==null){
+				layui.msg.error('【运营时段】不能为空');
+				return false;
+			}
 			for(var j=0;j<len;j++){
 				if(i!=j){
 					if($(".strategyLockTime").eq(i).val() == $(".strategyLockTime").eq(j).val()){

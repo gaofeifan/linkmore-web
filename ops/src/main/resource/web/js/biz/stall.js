@@ -476,6 +476,36 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	    	layui.common.modal(param);  
     });
 	
+	$('#un-sn-button').bind('click',function(){
+		var list = datatable.selected();
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定取消绑定序列号？',function(){
+			layui.common.ajax({
+				url:base_url+'unBind',
+				contentType:'application/json; charset=utf-8',
+				data:JSON.stringify(ids),
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,3000);
+					}else{
+						layui.msg.error(res.content);
+					}
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+
+	});
+	
 	/**
 	 * 上线
 	 */

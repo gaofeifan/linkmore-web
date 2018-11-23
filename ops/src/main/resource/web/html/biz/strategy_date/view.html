@@ -1,0 +1,219 @@
+
+<div class="layui-tab layui-tab-brief" lay-filter="demo">
+  <ul class="layui-tab-title">
+    <li class="layui-this" lay-id="date">按日期</li>
+    <li lay-id="week">按周</li>
+  </ul>
+
+<div class="layui-tab-content">
+
+<div style="width:100%;margin:0 auto;padding:0 auto;height: 400px;overflow-y: scroll;" class="layui-tab-item layui-show">
+
+	<form id="edit-form-date" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	    <input type="hidden" name="dateGroup" >
+	    <input type="hidden" name="datetype" value="1" >
+	    <input type="hidden" name="id" >
+		<div style="float:left;width:80%;">
+		    <div class="layui-form-item">
+			    <label class="layui-form-label"><b>策略名称</b></label>
+			    <div class="layui-input-block">
+			        <input type="text" name="name" placeholder="请输入时段策略名称" class="layui-input" readonly>
+			    </div>
+			</div>
+		</div>
+     
+		<div id="date_div" style="width:100%;">
+		  <div id="date_line_div">
+			<div style="float:left;width:40%;">
+				<div class="layui-form-item">
+			        <label class="layui-form-label"><b>开始日</b></label>
+			        <div class="layui-input-block">
+			            <input type="text"  name="beginDate"  placeholder="请输入开始日[如2018-09-01]"  class="layui-input beginDate" readonly>
+			        </div>
+			    </div>
+		    </div>
+		    <div style="float:left;width:40%;">
+		    	<div class="layui-form-item">
+			        <label class="layui-form-label"><b>结束日</b></label>
+			         <div class="layui-input-block">
+			            <input type="text"  name="endDate"  placeholder="请输入结束日[如2018-09-30]" class="layui-input endDate" readonly>
+			        </div>
+			    </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="layui-form-item layui-form-text">
+            <label class="layui-form-label"><b>策略简介</b></label>
+            <div class="layui-input-block">
+              <textarea name="detail" placeholder="请输入策略简介" class="layui-textarea" readonly></textarea>
+            </div>
+        </div>
+ 		<div style="float:left;width:90%;">
+	   		<div class="layui-form-item">
+	            <label class="layui-form-label"><b>策略状态</b></label>
+	            <div class="layui-input-block">
+	             <input type="text" name="status"  class="layui-input status" readonly>
+	            </div>
+	        </div>
+        </div> 
+
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>修改时间</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="updateTime"  class="layui-input updateTime" readonly>
+	            </div>
+	        </div>
+        </div>
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>修改人</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="updateUserName"  class="layui-input updateUserName" readonly>
+	            </div>
+	        </div>
+        </div>
+        
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>创建时间</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="createTime"  class="layui-input createTime" readonly>
+	            </div>
+	        </div>
+        </div>
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>创建人</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="createUserName"  class="layui-input createUserName" readonly>
+	            </div>
+	        </div>
+        </div>
+        
+	    <div class="hr-line-dashed"></div>
+	</form>
+	<div class="layui-form-item text-center">
+        <button class="layui-btn layui-btn-danger" id="strategy-date-view-close-button" type='button' data-close>关闭</button>
+    </div>
+</div>
+
+
+<div style="width:100%;margin:0 auto;padding:0 auto;height: 400px;overflow-y: scroll;" class="layui-tab-item layui-show">
+
+	<form id="edit-form-week" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	    <input type="hidden" name="dateGroup" >
+	    <input type="hidden" name="datetype" value="2" >
+	    <input type="hidden" name="id" >
+		<div style="float:left;width:80%;">
+		    <div class="layui-form-item">
+			    <label class="layui-form-label"><b>策略名称</b></label>
+			    <div class="layui-input-block">
+			        <input type="text" name="name" placeholder="请输入时段策略名称" class="layui-input name" readonly>
+			    </div>
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label"><b>策略运行日期:</b></label>
+        </div>
+  		<div style="width:100%;" class="layui-form">
+			<div style="float:left;width:40%;">
+				<div class="layui-form-item">
+			        <label class="layui-form-label"><b>开始日期</b></label>
+			        <div class="layui-input-block">
+			            <input type="text"  name="startDate"  placeholder="请输入开始日期[如2018-09-01]"  class="layui-input startDate" readonly>
+			        </div>
+			    </div>
+		    </div>
+		    <div style="float:left;width:40%;">
+		    	<div class="layui-form-item">
+			        <label class="layui-form-label"><b>结束日期</b></label>
+			         <div class="layui-input-block">
+			            <input type="text"  name="stopDate"  placeholder="请输入结束日期[如2018-09-30]" class="layui-input stopDate" readonly>
+			        </div>
+			    </div>
+		    </div>
+  		</div>
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label"><b>策略运行周期:</b></label>
+        </div>
+		<div id="week_div" style="width:100%;">
+		  <div id="week_line_div">
+			<div style="float:left;width:40%;">
+				<div class="layui-form-item">
+			        <label class="layui-form-label"><b>开始日</b></label>
+			        <div class="layui-input-block">
+			        	<input type="text"  name="beginWeek" class="layui-input beginWeek" readonly>
+			        </div>
+			    </div>
+		    </div>
+		    <div style="float:left;width:40%;">
+		    	<div class="layui-form-item">
+			        <label class="layui-form-label"><b>结束日</b></label>
+			         <div class="layui-input-block">
+			         	<input type="text"  name="endWeek" class="layui-input endWeek" readonly>
+			        </div>
+			    </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="layui-form-item layui-form-text">
+            <label class="layui-form-label"><b>策略简介</b></label>
+            <div class="layui-input-block">
+              <textarea name="detail" placeholder="请输入策略简介" class="layui-textarea" readonly></textarea>
+            </div>
+        </div>
+ 		<div style="float:left;width:90%;">
+	   		<div class="layui-form-item">
+	            <label class="layui-form-label"><b>策略状态</b></label>
+	            <div class="layui-input-block">
+	             <input type="text" name="status"  class="layui-input status" readonly>
+	            </div>
+	        </div>
+        </div>
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>修改时间</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="updateTime"  class="layui-input updateTime" readonly>
+	            </div>
+	        </div>
+        </div>
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>修改人</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="updateUserName"  class="layui-input updateUserName" readonly>
+	            </div>
+	        </div>
+        </div>
+        
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>创建时间</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="createTime"  class="layui-input createTime" readonly>
+	            </div>
+	        </div>
+        </div>
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>创建人</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="createUserName"  class="layui-input createUserName" readonly>
+	            </div>
+	        </div>
+        </div>
+        
+	    <div class="hr-line-dashed"></div>
+	</form>
+	<div class="layui-form-item text-center">
+        <button class="layui-btn layui-btn-danger" id="strategy-week-edit-close-button" type='button' data-close>关闭</button>
+    </div>
+
+</div>
+
+</div>
+</div>

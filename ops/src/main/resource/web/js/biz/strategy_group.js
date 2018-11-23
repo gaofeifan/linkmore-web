@@ -86,7 +86,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		columns:[
 			{ sTitle: '编号',   mData: 'id'},
 			{ sTitle: '车区',   mData: 'prefectureName'} ,
-			{ sTitle: '策略名称',   mData: 'name'},
+			{ sTitle: '分组策略名称',   mData: 'name'},
 			{ sTitle: '车位数量',   mData: 'parkingCount'},
 			{ sTitle: '操作人',   mData: 'updateUserName'} ,
 			{ sTitle: '车区id',   mData: 'prefectureId', visible : false} ,
@@ -142,7 +142,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		$.each(list,function(index,dg){
 			ids.push(dg.id);
 		});
-		layui.msg.confirm('您确定要删除',function(){
+		layui.msg.confirm('您确定要删除这个车区分组策略吗?<br>确定删除请点击【确认】<br>不删除请点击【取消】!',function(){
 			layui.common.ajax({
 				url:'/admin/biz/strategy/group/delete',
 				data:JSON.stringify(ids),
@@ -462,6 +462,22 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		}
 		
     	location.href="edit.html?strategyGroupId=" + list[0].id + "&stragegyGroupName=" + list[0].name + "&prefectureId=" + list[0].prefectureId  ;
+    	return false;
+
+    });
+    
+    /**
+	 * 查看按钮
+	 */
+    $('#view-button').bind('click',function(){
+
+    	var list = datatable.selected(); 
+		if(list.length!=1){
+			layui.msg.error('请选择一条记录');
+			return false;
+		}
+		
+    	location.href="view.html?strategyGroupId=" + list[0].id + "&stragegyGroupName=" + list[0].name + "&prefectureId=" + list[0].prefectureId  ;
     	return false;
 
     });

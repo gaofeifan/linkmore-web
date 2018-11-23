@@ -84,7 +84,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 	
  	var treeClick = function(event, treeId, treeNode, clickFlag){
  		level = treeNode.level;
- 		if(level<2){
+ 		if(!treeNode.click){
  			selectedEntId = treeNode.id;
  			lastNode  = treeNode;
  			

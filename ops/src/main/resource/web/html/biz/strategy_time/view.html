@@ -1,0 +1,96 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;height: 400px;overflow-y: scroll;">
+	<form id="edit-form" class="layui-form layui-box layui-form-pane" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		<input type="hidden" name="id"/>
+		<input type="hidden" name="timeGroup" >
+		<input type="hidden" value="分钟" name="timelyUnit"/>
+		<div style="float:left;width:50%;">
+		    	<div class="layui-form-item">
+			        <label class="layui-form-label"><b>策略名称</b></label>
+			        <div class="layui-input-block">
+			            <input type="text" name="name" placeholder="请输入时段策略名称" class="layui-input" readonly>
+			        </div>
+			    </div>
+		    </div>
+
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label"><b>每日运营时段:</b></label>
+        </div>
+		<div id="time_div"  style="width:100%;">
+		  <div id="time_line_div">
+			<div style="float:left;width:40%;">
+				<div class="layui-form-item">
+			        <label class="layui-form-label"><b>开始时刻</b></label>
+			        <div class="layui-input-block">
+			            <input type="text" name="beginTime" placeholder="请输入开始时刻[如08:00:00]"  class="layui-input beginTime" readonly>
+			        </div>
+			    </div>
+		    </div>
+		    <div style="float:left;width:40%;">
+		    	<div class="layui-form-item">
+			        <label class="layui-form-label"><b>结束时刻</b></label>
+			         <div class="layui-input-block">
+			            <input type="text" name="endTime"  placeholder="请输入结束时刻[如12:00:00]" class="layui-input endTime" readonly>
+			        </div>
+			    </div>
+		    </div>
+		  </div> 
+		</div>
+		<div style="float:left;width:90%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>策略简介</b></label>
+	            <div class="layui-input-block">
+	              <textarea name="detail" placeholder="请输入策略简介" class="layui-textarea" readonly></textarea>
+	            </div>
+	        </div>
+		</div>
+ 		<div style="float:left;width:90%;">
+	   		<div class="layui-form-item">
+	            <label class="layui-form-label"><b>策略状态</b></label>
+	            <div class="layui-input-block">
+	             <input type="text" name="status"  class="layui-input status" readonly>
+	            </div>
+	        </div>
+        </div>
+
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>修改时间</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="updateTime"  class="layui-input updateTime" readonly>
+	            </div>
+	        </div>
+        </div>
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>修改人</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="updateUserName"  class="layui-input updateUserName" readonly>
+	            </div>
+	        </div>
+        </div>
+        
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>创建时间</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="createTime"  class="layui-input createTime" readonly>
+	            </div>
+	        </div>
+        </div>
+        <div style="float:left;width:40%;">
+			<div class="layui-form-item">
+	            <label class="layui-form-label"><b>创建人</b></label>
+	            <div class="layui-input-block">
+	               <input type="text" name="createUserName"  class="layui-input createUserName" readonly>
+	            </div>
+	        </div>
+        </div>
+         
+	    <div class="hr-line-dashed"></div>
+	    
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn layui-btn-danger" id="strategy-time-close-button" type='button'  data-close>关闭</button>
+    </div>
+</div>
