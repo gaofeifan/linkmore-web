@@ -127,7 +127,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		filter:addServerParams
 	});
 
-
 	$('.search_btn').bind('click',function(){
 		query();
 	});
