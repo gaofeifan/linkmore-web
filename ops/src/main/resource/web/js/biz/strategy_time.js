@@ -53,7 +53,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		key:'id',
 		columns:[
 			{ sTitle: '编号',   mData: 'id'},
-			{ sTitle: '策略名称',   mData: 'name'},
+			{ sTitle: '分时策略名称',   mData: 'name'},
 			{ sTitle: '策略简介',   mData: 'detail'},
 			{ sTitle: '操作人',   mData: 'updateUserName'} ,
 			{ sTitle: '状态',   mData: 'status',
@@ -112,7 +112,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		$.each(list,function(index,dg){
 			ids.push(dg.id);
 		});
-		layui.msg.confirm('您确定要删除',function(){
+		layui.msg.confirm('您确定要删除这个分时策略吗?<br>确定删除请点击【确认】<br>不删除请点击【取消】!',function(){
 			layui.common.ajax({
 				url:'/admin/biz/strategy/time/delete',
 				data:JSON.stringify(ids),

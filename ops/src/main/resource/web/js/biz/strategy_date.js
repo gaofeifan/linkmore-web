@@ -53,7 +53,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		key:'id',
 		columns:[
 			{ sTitle: '编号',   mData: 'id'},
-			{ sTitle: '策略名称',   mData: 'name'},
+			{ sTitle: '分期策略名称',   mData: 'name'},
 			{ sTitle: '策略简介',   mData: 'detail'},
 			{ sTitle: '分期类型',   mData: 'datetype',
 	          	mRender:function(mData,type,full){
@@ -114,7 +114,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		$.each(list,function(index,dg){
 			ids.push(dg.id);
 		});
-		layui.msg.confirm('您确定要删除',function(){
+		layui.msg.confirm('您确定要删除这个分期策略吗?<br>确定删除请点击【确认】<br>不删除请点击【取消】!',function(){
 			layui.common.ajax({
 				url:'/admin/biz/strategy/date/delete',
 				data:JSON.stringify(ids),
