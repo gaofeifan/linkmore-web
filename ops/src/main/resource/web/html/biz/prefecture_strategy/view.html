@@ -31,9 +31,10 @@
 		border:1px solid #d9d9d9; 
 		border-radius:10px
 	}
-	select[disabled='disabled']::-ms-value {
-		color: red;
+	.layui-select-disabled .layui-disabled {
+	    color: #000!important;
 	}
+
 </style>
 <body>
 <div>
@@ -90,7 +91,7 @@
 						    <div class="layui-form-item">
 							   <label class="layui-form-label" >运营时段</label>
 							    <div class="layui-input-block">
-							    	<select id="strategyLockTime" name="strategyLockTime" class="strategyLockTime">
+							    	<select id="strategyLockTime" name="strategyLockTime" class="strategyLockTime" disabled="disabled">
 								        <option value=""></option>
 								    </select>
 							    </div>
@@ -120,7 +121,7 @@
 			    <div class="layui-form-item">
 				    <label class="layui-form-label">选择已配置车区分组</label>
 				    <div class="layui-input-block">
-				    	<select id="strategyGroup" name="strategyGroup" class="strategyGroup">
+				    	<select id="strategyGroup" name="strategyGroup" class="strategyGroup" disabled="disabled">
 					    </select>
 				    </div>
 				</div>
@@ -136,7 +137,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">选择已配置分期策略</label>
 					<div class="layui-input-block">
-						<select id="strategyDate" name="strategyDate" class="strategyDate">
+						<select id="strategyDate" name="strategyDate" class="strategyDate" disabled="disabled">
 						</select>
 					</div>
 				</div>
@@ -146,8 +147,7 @@
 				<div class="layui-form-item">
 				<label class="layui-form-label">选择已配置计费策略</label>
 					<div class="layui-input-block">
-					 	<select id="strategyFee" name="strategyFee" class="strategyFee">
-					 		<option value='1'>计费策略1</option>
+					 	<select id="strategyFee" name="strategyFee" class="strategyFee" disabled="disabled">
 						</select>
 					</div>
 				</div>
@@ -207,7 +207,7 @@
 		</div>
 
       </form>
-	  <div class="hr-line-dashed"></div>
+	
 
 	<div class="layui-form-item text-center">
 	    <button class="layui-btn" id="back-button" type='button' >返回</button>

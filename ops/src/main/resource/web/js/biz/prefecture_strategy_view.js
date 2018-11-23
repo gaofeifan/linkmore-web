@@ -51,11 +51,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	var pageData=layui.sessionData('prefecture_strategy_edit').pageData;
 	var time_line_div='';
 	var lock_line_div='';
-
+	//分时策略列表
 	var initStrategyTime=function(){
 		layui.common.ajax({
 			url:'/admin/biz/strategy/time/find_list',
 			//contentType:'application/json; charset=utf-8',
+			async:false,
 			success:function(data){
 				if(data!=null){
 					$("#strategyLockTime").empty();
@@ -73,7 +74,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 				
 			}
 		});
-	}();
+	};
 	
 	var arrayPrefecture=null;
 	var initPrefectureId=function(){
@@ -104,22 +105,24 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		layui.common.ajax({
 			url:'/admin/biz/strategy/group/find_list',
 			//contentType:'application/json; charset=utf-8',
+			async:false,
 			success:function(data){
 				if(data!=null){
 					$("#strategyGroup").empty();
 					for(var i=0;i<data.length;i++){
 						$("#strategyGroup").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+						//alert(i+"="+data[i].id)
 					}
-					//form.render('select');
+					form.render('select');
 					//form.render();
-					//layui.render("#strategyTime");
-					initStrategyDate();
+					//initStrategyDate();
+					
 				}
 			},error:function(){
 				
 			}
 		});
-	}();
+	};
 	
 	var arrayStrategyDate=null;
 	//初使化分期策略下拉框
@@ -127,6 +130,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		layui.common.ajax({
 			url:'/admin/biz/strategy/date/find_list',
 			//contentType:'application/json; charset=utf-8',
+			async:false,
 			success:function(data){
 				if(data!=null){
 					arrayStrategyDate=data;
@@ -136,10 +140,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 					}
 					//form.render('select');
 					//form.render();
-					initStrategyFee();
-/*					dynamic_line_div=$("#dynamic_div").html();
-					$("#close_div").remove();
-					init();*/
+					//initStrategyFee();
 				}
 			},error:function(){
 				
@@ -152,33 +153,34 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		layui.common.ajax({
 			url:baseUrl+'strategy_fee/find_list',
 			//contentType:'application/json; charset=utf-8',
+			async:false,
 			success:function(data){
 				if(data!=null){
 					$("#strategyFee").empty();
 					for(var i=0;i<data.length;i++){
 						$("#strategyFee").append("<option value='"+data[i].parkCode+"'>"+data[i].parkName+"</option>");
 					}
-					form.render('select');
+					//form.render('select');
 					//form.render();
 					dynamic_line_div=$("#dynamic_div").html();
 					$("#close_div").remove();
-					init();
+					//init();
 				}
 			},error:function(){
 				
 			}
 		});
 	};
-	
-	
-	//返回
-	$('#back-button').bind('click',function(){
-		location.href='list.html';
-	});
+
 	
 	
 	var init=function(){
-		
+		initStrategyTime();
+		initPrefectureId();
+		initStrategyGroup();
+		initStrategyDate();
+		initStrategyFee();
+		//form.render("select");
 		layui.common.ajax({
 			url:baseUrl+'get',
 			data:JSON.stringify(pageData.id),
@@ -195,7 +197,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 					$('.createUserName').val(res.createUserName);
 					$('.status').val(res.status==1?"关闭":"开启");
 					
-					initPrefectureId();
 					
 					for(var i=0;i<arrayPrefecture.length;i++){
 						//alert(arrayPrefecture[i].id +" / " + pageData.prefectureId)
@@ -248,17 +249,21 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 							$(".lock_line_div").eq(i).find("#time_div").find(".time_line_div").eq(j).find("#strategyLockTime").val(v);
 						});
 					});
-					//form.render("select");
-					//bindClick();
+					form.render("select");
 				}
 			},error:function(){
 				
 			}
 		});
-		form.render("select");
+		//form.render("select");
 		//alert(pageData1);
 		//alert(JSON.stringify(pageData1));
-	};
-
+	}();
+	
+	
+	//返回
+	$('#back-button').bind('click',function(){
+		location.href='list.html';
+	});
 
 });
