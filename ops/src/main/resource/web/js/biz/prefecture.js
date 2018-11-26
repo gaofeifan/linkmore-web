@@ -491,7 +491,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	chargeTime: {
 				required: true,
 				number:true
-			}
+			},
+			businessTime:{
+		 		required: true,
+		 		rangelength: [1,12]
+		 	}
     	};
     	valid.messages = {
     		name:{
@@ -567,7 +571,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	chargeTime: {
 				required: "请输入计费时间",
 				number:"请输入正确格式"
-			}
+			},
+			businessTime: {
+				required: "请输入营业时间",
+				rangelength: "文字长度必须是1~12之间"
+		 	}
     	}; 
     	param.validate = valid;
     	param.width = 700;
@@ -813,7 +821,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	chargeTime: {
 				required: true,
 				number:true
-			}
+			},
+			businessTime:{
+		 		required: true,
+		 		rangelength: [1,12]
+		 	}
     	};
     	valid.messages = {
     		name:{
@@ -889,7 +901,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	chargeTime: {
 				required: "请输入计费时间",
 				number:"请输入正确格式"
-			}
+			},
+			businessTime: {
+				required: "请输入营业时间",
+				rangelength: "文字长度必须是1~12之间"
+		 	}
     	}; 
     	param.validate = valid;
     	param.width = 700;

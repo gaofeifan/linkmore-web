@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>凌猫停车</title>
+	<meta name="keywords" content="" />
+    <meta name="description" content="cms Version:1.09" />
+	<meta name="Author" content="view" />
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="Shortcut Icon" href="../favicon.ico" />  
+	<link rel="stylesheet" type="text/css" href="/web/common/layui/css/layui.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/font/font.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/ztree/css.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/common.css" media="all"> 
+
+	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/console.css" media="all">
+
+</head>
+<body>
+
+<div style="text-align:left; border:1px solid #000;">
+	<div class="layui-col-md9" >
+	      <label class="layui-form-label"><span id="stragegyGroupName" style="white-space: nowrap;">策略名称：</span></label>
+	</div>
+	<div class="layui-col-md3">
+      	<button type="button" class="layui-btn layui-btn-small submit_btn" id="strategy-group-back-button"><i class="layui-icon">&#xe65c;</i> 返回</button>
+    </div>
+</div>
+
+<div class="layui-row" > 
+	<div style=" text-align:left;width:90%;">  
+		<div class="layui-inline" style="margin:0px 35px 0px 5px">
+			<input type="text"  id="stall-name" value="" placeholder="请输入车位编号" class="form-control">
+		</div>
+		<div class="layui-inline" >
+			<button type="button" class="layui-btn layui-btn-small search_btn" id="strategy-group-add-button"><i class="layui-icon">&#xe608;</i> 添加</button>
+		</div>
+		<div class="layui-inline" style=" text-align:right;">
+			<button type="button" class="layui-btn layui-btn-small submit_btn" id="strategy-group-delete-button"><i class="layui-icon">&#xe640;</i> 删除</button>
+		</div>
+	</div>
+</div>
+
+
+<div id="stall_div" class="layui-row layui-form" >
+
+<!-- 
+<div style="width:22%;margin:0 auto;padding:0 auto;height: 300px;float:left;display:inline; background:#E0E0E0;">
+	<div class="layui-row" style="width:100%;margin:0 auto;padding:0 auto;height: 30px;text-align:center; color:#000;" >
+		A区
+	</div>
+	<div style="width:100%;margin:0 auto;padding:0 auto;height: 300px;text-align:center;overflow-y: scroll;">
+		<input type="checkbox" name="like[write]" title="A_1001" >
+		<input type="checkbox" name="like[write]" title="A_1001" >
+		<input type="checkbox" name="like[write]" title="A_1001" >
+		<input type="checkbox" name="like[write]" title="A_1001" >
+	</div>
+</div>
+
+ -->
+
+</div>
+
+<script type="text/javascript" src="/web/common/layui/layui.js"></script>
+<script type="text/javascript" src="/web/js/biz/strategy_group_edit.js"></script>
+
+</body>
+</html>

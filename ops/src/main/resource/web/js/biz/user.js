@@ -144,7 +144,37 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
     $('#search-button').bind('click',function(){
        	 query();
 	});
-        
+    
+	$('#delete-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('您确定要删除',function(){
+			layui.common.ajax({
+				url:'/admin/biz/user/delete',
+				data:JSON.stringify(ids),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					
+				}
+			});
+		}); 
+	});
+
 	$('#export-button').bind('click',function(){ 
 		  var filters = new Array();
 	        var filter = null; 

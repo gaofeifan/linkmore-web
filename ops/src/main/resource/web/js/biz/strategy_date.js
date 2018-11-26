@@ -53,7 +53,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		key:'id',
 		columns:[
 			{ sTitle: '编号',   mData: 'id'},
-			{ sTitle: '策略名称',   mData: 'name'},
+			{ sTitle: '分期策略名称',   mData: 'name'},
 			{ sTitle: '策略简介',   mData: 'detail'},
 			{ sTitle: '分期类型',   mData: 'datetype',
 	          	mRender:function(mData,type,full){
@@ -114,7 +114,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		$.each(list,function(index,dg){
 			ids.push(dg.id);
 		});
-		layui.msg.confirm('您确定要删除',function(){
+		layui.msg.confirm('您确定要删除这个分期策略吗?<br>确定删除请点击【确认】<br>不删除请点击【取消】!',function(){
 			layui.common.ajax({
 				url:'/admin/biz/strategy/date/delete',
 				data:JSON.stringify(ids),
@@ -267,11 +267,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
     	var len=$('.beginWeek').length;
     	for(var i=0;i<len;i++){
     		if( $(".beginWeek").eq(i).val().trim().length<=0 || $(".endWeek").eq(i).val().trim().length<=0 ){
-				layui.msg.error("开使周或结束周不能为空");
+				layui.msg.error("开使日或结束日不能为空");
 				return false;
 			}
     		if( $(".beginWeek").eq(i).val().trim() > $(".endWeek").eq(i).val().trim() ){
-				layui.msg.error("开使周不能大于结束周");
+				layui.msg.error("开使日不能大于结束日");
 				return false;
 			}
     		for(var j=0;j<len;j++){
@@ -458,7 +458,111 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			elem: '.stopDate',type: 'date'
 		});
     }
- 
+    
+
+    var viewInit = function(validate,lindex){
+    	var list = datatable.selected();
+    	layui.common.ajax({
+			url:'/admin/biz/strategy/date/get',
+			contentType:'application/json; charset=utf-8',
+			data:JSON.stringify(list[0].id),
+			success:function(res){
+				if(res!=null){
+					callback(res);
+				}else{
+					layui.msg.error("没有数据");
+				}
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
+    	var callback=function(res){
+			if(list[0].datetype==1){
+				//按日期
+				layui.common.set({
+					id:'edit-form-date',
+					data:res
+				});
+				$('.updateTime').val(new Date(res.updateTime).format("yyyy-MM-dd hh:mm:ss"));
+				$('.createTime').val(new Date(res.createTime).format("yyyy-MM-dd hh:mm:ss"));
+				$('.status').val(res.status==1?"关闭":"开启");
+				
+				var len=res.strategyDateDetail.length;
+				for(var i=1;i<len;i++){
+					var html = '<div class="date_line_div" style="display: inline;">'+$("#date_div").find("#date_line_div").eq(0).html();
+					// html += '<a class="layui-form-label delete_item_edit"><i class="layui-icon" style="font-size: 20px; color: #1E9FFF;">&#xe640;</i> </a></div>';
+					$("#date_div").append(html);
+				}
+				for(var i=0;i<len;i++){
+					$(".beginDate").eq(i).val(res.strategyDateDetail[i].beginDate)
+					$(".endDate").eq(i).val(res.strategyDateDetail[i].endDate)
+				}
+				//renderDate();
+				$(".delete_item_edit").click(function(){
+					$(this).parent().remove();
+				});
+				form.render();
+				element.tabChange('demo', 'date');
+				element.tabDelete('demo', 'week');
+			}else{
+				//按周
+				layui.common.set({
+					id:'edit-form-week',
+					data:res
+				});
+				$('.startDate').val(new Date(res.startDate).format("yyyy-MM-dd"));
+				$('.stopDate').val(new Date(res.stopDate).format("yyyy-MM-dd"));
+				
+				$('.updateTime').val(new Date(res.updateTime).format("yyyy-MM-dd hh:mm:ss"));
+				$('.createTime').val(new Date(res.createTime).format("yyyy-MM-dd hh:mm:ss"));
+				$('.status').val(res.status==1?"关闭":"开启");
+				
+				var weekName=new Array("周零","周一","周二","周三","周四","周五","周六","周日")
+				
+				var len=res.strategyDateDetail.length;
+				for(var i=1;i<len;i++){
+					var html = '<div class="week_line_div" style="display: inline;">'+$("#week_div").find("#week_line_div").eq(0).html();
+					// html += '<a class="layui-form-label delete_week_edit"><i class="layui-icon" style="font-size: 20px; color: #1E9FFF;">&#xe640;</i> </a></div>';
+					$("#week_div").append(html);
+				}
+				for(var i=0;i<len;i++){
+					$(".beginWeek").eq(i).val(weekName[res.strategyDateDetail[i].beginDate]);
+					$(".endWeek").eq(i).val(weekName[res.strategyDateDetail[i].endDate]);
+				}
+				$(".delete_week_edit").click(function(){
+					$(this).parent().remove();
+				});
+				form.render();
+				element.tabChange('demo', 'week');
+				element.tabDelete('demo', 'date');
+			}
+		}
+
+		$('#strategy-date-view-close-button,#strategy-week-edit-close-button').bind('click',function(){
+			layui.msg.close(lindex);
+			layui.layer.close(lindex);
+		});
+		
+    }
+    
+    
+    $('#view-button').bind('click',function(){
+    	var list = datatable.selected(); 
+		if(list.length!=1){
+			layui.msg.error('请选择一条记录');
+			return false;
+		}
+    	var param = new Object();
+    	param.url = 'view.html';
+    	param.title = '查看信息'; 
+    	var valid = new Object();
+    	valid.id = "edit-form";
+    	
+    	param.width = 800;
+    	param.init = viewInit;
+    	layui.common.modal(param);  
+    });
+
     var editInit = function(validate,lindex){ 
     	
 		form.render();

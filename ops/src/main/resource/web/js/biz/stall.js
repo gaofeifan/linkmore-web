@@ -116,6 +116,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		key:'id',
 		columns:[ 
 			{ sTitle: '名称',   mData: 'stallName'}, 
+			{ sTitle: '车区分组名称',   bSortable: true, mData: 'areaName'}, 
 			{
 				sTitle: '序列号',
 	          	mData: 'lockSn',
@@ -301,7 +302,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
 				required:true 
-		}
+    		},
+    		areaName:{
+				required:true ,
+				rangelength: [1,10]
+    		}
     	};
     	valid.messages = {
     		stallName:{
@@ -310,7 +315,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
     			required:"请填写位置描述"
+    		},
+    		areaName:{
+    			required:"请填写车区分组名称",
+    			rangelength:'分组名称长度应在[1,10]内'
     		}
+    		
     	}; 
     	param.validate = valid;
     	param.width = 500;
@@ -376,7 +386,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
 				required:true 
-		}
+    		},
+    		areaName:{
+				required:true ,
+				rangelength: [1,10]
+    		}
     	};
     	valid.messages = {
     		stallName:{
@@ -385,6 +399,10 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		},
     		stallLocal:{
     			required:"请填写位置描述"
+    		},
+    		areaName:{
+    			required:"请填写车区分组名称",
+    			rangelength:'分组名称长度应在[1,10]内'
     		}
     	}; 
     	param.validate = valid;
@@ -465,6 +483,36 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	    	param.init = snInit;
 	    	layui.common.modal(param);  
     });
+	
+	$('#un-sn-button').bind('click',function(){
+		var list = datatable.selected();
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定取消绑定序列号？',function(){
+			layui.common.ajax({
+				url:base_url+'unBind',
+				contentType:'application/json; charset=utf-8',
+				data:JSON.stringify(ids),
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,3000);
+					}else{
+						layui.msg.error(res.content);
+					}
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+
+	});
 	
 	/**
 	 * 上线
