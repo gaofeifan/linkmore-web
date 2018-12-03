@@ -135,6 +135,16 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     	param.title = '编辑信息'; 
     	var valid = new Object();
     	valid.id = "temp-edit-form";
+    	valid.rules = {
+    		firstHourPrice:{
+        			required: true,
+        		}
+        	};
+        	valid.messages = {
+        		firstHourPrice:{
+        			required: '请填写首小时金额'
+        		}
+        	};
     	param.width = 800;
     	param.validate = valid;
     	param.init = editInit;
@@ -319,79 +329,13 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     	var valid = new Object();
     	valid.id = "temp-add-form";
     	valid.rules = {
-			name:{
-    			rangelength:[1,32] ,
-    			required: true
-    		},faceAmount:{
-    			decimal:true,
-    			max: 100,
-    			required: true
-    		},quantity:{
-    			digits:true,
-    			max: 10,
-    			required: true
-    		},couponValidDay:{
-    			digits:true,
-    			max: 1000,
-    			required: true
-    		},conditionAmount:{
-    			decimal:true,
-    			max: 100,
-    			required: true
-    		},mj_faceAmount:{
-    			decimal:true,
-    			max: 100,
-    			required: true
-    		},item_discount:{
-    			digits:true,
-    			max: 99 ,
-    			required: true
-    		},zk_faceAmount:{
-    			decimal:true,
-    			max: 20,
-    			required: true
-    		},validDay:{
-    			digits:true,
+		firstHourPrice:{
     			required: true,
-    			max: 99
     		}
     	};
     	valid.messages = {
-			name:{
-    			rangelength:'停车券套餐名称长度应在[1,32]内', 
-    			required: '请填写停车券套餐名称',
-    			remote:'停车券套餐名称已经存在'
-    		},faceAmount:{
-    			decimal:"请输入1位小数",
-    			max:'停车券金额请输入小于等于100的自然数',
-    			required: '请填写优停车券金额'
-    		},quantity:{
-    			digits:'数量请输入整数',
-    			max:'数量请输入小于等于10的自然数',
-    			required: '请填写数量'
-    		},couponValidDay:{
-    			digits:'有效期请输入整数',
-    			max:'有效期请输入小于等于1000自然数', 
-    			required: '请填写有效期'
-    		},conditionAmount:{
-    			decimal:"请输入1位小数",
-    			max:'满足金额请输入小于等于100的自然数', 
-    			required: '请填写满足金额'
-    		},mj_faceAmount:{
-    			decimal:"请输入1位小数",
-    			max:'减免金额请输入小于等于100的自然数', 
-    			required: '请填写减免金额'
-    		},item_discount:{
-    			digits:'折扣率请输入整数',
-    			max:'折扣率请输入小于等于99的自然数', 
-    			required: '请填写折扣率'
-    		},zk_faceAmount:{
-    			decimal:"请输入1位小数",
-    			max:'请输入20之内的自然数', 
-    			required: '请填写折扣上限'
-    		},validDay:{
-				rangelength:'有效周期数值应在[1,32]内', 
-				required:'请填写有效周期数值'
+    		firstHourPrice:{
+    			required: '请填写首小时金额'
     		}
     	}; 
     	param.validate = valid;

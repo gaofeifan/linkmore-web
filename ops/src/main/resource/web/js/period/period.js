@@ -73,16 +73,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		function showTempInfo(){
 			tempId = $(this).attr('data-detail-id');
 			location.href = 'period_list.html?id='+tempId;
-//			alert(tempId);
-//	    	var param = new Object();
-//	    	param.url = 'period_list.html';
-//	    	param.title = '详情信息'; 
-//	    	var valid = new Object();
-//	    	valid.id = "temp-detail-form";
-//	    	param.width = 800;
-//	    	param.height = 800;
-//	    	param.init = detailInit;
-//	    	layui.common.modal(param);
 		}
 	
 	
@@ -103,54 +93,34 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     	param.title = '编辑信息'; 
     	var valid = new Object();
     	valid.id = "temp-edit-form";
+    	
+    	valid.rules = {
+    			parkName:{
+        			rangelength:[1,32] ,
+        			required: true,
+        		},freeTime:{
+    		 		required: true,
+    		 		rangelength: [1,30]
+    		 	},limitPrice:{
+    		 		required: false
+    		 	}
+        	};
+        	valid.messages = {
+        		name:{
+        			rangelength:'名称长度应在[1,32]内', 
+        			required: '请填写策略名称'
+        		},freeTime:{
+        			rangelength:'简介长度应该在[1,30]内',  
+        			required: '请免费时长'
+        		}
+        	};
+    	
     	param.width = 800;
     	param.validate = valid;
     	param.init = editInit;
     	layui.common.modal(param);
 	}
-	function startTemplate() {
-		var id = $(this).attr('data-start-id');
-		layui.msg.confirm('您确定要启用',function(){
-			layui.common.ajax({
-				url:'/admin/coupon_enterprise/start',
-				data:JSON.stringify(id),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					layui.msg.error("网络异常");
-				}
-			});
-		}); 
-    }
 	
-	function stopTemplate() {
-		var id = $(this).attr('data-stop-id');
-		layui.msg.confirm('您确定要暂停',function(){
-			layui.common.ajax({
-				url:'/admin/coupon_enterprise/stop',
-				data:JSON.stringify(id),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					layui.msg.error("网络异常");
-				}
-			});
-		}); 
-    }
 	
 	function deleteTemplate() {
 		var id = $(this).attr('data-delete-id');
@@ -350,6 +320,28 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     	param.title = '添加信息'; 
     	var valid = new Object();
     	valid.id = "temp-add-form";
+    	
+    	valid.rules = {
+    			parkName:{
+        			rangelength:[1,32] ,
+        			required: true,
+        		},freeTime:{
+    		 		required: true,
+    		 		rangelength: [1,30]
+    		 	},limitPrice:{
+    		 		required: false
+    		 	}
+        	};
+        	valid.messages = {
+        		name:{
+        			rangelength:'名称长度应在[1,32]内', 
+        			required: '请填写策略名称'
+        		},freeTime:{
+        			rangelength:'简介长度应该在[1,30]内',  
+        			required: '请免费时长'
+        		}
+        	};
+    	
     	param.validate = valid;
     	param.width = 800;
     	param.init = addInit;
