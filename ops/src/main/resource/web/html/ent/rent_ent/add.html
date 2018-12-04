@@ -1,0 +1,41 @@
+<div style="width: 100%; margin: 0 auto; padding: 0 auto;">
+	<form id="company-add-form" class="layui-form layui-row" style='padding: 25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	<input type="hidden" name="stallNames" id="stallNames"> 
+	<input type="hidden" name="preIds" id="preIds"> 
+		<div class="layui-tab layui-tab-card" lay-filter="rent-user-tab" id="rent-user-tab">
+			<div class="layui-tab-content">
+				<div class="layui-form-item">
+					<label class="layui-form-label">公司名称</label>
+					<div class="layui-input-block">
+						<input type="text" id="companyName" name="companyName" placeholder="请输入公司名称" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+		<label class="layui-form-label">车位信息</label>
+		<div class="layui-input-block">
+			<select lay-filter="stallIds" multiple id="stallIds" name="stallIds" lay-verify="required">
+				<option value="">请选择车位</option>
+			</select>
+		</div>
+	</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">开始时间</label>
+					<div class="layui-input-inline">
+						<input type="text" name="startTime" id="start-time" placeholder="请选择开始时间" autocomplete="off" class="layui-input" />
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">结束时间</label>
+					<div class="layui-input-inline">
+						<input type="text" name="endTime" id="end-time" placeholder="请选择结束时间" autocomplete="off" class="layui-input" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="layui-form-item text-center">
+		<button class="layui-btn" id="company-add-button" type='button'>保存数据</button>
+		<button class="layui-btn layui-btn-danger" id="company-cancel-button" type='button' data-confirm="确定取消编辑吗？" data-close>取消编辑</button>
+	</div>
+</div>
