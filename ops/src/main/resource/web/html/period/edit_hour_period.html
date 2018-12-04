@@ -1,0 +1,26 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="temp-edit-form" class="layui-form layui-box"  style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	        <input type="hidden" name="chargeId"  id="chargeId"  class="layui-input">
+	        <input type="hidden" name="id"  id="id"  class="layui-input">
+	    <div class="layui-form-item" >
+	        <label class="layui-form-label">首小时金额</label>
+	        <div class="layui-input-inline" style="display: flex;">
+	         <input type="text" name="firstHourPrice" id= "firstHourPrice" placeholder="请输入金额……" class="layui-input" style="width: 200px"> 
+	        </div>
+	    </div>
+	    <div class="layui-form-item" >
+	        <label class="layui-form-label">计费单元</label>
+	        <div class="layui-input-block"  style="display: flex;">
+	         <input type="text" name="firstPeriodPrice" id="firstPeriodPrice" placeholder="单位：元" class="layui-input" style="width: 100px"> <span>/</span>
+	         <input type="text" name="firstPeriodTime" id="firstPeriodTime" placeholder="单位：分钟" class="layui-input" style="width: 100px"> <span>分钟</span>
+	        	
+	        </div>
+	    </div>
+	</form>   
+	
+	<div class="hr-line-dashed"></div> 
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="temp-add-button" type='button'>确定</button>
+        <button class="layui-btn layui-btn-danger" id="temp-cancel-button" type='button' data-confirm="aa" data-close>取消</button>
+    </div>
+</div>

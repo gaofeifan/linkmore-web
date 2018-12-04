@@ -1,0 +1,50 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="temp-add-form" class="layui-form layui-box"  style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	      <div class="layui-form-item">
+	        <label class="layui-form-label">时段名称</label>
+	        <div class="layui-input-block">
+	        <input type="hidden" name="chargeId"  id="chargeId" placeholder="请输入名称……" class="layui-input">
+	        <input type="text" name="periodName" placeholder="请输入名称……" class="layui-input">
+
+	        </div>
+	    </div>
+	       <div class="layui-form-item">
+	        <label class="layui-form-label">封顶金额</label>
+	        <div class="layui-input-block">
+	         <input type="text" name="limitFee" placeholder="请输入封顶金额" class="layui-input">
+	        </div>
+	    </div>
+	    
+	     <div class="layui-form-item">
+	        <label class="layui-form-label">计费时段</label>
+		       <div class="layui-input-inline" style="display: flex">
+		            <input type="text" name="beginTime"  placeholder="开始时间（格式：00:00）" class="layui-input" style="float: left;width: 150px;margin-right: 10px">
+		            <input type="text" name="endTime" placeholder="结束时间（格式：23:00）" class="layui-input" style="float: left;width: 150px">
+		        </div>
+	    </div>
+	    <div class="layui-form-item"  style="width: 550px;">
+	        <label class="layui-form-label">计时金额</label>
+	        <div class="layui-input-inline" style="display: flex;">
+	         <input type="text" name="chargeFee" placeholder="请输入计时金额……" class="layui-input" style="width: 100px"> 
+	         <span style="padding: 0 10px">/</span> 
+	         <select name="chargeUnit" id="chargeUnit" class="input-sm form-control" >
+		             	<option value="2">小时</option>
+		            	<option value="3">次</option>
+		      </select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">计费单元</label>
+	        <div class="layui-input-block">
+	         <input type="text" name="chargeHourFree" placeholder="请输入计费单元" class="layui-input">
+	          
+	        </div>
+	    </div>
+	</form>   
+	
+	<div class="hr-line-dashed"></div> 
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="temp-add-button" type='button'>确定</button>
+        <button class="layui-btn layui-btn-danger" id="temp-cancel-button" type='button' data-confirm="aa" data-close>取消</button>
+    </div>
+</div>

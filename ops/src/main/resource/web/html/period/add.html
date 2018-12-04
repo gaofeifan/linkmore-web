@@ -1,0 +1,54 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="temp-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	      <div class="layui-form-item">
+	        <label class="layui-form-label">计费名称</label>
+	        <div class="layui-input-block">
+	        <input type="text" name="parkName" placeholder="请输入计费名称，类型为整型" class="layui-input">
+
+	        </div>
+	    </div>
+	       <div class="layui-form-item">
+	        <label class="layui-form-label">免费时长</label>
+	        <div class="layui-input-block">
+	         <input type="text" name="freeTime" placeholder="请输入免费时长，类型为整型" class="layui-input">
+	        </div>
+	    </div>
+	    
+	     <div class="layui-form-item">
+	        <label class="layui-form-label">是否包含</label>
+		       <div class="layui-input-inline">
+		             <select name="containsFreeTime" id="couponType" lay-filter="couponType" class="input-sm form-control" >
+		             	<option value="0">不包含</option>
+		            	<option value="1">包  含</option>
+		             </select>
+		        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">封顶类型</label>
+		       <div class="layui-input-inline">
+		             <select name="limitType" id="couponType" lay-filter="couponType" class="input-sm form-control" >
+		             	<option value="1">时长封顶</option>
+		            	<option value="2">每车次当日封顶</option>
+		             </select>
+		        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">封顶金额</label>
+	        <div class="layui-input-block">
+	         <input type="text" name="limitPrice" placeholder="请输入封顶金额，类型为整型" class="layui-input">
+	        </div>
+	    </div>
+	    <!-- <div class="layui-form-item">
+	        <label class="layui-form-label">备注</label>
+	        <div class="layui-input-block">
+	         <input type="text" name="remark" placeholder="" class="layui-input">
+	        </div>
+	    </div> -->
+	</form>   
+	
+	<div class="hr-line-dashed"></div> 
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="temp-add-button" type='button'>确定</button>
+        <button class="layui-btn layui-btn-danger" id="temp-cancel-button" type='button' data-confirm="取消后，你填写的信息将不会保存，请谨慎选择" data-close>取消</button>
+    </div>
+</div>
