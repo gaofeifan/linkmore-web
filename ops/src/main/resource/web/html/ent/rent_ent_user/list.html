@@ -38,11 +38,17 @@
 		<div class="layui-inline">
 			<button type="button" id="delete-button"  class="layui-btn linkmore-acl layui-btn-small layui-btn-danger "><i class="layui-icon">&#xe640;</i>删除</button>
 		</div>
+		<div class="layui-inline"> 
+			<button type="button" id="return-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe603;</i>返回</button>
+		</div>
+		
    	</div>
+   	<!--  
    	<div style="float:left;width:20%;">
-   			<div id="resource-tree"  class="ztree"></div>
-   		</div>
-   		<div style="float:left;width:80%;">
+   		<div id="resource-tree"  class="ztree"></div>
+    </div>
+    
+   		<div style="float:left;width:80%;"> -->
    			<div class="row shortcut">
 		    	<form class="layui-form" id="role-search-form">
 			    	<div style="margin:10px 0px 10px 0px;">  
@@ -50,7 +56,7 @@
 				             <input type="text"  id="mobile" value="" placeholder="手机号" class="form-control">
 				        </div>
 						<div class="layui-inline" style="margin:0px 35px 0px 5px">
-				             <input type="text"  id="name" value="" placeholder="姓名" class="form-control">
+				             <input type="text"  id="userName" value="" placeholder="姓名" class="form-control">
 				        </div>
 						<div class="layui-inline" style="margin:0px 35px 0px 5px">
 				             <input type="text"  id="plate" value="" placeholder="车牌号" class="form-control">
@@ -62,7 +68,7 @@
 		    	</form> 
 		    	<table class="table-box table-sort " id="rent-user-table"></table>
 		    </div>
-   		</div>
+  <!-- 		</div>  -->
    	
     <!-- 首页信息 -->
 </div>

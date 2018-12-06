@@ -68,7 +68,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			{
 				sTitle: '用户数量',
 	          	mRender:function(mData,type,full){
-	          		var html = '<a class="operation-user" href="user_list.html?companyId='+full.id+'">'+full.userCount+'</a>';
+	          		var html = '<a class="operation-user" href="../rent_ent_user/list.html?companyId='+full.id+'">'+full.userCount+'</a>';
 	          		return html;
 	          	}
 			},
