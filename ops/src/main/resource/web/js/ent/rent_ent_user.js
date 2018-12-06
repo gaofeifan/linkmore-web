@@ -45,8 +45,8 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		var filters = new Array();
 		var filter = null; 
 		filter = new Object();
-		filter.property = 'rentEntId';
-		filter.value = selectedMenuId;
+		//filter.property = 'rentEntId';
+		//filter.value = selectedMenuId;
 		filters.push(filter);
 		var searchPhone = $('#mobile').val();
 		if(searchPhone!=null && searchPhone!=''){
@@ -82,25 +82,30 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		columns:[ 
 			{ sTitle: 'id',   mData: 'id', bVisible:false}, 
 			{ sTitle: '公司名称',   mData: 'companyName'}, 
-			{ sTitle: '用户名称',   mData: 'username'}, 
+			{ sTitle: '用户名称',   mData: 'userName'}, 
 			{ sTitle: '手机号',   mData: 'mobile'}, 
 			{ sTitle: '车牌号',   mData: 'plate'}, 
 			{
 				sTitle: '创建时间',
-				mData: 'startTime' ,
+				mData: 'createTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return new Date(mData).format('yyyy-MM-dd');
+					return new Date(mData).format('yyyy-MM-dd hh:mm:ss');
 				}
 			},
-			{
-				sTitle: '结束时间',
-				mData: 'endTime' ,
-				bSortable: true,
-				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'暂未登录';
-				}
-			}
+			{ sTitle: '状态',   mData: 'status',
+	          	mRender:function(mData,type,full){
+	          		var html = '<label style="color:gray">未知</label>';
+	          		if(mData==0){
+	          			html = '<label style="color:gray">默认</label>';
+	          		}else if(mData==1){
+	          			html = '<label style="color:gray">关闭</label>'; 
+	          		}else if(mData==2){
+	          			html = '<label style="color:blue">开启</label>'; 
+	          		}
+	          		return html;
+	          	}
+			} 
 		],
 		orderIndex:6,
 		orderType:'desc',
@@ -274,4 +279,60 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			});
 		}); 
 	});
+	
+	  
+    var addFileInit = function(validate,lindex){
+    	
+    	var initPrefectureId=function(){
+    		layui.common.ajax({
+    			url:'/admin/biz/prefecture/selectListByUser',
+    			//contentType:'application/json; charset=utf-8',
+    			success:function(data){
+    				if(data!=null){
+    					arrayStrategyDate=data;
+    					$("#prefectureId").empty();
+    					for(var i=0;i<data.length;i++){
+    						$("#prefectureId").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+    					}
+    					form.render('select');
+    					//form.render();
+    					initStrategyFee();
+    				}
+    			},error:function(){
+    				
+    			}
+    		});
+    	};
+    	//initPrefectureId();
+    	
+		$('#excel-cancel-button').bind('click',function(){
+			layui.layer.close(lindex);
+		});
+		$('#excel-add-button').bind('click',function(){
+			var data = new FormData($( "#excel-add-form" )[0]); 
+			layui.common.upload({
+				url:'/admin/ent/rent-ent-user/importExcel',
+				data:data,
+				success:function(res){
+					if(res.success){   
+						layui.layer.close(lindex);
+			    		layui.msg.success(res.content);
+    					window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					} 
+				} 
+			}); 
+        });
+	};
+    $('#import-button').bind('click',function(){
+    	var param = new Object();
+    	param.url = 'add_excel.html';
+    	param.title = '导入车牌';  
+    	param.width = 600;
+    	param.init = addFileInit;
+    	layui.common.modal(param);  
+    });
+	
+	
 });
