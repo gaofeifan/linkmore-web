@@ -1,29 +1,24 @@
 <div style="width:100%;margin:0 auto;padding:0 auto;">
-	<form id="admin-rent-edit-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	<form id="company-edit-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
 		<input type="hidden" name="id" id="id"> 
-		<input type="hidden" name="createEntId" id="createEntId"> 	    
+		<input type="hidden" name="createComId" id="createComId">
+		<input type="hidden" name="preId" id="preId">
 	      <div class="layui-form-item">
 	        <label class="layui-form-label">姓名</label>
 	        <div class="layui-input-block">
 	            <input type="text" name="companyName" placeholder="请输入公司姓名" class="layui-input">
 	        </div>
-	    </div>
-	      <div class="layui-form-item">
-	        <label class="layui-form-label">车牌号</label>
-	        <div class="layui-input-block">
-	            <input type="text" name="plate" placeholder="请输入车牌号" class="layui-input">
-	        </div>
-	    </div>
+	     </div>
 		 <div class="layui-form-item">
 	        <label class="layui-form-label">开始时间</label>
 	        <div class="layui-input-inline">
-	        	<input type="text" name="startDate" id="start-time" placeholder="请选择开始时间" autocomplete="off" class="layui-input"/>
+	        	<input type="text" name="startTimeStr" id="start-time" placeholder="请选择开始时间" autocomplete="off" class="layui-input"/>
 	        </div>
 	     </div>
 	     <div class="layui-form-item">
 	        <label class="layui-form-label">结束时间</label>
 	        <div class="layui-input-inline">
-	        	<input type="text" name="endDate" id="end-time" placeholder="请选择结束时间" autocomplete="off" class="layui-input"/>
+	        	<input type="text" name="endTimeStr" id="end-time" placeholder="请选择结束时间" autocomplete="off" class="layui-input"/>
 	        </div>
 	     </div>
 	    <div class="hr-line-dashed"></div>
