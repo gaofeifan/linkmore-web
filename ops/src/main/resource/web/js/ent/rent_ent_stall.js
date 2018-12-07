@@ -46,10 +46,6 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 
     var companyId = getUrlParam("companyId");
 	
-	var draw = function(settings, json){
-//		$(".operation-start").unbind('click').bind('click',startTemplate);
-	};
-	
 	var addServerParams = function(data){  
 		var filters = new Array();
 		var filter = null; 
@@ -86,7 +82,6 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			/*{ sTitle: '公司名称',   mData: 'companyName'}, */
 			{ sTitle: '车位名称',   mData: 'stallName'},  
 			{ sTitle: '车区名称',   mData: 'preName'},  
-			/*{ sTitle: '车位数量',   mData: 'stallCount'}, */ 
 			{ sTitle: '操作人',   mData: 'updateUserName'},
 			{ sTitle: '创建(修改)时间',  
 			  mData: 'updateTime',
@@ -100,7 +95,6 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		],
 		orderIndex:5,
 		orderType:'desc',
-		draw:draw,
 		filter:addServerParams
 	});  
 	
@@ -128,7 +122,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		});
 		layui.msg.confirm('您确定要删除车位吗？确定删除请点击确认，放弃删除请点击取消。',function(){
 			layui.common.ajax({
-				url:'/admin/ent/rent-ent/delete',
+				url:'/admin/ent/rent-ent/delete-stall',
 				data:JSON.stringify(ids),
 				contentType:'application/json; charset=utf-8',
 				success:function(res){
@@ -150,23 +144,10 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	 * 添加
 	 */
 	var addInit = function(validate,lindex){
-		$('#company-cancel-button').bind('click',function(){
+		$('#stall-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
-		laydate.render({
-		    elem: '#start-time',
-		    min: new Date().format('yyyy-MM-dd'),
-		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false,
-			type: 'date'
-		});
-		laydate.render({
-		    elem: '#end-time',
-		    min: new Date().format('yyyy-MM-dd'),
-		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false,
-			type: 'date'
-		}); 
+		
 		var stallHtml = '<option value = "">请选择车位</option>';
 		var stallList;
 		layui.common.ajax({
@@ -181,23 +162,8 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		}});
 		$("#stallIds").html(stallHtml);
 		form.render();
-		$('#company-add-button').bind('click',function(){
+		$('#stall-add-button').bind('click',function(){
 	    	if(validate.valid()){
-	    		/*
-	    		var stallIds = $('#stallIds').val();
-	    		var startTime = $('#start-time').val();
-	    	    var endTime = $('#end-time').val();
-        		if(companyName == ''){
-        			layui.msg.tips('请填写公司名称!');
-    				return;
-    			if(stallIds ==""){
-        			layui.msg.tips('请选择车位!');
-    				return;
-        		}
-        		if(startTime > endTime){
-        			layui.msg.error("开始日期不能大于结束日期");
-        			return false;
-        		}*/
 	    		var names = new Array();
 	    		var stallIds = new Array();
 	    		$.each($("#stallIds").find("option:selected"),function(index){
@@ -205,9 +171,10 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	    			stallIds.push($(this).val());
 	    		})
 	    		$("#stallNames").val(names);
+	    		$("#id").val(companyId);
 	    		layui.common.ajax({
-	    			url:'/admin/ent/rent-ent/save',
-	    			data:$('#company-add-form').serialize(),
+	    			url:'/admin/ent/rent-ent/save-stall',
+	    			data:$('#stall-add-form').serialize(),
 	    			success:function(res){
 	    				if(res.success){
 	    					layui.layer.close(lindex);
@@ -222,217 +189,27 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	};
     $('#add-button').bind('click',function(){
     	var param = new Object();
-    	param.url = 'add.html';
+    	param.url = 'stall_add.html';
     	param.title = '添加信息'; 
     	var valid = new Object();
-    	valid.id = "company-add-form";
+    	valid.id = "stall-add-form";
     	valid.rules = {
-    		companyName:{
-    			rangelength:[2,11],
-    			required: true
-    		},stallIds:{
+    		stallIds:{
     			rangelength:[1,255],  
-    			required: true
-    		},startTime:{
-    			required: true
-    		},endTime:{
     			required: true
     		}
     	};
     	valid.messages = {
-    		companyName:{
-    			required: '请填写公司名称'
-    		},stallIds:{
+    		stallIds:{
     			rangelength:'请选择车位',  
     			required: '请选择车位'
-    		},startTime:{
-    			required: '请填写开始日期'
-    		},endTime:{
-    			required: '请填写结束日期'
     		}
     	}; 
     	param.validate = valid;
     	param.width = 600;
+    	param.heigth = 400;
     	param.init = addInit;
     	layui.common.modal(param);  
     });
-    /*
-     * 编辑
-     */
-    var editInit = function(validate,lindex){
-    	laydate.render({
-		    elem: '#start-time',
-		    min: new Date().format('yyyy-MM-dd'),
-		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false,
-			type: 'date'
-		});
-		laydate.render({
-		    elem: '#end-time',
-		    min: new Date().format('yyyy-MM-dd'),
-		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
-			istoday: false,
-			type: 'date'
-		}); 
-    	
-    	$('#company-cancel-button').bind('click',function(){
-			layui.layer.close(lindex);
-		});
-		var list = datatable.selected();
-		form.render('select');
-		layui.common.set({
-			id:'company-edit-form',
-			data:list[0]
-		});
-		
-		$("#start-time").val(new Date(list[0].startTime).format('yyyy-MM-dd'));
-		$("#end-time").val(new Date(list[0].endTime).format('yyyy-MM-dd'));
-		form.render('checkbox');
-		
-		/*$("#entId").val(list[0].entId);
-		$("#entPreId").val(list[0].entPreId);
-		var stallHtml = '<option value="">选择车区车位</option>';
-		$.each(stallList,function(index,stall){
-			if(stall.preId == list[0].preId){
-				stallHtml += '<option value="'+stall.id+'">';
-				stallHtml += stall.stallName;
-				stallHtml += '</option>';
-			}
-		})
-		$("#stallId").html(stallHtml);
-		form.render('select');
-		$("#stallId").val(list[0].stallId);
-		form.render('select');*/
-		
-		/*$.each(enterpriseList,function(index,ent){
-			if(ent.id == list[0].entId){
-				$.each(preList,function(index,pre){
-					if(pre.entId == list[0].entId){
-						preHtml += '<option value="'+pre.id+'">';
-						preHtml += pre.preName;
-						preHtml += '</option>';
-					}
-				})
-				$("#ent-pre-id").html(preHtml);
-				$("#ent-pre-id").val(list[0].preId);
-				form.render('select');
-			}
-		})
-		
-		form.on('select(enterpriseId)', function(data){
-		preHtml = '<option value="">选择企业车区</option>';
-		$.each(enterpriseList,function(index,ent){
-			if(ent.id == data.value){
-				$("#entName").val(ent.name);
-				$.each(preList,function(index,pre){
-					if(pre.entId == data.value){
-						preHtml += '<option value="'+pre.id+'">';
-						preHtml += pre.preName;
-						preHtml += '</option>';
-					}
-				})
-				$("#ent-pre-id").html(preHtml);
-				form.render('select');
-			}
-		})
-		})
-		form.on('select(ent-pre-id)', function(data){
-			var stallHtml = '<option value="">选择车区车位</option>';
-			$.each(preList,function(index,pre){
-				if(pre.id == data.value){
-					$("#preName").val(pre.name);
-					$("#preId").val(pre.preId);
-					$.each(stallList,function(index,stall){
-						if(stall.preId == pre.preId){
-							stallHtml += '<option value="'+stall.id+'">';
-							stallHtml += stall.stallName;
-							stallHtml += '</option>';
-						}
-					})
-				}
-			})
-			$("#stallId").html(stallHtml);
-			form.render('select');
-		});
-		
-		form.on('select(stallId)', function(data){
-			$.each(stallList,function(index,stall){
-				if(stall.id == data.value){
-					$("#stallName").val(stall.stallName)
-				}
-			})
-		})*/
-		$('#company-edit-button').bind('click',function(){
-        	if(validate.valid()){  
-        		layui.common.ajax({
-        			url:'/admin/ent/rent-ent/update',
-        			data:$('#company-edit-form').serialize(),
-        			success:function(res){
-        				if(res.success){
-        					layui.layer.close(lindex);
-        					layui.msg.success(res.content);
-        					window.setTimeout(function(){
-        						location.reload(false);
-        					},1000);
-        				}
-        			} 
-        		});
-        	}
-        });
-	}
-	$('#edit-button').bind('click',function(){
-		var list = datatable.selected(); 
-		if(list.length!=1){
-			layui.msg.error('请选择一条记录！');
-			return false;
-		}
-		if(list[0].status == 2){
-			layui.msg.error('启用状态下禁止修改！');
-			return false;
-		}
-		var param = new Object();
-    	param.url = 'edit.html';
-    	param.title = '编辑信息'; 
-    	var valid = new Object();
-    	valid.id = "company-edit-form";
-    	valid.rules = {
-			companyName:{
-    			rangelength:[2,11],
-    			required: true
-    		},startTimeStr:{
-    			required: true
-    		},endTimeStr:{
-    			required: true
-    		}
-    	};
-    	valid.messages = {
-			companyName:{
-    			required: '请填写公司名称'
-    		},startTimeStr:{
-    			required: '请填写开始日期'
-    		},endTimeStr:{
-    			required: '请填写结束日期'
-    		}
-			/*mobile:{
-    			rangelength:'手机号长度有误', 
-    			required: '请填写手机号',
-    			mobile:'手机号格式有误',
-    		},realname:{
-    			rangelength:'姓名应该在[1,12]内',  
-    			required: '请填写姓名'
-    		},plate:{
-    			required: '请填写车牌号',
-    			isPlateNo:'请输入正确的车牌号'
-    		},startDate:{
-    			required: '请填写开始日期'
-    		},endDate:{
-    			required: '请填写结束日期'
-    		}*/
-    	}; 
-    	param.validate = valid;
-    	param.width = 600;
-    	param.init = editInit;
-    	layui.common.modal(param);
-	});
-	
+    
 });

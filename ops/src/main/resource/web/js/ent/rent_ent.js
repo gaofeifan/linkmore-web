@@ -223,9 +223,18 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			return false;
 		}
 		var ids = new Array();
+		var flag = false;
 		$.each(list,function(index,page){
 			ids.push(page.id);
+			if(page.status == 2){
+				flag = true;
+				return false;
+			}
 		});
+		if(flag){
+			layui.msg.error('启用状态下禁止删除');
+			return false;
+		}
 		layui.msg.confirm('您确定要删除公司吗？确定删除请点击确认，放弃删除请点击取消。',function(){
 			layui.common.ajax({
 				url:'/admin/ent/rent-ent/delete',
