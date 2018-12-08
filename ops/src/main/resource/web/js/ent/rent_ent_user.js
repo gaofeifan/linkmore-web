@@ -178,16 +178,22 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	valid.id = "rent-user-add-form";
     	valid.rules = {
     		userName:{
-    			rangelength:[1,32],
+    			rangelength:[0,32],
     			required: true
+    		},plate:{
+    			required: true,
+    			isPlateNo:true
     		},mobile:{
     			rangelength:[11,11]
     		}  
     	};
     	valid.messages = {
     		userName:{
-				rangelength:'用户名称不能为空', 
+				rangelength:'用户名称不能超过32个字符', 
 				required: '请填写用户名称'
+    		},plate:{
+    			required: '请填写车牌号',
+    			isPlateNo:'请输入正确的车牌号'
     		},mobile:{
     			rangelength:'请输入正确的手机号'  
     		} 
@@ -248,34 +254,27 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	var valid = new Object();
     	valid.id = "rent-user-edit-form";
     	valid.rules = {
-    		cellphone:{
-    			rangelength:[11,11],
-    			required: true,
-    			digits:true,
-    			remote:{
-    				url:"/admin/ent/rent-ent-user/check",
-    				data:{
-    					property:"cellphone",
-    					value:function(){return $('#admin-user-edit-form input[name=cellphone]').val();},
-    					id:function(){return $('#admin-user-edit-form input[name=id]').val();}
-    				}
-    			}
-    		},realname:{
-    			rangelength:[1,12],
-    			required: true
-    		}  
+    			userName:{
+        			rangelength:[0,32],
+        			required: true
+        		},plate:{
+        			required: true,
+        			isPlateNo:true
+        		},mobile:{
+        			rangelength:[11,11]
+        		}
     	};
     	valid.messages = {
-    		cellphone:{
-    			rangelength:'手机号长度有误', 
-    			required: '请填写手机号',
-    			remote:'手机号已经存在',
-    			digits:'手机号格式有误',
-    		},realname:{
-    			rangelength:'姓名应该在[1,12]内',  
-    			required: '请填写姓名'
-    		} 
-    	}; 
+        		userName:{
+    				rangelength:'用户名称不能超过32个字符',
+    				required: '请填写用户名称'
+        		},plate:{
+        			required: '请填写车牌号',
+        			isPlateNo:'请输入正确的车牌号'
+        		},mobile:{
+        			rangelength:'请输入正确的手机号'
+        		}
+        };
     	param.validate = valid;
     	param.width = 600;
     	param.init = editInit;
