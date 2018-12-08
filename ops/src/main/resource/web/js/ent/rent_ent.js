@@ -118,12 +118,6 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	        		  return new Date(mData).format('yyyy-MM-dd hh:mm:ss');
 	        	  }
 	          }	
-			},
-			{
-				sTitle: '操作',
-				mRender:function(mData,type,full){
-					return '<a class="operation-detail" data-detail-id="'+full.id+'" href="javascript:void(0);">车位</a>'
-				}
 			}
 		],
 		orderIndex:6,
