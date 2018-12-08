@@ -1,0 +1,27 @@
+<div style="width: 100%; heigth:400px; margin: 0 auto; padding: 0 auto;">
+	<form id="stall-add-form" class="layui-form layui-row" style='padding: 25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	<input type="hidden" name="stallNames" id="stallNames"> 
+	<input type="hidden" name="preId" id="preId"> 
+	<input type="hidden" name="id" id="id"> 
+		<div class="layui-tab layui-tab-card" lay-filter="rent-user-tab" id="rent-user-tab">
+			<div class="layui-tab-content">
+				<div class="layui-form-item">
+				</div>
+				<div class="layui-form-item">
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">车位信息</label>
+					<div class="layui-input-block">
+						<select lay-filter="stallIds" multiple id="stallIds" name="stallIds" lay-verify="required">
+							<option value="">请选择车位</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="layui-form-item text-center">
+		<button class="layui-btn" id="stall-add-button" type='button'>保存数据</button>
+		<button class="layui-btn layui-btn-danger" id="stall-cancel-button" type='button' data-confirm="确定取消编辑吗？" data-close>取消编辑</button>
+	</div>
+</div>
