@@ -350,5 +350,23 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	layui.common.modal(param);  
     });
 	
+    $('#sync-button').bind('click',function(){
+    	layui.common.ajax({
+			url:'/admin/ent/rent-ent-user/sync/byCompanyId',
+			data:JSON.stringify(companyId),
+			contentType:'application/json; charset=utf-8',
+			success:function(res){
+				if(res.success){  
+					layui.msg.success(res.content);
+					window.setTimeout(query,1000);
+				}else{
+					layui.msg.error(res.content);
+				}
+				
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
+    });
 	
 });
