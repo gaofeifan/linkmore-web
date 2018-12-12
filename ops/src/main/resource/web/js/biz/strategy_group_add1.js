@@ -66,7 +66,7 @@ layui.use(['layer','msg','form', 'common','validate'], function() {
 			return false;
 		}
 		if (name.trim().length<=0 || name.trim().length>10){
-			layui.msg.error('策略名称长度应该为【1-10】');
+			layui.msg.error('分组策略名称长度应该为【1-10】');
 			return false;
 		}
 		if(parkingInterval.trim().length<=0){
