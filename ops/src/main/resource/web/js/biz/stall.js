@@ -170,8 +170,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          		var html = '';
 	          		if(0== mData){
 	          			html += '<label style="color:#FF00FF;">临停车位</label>';
-//	          		}else if(1== mData){
-//	          			html += '<label style="color:#FF4500;">临停车位</label>';
+	          		}else if(1== mData){
+	          			html += '<label style="color:#FF4500;">临停车位</label>';
 	          		}else if(2== mData){
 	          			html += '<label style="color:#FF4500;">固定车位</label>';
 	          		}
@@ -229,8 +229,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          	mRender:function(mData,type,full){
 	          		 return new Date(mData).format('yyyy-MM-dd hh:mm');
 	          	}
-			}
-			/*,{ sTitle: '创建人',   mData: 'createName'}*/
+			},
+			{ sTitle: '创建人',   mData: 'createName'}
 			
 		],
 		orderIndex:6,
