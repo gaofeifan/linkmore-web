@@ -156,17 +156,19 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		});
 
 		$('#rent-user-add-button').bind('click',function(){
-        	layui.common.ajax({
-        		url:'/admin/ent/rent-ent-user/add',
-        		data:$('#rent-user-add-form').serialize(),
-        		success:function(res){
-        			if(res.success){
-	    				layui.layer.close(lindex);
-	    				layui.msg.success(res.content);
-	    				window.setTimeout(query,1000);
-	    			}
-        		}
-        	});
+			if(validate.valid()){
+	        	layui.common.ajax({
+	        		url:'/admin/ent/rent-ent-user/add',
+	        		data:$('#rent-user-add-form').serialize(),
+	        		success:function(res){
+	        			if(res.success){
+		    				layui.layer.close(lindex);
+		    				layui.msg.success(res.content);
+		    				window.setTimeout(query,1000);
+		    			}
+	        		}
+	        	});
+			}
         });
 
 	};

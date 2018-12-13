@@ -275,7 +275,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				mData: 'startTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm:ss'):'';
+					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'';
 				}
 			},
 			{
@@ -283,7 +283,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				mData: 'endTime' ,
 				bSortable: true,
 				mRender:function(mData,type,full){
-					return mData!=null?new Date(mData).format('yyyy-MM-dd hh:mm:ss'):'';
+					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'';
 				}
 			}
 		],
@@ -391,11 +391,11 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     	valid.rules = {
     		mobile:{
     			rangelength:[11,11],
-    			required: true,
+    			//required: false,
     			mobile:true
     		},realname:{
     			rangelength:[1,12],  
-    			required: true
+    			//required: false
     		},plate:{
     			required: true,
     			isPlateNo:true
@@ -408,7 +408,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     	valid.messages = {
     		mobile:{
     			rangelength:'手机号长度有误', 
-    			required: '请填写手机号',
+    		//	required: '请填写手机号',
     			mobile:'请输入有效手机号'
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
@@ -579,11 +579,11 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     	valid.rules = {
 			mobile:{
     			rangelength:[11,11],
-    			required: true,
+    			//required: true,
     			mobile:true
     		},realname:{
     			rangelength:[1,12],  
-    			required: true
+    			//required: true
     		},plate:{
     			required: true,
     			isPlateNo:true
@@ -596,11 +596,11 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     	valid.messages = {
 			mobile:{
     			rangelength:'手机号长度有误', 
-    			required: '请填写手机号',
+    			//required: '请填写手机号',
     			mobile:'手机号格式有误',
     		},realname:{
     			rangelength:'姓名应该在[1,12]内',  
-    			required: '请填写姓名'
+    			//required: '请填写姓名'
     		},plate:{
     			required: '请填写车牌号',
     			isPlateNo:'请输入正确的车牌号'

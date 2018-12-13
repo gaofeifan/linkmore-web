@@ -229,7 +229,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			layui.msg.error('启用状态下禁止删除');
 			return false;
 		}
-		layui.msg.confirm('您确定要删除公司吗？确定删除请点击确认，放弃删除请点击取消。',function(){
+		layui.msg.confirm('您确定要删除公司吗？</br>删除公司会取消其下的车位和用户相关权限。</br>确定删除请点击【确认】</br>放弃删除请点击【取消】。',function(){
 			layui.common.ajax({
 				url:'/admin/ent/rent-ent/delete',
 				data:JSON.stringify(ids),
@@ -286,21 +286,28 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		form.render();
 		$('#company-add-button').bind('click',function(){
 	    	if(validate.valid()){
-	    		/*
+	    		var companyName = $('#companyName').val();
 	    		var stallIds = $('#stallIds').val();
 	    		var startTime = $('#start-time').val();
 	    	    var endTime = $('#end-time').val();
+	    	   
         		if(companyName == ''){
         			layui.msg.tips('请填写公司名称!');
     				return;
-    			if(stallIds ==""){
+        		}	
+    			if(stallIds == null){
         			layui.msg.tips('请选择车位!');
     				return;
+        		}
+
+            	if(startTime.trim().length<=0 || endTime.trim().length<=0 ){
+        			layui.msg.error("开使日期或结束日期不能为空");
+        			return false;
         		}
         		if(startTime > endTime){
         			layui.msg.error("开始日期不能大于结束日期");
         			return false;
-        		}*/
+        		}
 	    		var names = new Array();
 	    		var stallIds = new Array();
 	    		$.each($("#stallIds").find("option:selected"),function(index){
