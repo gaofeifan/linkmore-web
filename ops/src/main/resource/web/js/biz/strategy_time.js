@@ -592,4 +592,58 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     	param.init = editInit;
     	layui.common.modal(param);  
     });
+    
+    
+    var addFileInit = function(validate,lindex){
+    	
+    	var initPrefectureId=function(){
+    		layui.common.ajax({
+    			url:'/admin/biz/prefecture/selectListByUser',
+    			//contentType:'application/json; charset=utf-8',
+    			success:function(data){
+    				if(data!=null){
+    					arrayStrategyDate=data;
+    					$("#prefectureId").empty();
+    					for(var i=0;i<data.length;i++){
+    						$("#prefectureId").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+    					}
+    					form.render('select');
+    					//form.render();
+    					initStrategyFee();
+    				}
+    			},error:function(){
+    				
+    			}
+    		});
+    	};
+    	initPrefectureId();
+    	
+		$('#excel-cancel-button').bind('click',function(){
+			layui.layer.close(lindex);
+		});
+		$('#excel-add-button').bind('click',function(){
+			var data = new FormData($( "#excel-add-form" )[0]); 
+			layui.common.upload({
+				url:'/admin/ent/rent-ent-user/importExcel',
+				data:data,
+				success:function(res){
+					if(res.success){   
+						layui.layer.close(lindex);
+			    		layui.msg.success(res.content);
+    					window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					} 
+				} 
+			}); 
+        });
+	};
+    $('#import-button').bind('click',function(){
+    	var param = new Object();
+    	param.url = 'add_excel.html';
+    	param.title = '导入车牌';  
+    	param.width = 600;
+    	param.init = addFileInit;
+    	layui.common.modal(param);  
+    });
 });

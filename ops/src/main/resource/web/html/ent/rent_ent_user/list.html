@@ -23,23 +23,35 @@
 <body> 
 <div class="linkmore-grid linkmore-wrapper"> 
 	<div style=" text-align:right;">  
-        <div class="layui-inline"> 
-			<button id="add-button" class="layui-btn linkmore-acl layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe608;</i> 添加</button>
+        <div class="layui-inline"><!-- linkmore-acl -->
+			<button id="add-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe608;</i> 添加</button>
+		</div>
+		<div class="layui-inline"> 
+			<button id="import-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe62f;</i> 车牌导入</button>
+		</div>
+		<div class="layui-inline"> 
+			<button id="sync-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe62f;</i>生成长租车位</button>
 		</div>
 		<div class="layui-inline">
-			<button type="button" id="edit-button"  class="layui-btn linkmore-acl layui-btn-small recommend" style="background-color:#5FB878"><i class="layui-icon">&#xe642;</i>编辑</button>
+			<button type="button" id="edit-button"  class="layui-btn layui-btn-small recommend" style="background-color:#5FB878"><i class="layui-icon">&#xe642;</i>编辑</button>
 		</div> 
 		<div class="layui-inline"> 
-			<button id="bind-button" class="layui-btn layui-btn-small linkmore-acl layui-btn-normal"><i class="layui-icon">&#xe642;</i> 绑定</button>
+			<button id="bind-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe642;</i> 绑定</button>
 		</div>
-		<div class="layui-inline">
-			<button type="button" id="delete-button"  class="layui-btn linkmore-acl layui-btn-small layui-btn-danger "><i class="layui-icon">&#xe640;</i>删除</button>
+		<div class="layui-inline"><!-- linkmore-acl -->
+			<button type="button" id="delete-button"  class="layui-btn layui-btn-small layui-btn-danger "><i class="layui-icon">&#xe640;</i>删除</button>
 		</div>
+		<div class="layui-inline"> 
+			<button type="button" id="return-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe603;</i>返回</button>
+		</div>
+		
    	</div>
+   	<!--  
    	<div style="float:left;width:20%;">
-   			<div id="resource-tree"  class="ztree"></div>
-   		</div>
-   		<div style="float:left;width:80%;">
+   		<div id="resource-tree"  class="ztree"></div>
+    </div>
+    
+   		<div style="float:left;width:80%;"> -->
    			<div class="row shortcut">
 		    	<form class="layui-form" id="role-search-form">
 			    	<div style="margin:10px 0px 10px 0px;">  
@@ -47,7 +59,7 @@
 				             <input type="text"  id="mobile" value="" placeholder="手机号" class="form-control">
 				        </div>
 						<div class="layui-inline" style="margin:0px 35px 0px 5px">
-				             <input type="text"  id="name" value="" placeholder="姓名" class="form-control">
+				             <input type="text"  id="userName" value="" placeholder="姓名" class="form-control">
 				        </div>
 						<div class="layui-inline" style="margin:0px 35px 0px 5px">
 				             <input type="text"  id="plate" value="" placeholder="车牌号" class="form-control">
@@ -59,7 +71,7 @@
 		    	</form> 
 		    	<table class="table-box table-sort " id="rent-user-table"></table>
 		    </div>
-   		</div>
+  <!-- 		</div>  -->
    	
     <!-- 首页信息 -->
 </div>

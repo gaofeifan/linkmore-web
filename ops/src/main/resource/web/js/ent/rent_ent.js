@@ -40,26 +40,15 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	var draw = function(settings, json){
 //		$(".operation-start").unbind('click').bind('click',startTemplate);
 	};
-	function showTempInfo(){
-		tempId = $(this).attr('data-detail-id');
-    	var param = new Object();
-    	param.url = 'detail.html';
-    	param.title = '详情信息'; 
-    	var valid = new Object();
-    	valid.id = "company-detail-form";
-    	param.width = 400;
-    	param.init = detailInit;
-    	layui.common.modal(param);
-	}
 	
 	var addServerParams = function(data){  
 		var filters = new Array();
 		var filter = null; 
-		var searchEntName = $('#search-ent-name').val();
-		if(searchEntName!=''){
+		var searchCompanyName = $('#search-company-name').val();
+		if(searchCompanyName!=''){
 			filter = new Object();
 			filter.property = 'companyName';
-			filter.value = '%'+searchEntName +'%';
+			filter.value = '%'+searchCompanyName +'%';
 			filters.push(filter);
 		}
 		
@@ -74,8 +63,22 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		key:'id',
 		columns:[
 			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
-			{ sTitle: '企业ID',   mData: 'createEntId', bVisible:false}, 
 			{ sTitle: '公司名称',   mData: 'companyName'}, 
+			{ sTitle: '车区名称',   mData: 'preName'},  
+			{
+				sTitle: '用户数量',
+	          	mRender:function(mData,type,full){
+	          		var html = '<a class="operation-user" href="../rent_ent_user/list.html?companyId='+full.id+'">'+full.userCount+'</a>';
+	          		return html;
+	          	}
+			},
+			{
+				sTitle: '车位数量',
+	          	mRender:function(mData,type,full){
+	          		var html = '<a class="operation-user" href="stall_list.html?companyId='+full.id+'">'+full.stallCount+'</a>';
+	          		return html;
+	          	}
+			},
 			{
 				sTitle: '开始时间',
 				mData: 'startTime' ,
@@ -87,19 +90,37 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			{
 				sTitle: '结束时间',
 				mData: 'endTime' ,
-				bSortable: true,
 				mRender:function(mData,type,full){
 					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'';
 				}
 			},
-			{
-				sTitle: '操作',
-				mRender:function(mData,type,full){
-					return '<a class="operation-detail" data-detail-id="'+full.id+'" href="javascript:void(0);">车位</a>'
-				}
+			{ sTitle: '操作人',   mData: 'updateUserName'},
+			{ sTitle: '状态',   mData: 'status',
+	          	mRender:function(mData,type,full){
+	          		var html = '<label style="color:gray">未知</label>';
+	          		if(mData==0){
+	          			html = '<label style="color:gray">默认</label>';
+	          		}else if(mData==1){
+	          			html = '<label style="color:gray">关闭</label>'; 
+	          		}else if(mData==2){
+	          			html = '<label style="color:blue">开启</label>'; 
+	          		}else if(mData==3){
+	          			html = '<label style="color:gray">过期</label>'; 
+	          		}
+	          		return html;
+	          	}
+			} ,
+			{ sTitle: '创建(修改)时间',  
+			  mData: 'updateTime',
+			  bSortable: true,
+	          mRender:function(mData,type,full){
+	        	  if(mData != null){
+	        		  return new Date(mData).format('yyyy-MM-dd hh:mm:ss');
+	        	  }
+	          }	
 			}
 		],
-		orderIndex:4,
+		orderIndex:6,
 		orderType:'desc',
 		draw:draw,
 		filter:addServerParams
@@ -112,6 +133,121 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	$('.search_btn').bind('click',function(){
 		query();
 	});  
+	
+	/**
+	 * 启用策略
+	 */
+	$('#open-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		if(list[0].status == 2){
+			layui.msg.error('该公司已启用');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定开启吗？',function(){
+			layui.common.ajax({
+				url:'/admin/ent/rent-ent/status/open',
+				contentType:'application/json; charset=utf-8',
+				data:JSON.stringify(ids),
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,3000);
+					}else{
+						layui.msg.error(res.content);
+					}
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});
+	
+	/**
+	 * 关闭策略
+	 */
+	$('#close-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		if(list[0].status == 1){
+			layui.msg.error('公司已关闭');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定关闭吗？',function(){
+			layui.common.ajax({
+				url:'/admin/ent/rent-ent/status/close',
+				contentType:'application/json; charset=utf-8',
+				//data:JSON.stringify(list[0].id),
+				data:JSON.stringify(ids),
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,3000);
+					}else{
+						layui.msg.error(res.content);
+					}
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});
+	
+	/*
+	 * 删除
+	 */
+	$('#delete-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		var flag = false;
+		$.each(list,function(index,page){
+			ids.push(page.id);
+			if(page.status == 2){
+				flag = true;
+				return false;
+			}
+		});
+		if(flag){
+			layui.msg.error('启用状态下禁止删除');
+			return false;
+		}
+		layui.msg.confirm('您确定要删除公司吗？确定删除请点击确认，放弃删除请点击取消。',function(){
+			layui.common.ajax({
+				url:'/admin/ent/rent-ent/delete',
+				data:JSON.stringify(ids),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});
 	
 	/*
 	 * 添加
@@ -142,6 +278,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			success:function(res){
 				stallList = res;
 				$.each(res,function(index,stall){
+					$("#preId").val(stall.preId);
 					stallHtml += '<option value = "'+stall.id+'">'+stall.stallName+'</option>';
 				})
 		}});
@@ -165,21 +302,14 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
         			return false;
         		}*/
 	    		var names = new Array();
-	    		var preIds = new Array();
+	    		var stallIds = new Array();
 	    		$.each($("#stallIds").find("option:selected"),function(index){
-	    			names.push($(this).text())
-	    			var stallId = $(this).val();
-    				$.each(stallList,function(index,stall){
-	    				if(stall.id == stallId){
-	    					preIds.push(stall.preId);
-	    				}
-	    			})
+	    			names.push($(this).text());
+	    			stallIds.push($(this).val());
 	    		})
 	    		$("#stallNames").val(names);
-	    		$("#preIds").val(preIds);
-	    	
 	    		layui.common.ajax({
-	    			url:'/admin/ent/rent-ent/add',
+	    			url:'/admin/ent/rent-ent/save',
 	    			data:$('#company-add-form').serialize(),
 	    			success:function(res){
 	    				if(res.success){
@@ -238,46 +368,31 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false,
-			type: 'datetime'
+			type: 'date'
 		});
 		laydate.render({
 		    elem: '#end-time',
 		    min: new Date().format('yyyy-MM-dd'),
 		    max: new Date(new Date().getTime()+1000*60*60*24*3650).format('yyyy-MM-dd'),
 			istoday: false,
-			type: 'datetime'
+			type: 'date'
 		}); 
     	
     	$('#company-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
 		var list = datatable.selected();
-		
-		$("#preId").html(preHtml);
-		$("#entId").html(enterpriseHtml);
-		$("#entPreId").html(entPreHtml);
-		//initStall(list[0].preId);
-		initEntPre(list[0].entId);
 		form.render('select');
-		
 		layui.common.set({
 			id:'company-edit-form',
 			data:list[0]
 		});
 		
-		var type = list[0].type;
-		if(type == 0){
-			$("#user-pre").css('display','block');
-		}else{
-			$("#com-ent").css('display','block');
-			$("#com-ent-pre").css('display','block');
-			$("#preId").val(list[0].preId);
-		}
-		$("#start-time").val(new Date(list[0].startTime).format('yyyy-MM-dd hh:mm:ss'));
-		$("#end-time").val(new Date(list[0].endTime).format('yyyy-MM-dd hh:mm:ss'));
+		$("#start-time").val(new Date(list[0].startTime).format('yyyy-MM-dd'));
+		$("#end-time").val(new Date(list[0].endTime).format('yyyy-MM-dd'));
 		form.render('checkbox');
 		
-		$("#entId").val(list[0].entId);
+		/*$("#entId").val(list[0].entId);
 		$("#entPreId").val(list[0].entPreId);
 		var stallHtml = '<option value="">选择车区车位</option>';
 		$.each(stallList,function(index,stall){
@@ -290,7 +405,8 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		$("#stallId").html(stallHtml);
 		form.render('select');
 		$("#stallId").val(list[0].stallId);
-		form.render('select');
+		form.render('select');*/
+		
 		/*$.each(enterpriseList,function(index,ent){
 			if(ent.id == list[0].entId){
 				$.each(preList,function(index,pre){
@@ -349,11 +465,11 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				}
 			})
 		})*/
-		$('#admin-rent-edit-button').bind('click',function(){
+		$('#company-edit-button').bind('click',function(){
         	if(validate.valid()){  
         		layui.common.ajax({
-        			url:'/admin/ent/rent/update',
-        			data:$('#admin-rent-edit-form').serialize(),
+        			url:'/admin/ent/rent-ent/update',
+        			data:$('#company-edit-form').serialize(),
         			success:function(res){
         				if(res.success){
         					layui.layer.close(lindex);
@@ -370,33 +486,37 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	$('#edit-button').bind('click',function(){
 		var list = datatable.selected(); 
 		if(list.length!=1){
-			layui.msg.error('请选择一条记录进行编辑');
+			layui.msg.error('请选择一条记录！');
+			return false;
+		}
+		if(list[0].status == 2){
+			layui.msg.error('启用状态下禁止修改！');
 			return false;
 		}
 		var param = new Object();
     	param.url = 'edit.html';
     	param.title = '编辑信息'; 
     	var valid = new Object();
-    	valid.id = "admin-rent-edit-form";
+    	valid.id = "company-edit-form";
     	valid.rules = {
-			mobile:{
-    			rangelength:[11,11],
-    			required: true,
-    			mobile:true
-    		},realname:{
-    			rangelength:[1,12],  
+			companyName:{
+    			rangelength:[2,11],
     			required: true
-    		},plate:{
-    			required: true,
-    			isPlateNo:true
-    		},startDate:{
+    		},startTimeStr:{
     			required: true
-    		},endDate:{
+    		},endTimeStr:{
     			required: true
     		}
     	};
     	valid.messages = {
-			mobile:{
+			companyName:{
+    			required: '请填写公司名称'
+    		},startTimeStr:{
+    			required: '请填写开始日期'
+    		},endTimeStr:{
+    			required: '请填写结束日期'
+    		}
+			/*mobile:{
     			rangelength:'手机号长度有误', 
     			required: '请填写手机号',
     			mobile:'手机号格式有误',
@@ -410,43 +530,12 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     			required: '请填写开始日期'
     		},endDate:{
     			required: '请填写结束日期'
-    		}
+    		}*/
     	}; 
     	param.validate = valid;
     	param.width = 600;
     	param.init = editInit;
     	layui.common.modal(param);
 	});
-	/*
-	 * 删除
-	 */
-	$('#delete-button').bind('click',function(){
-		var list = datatable.selected(); 
-		if(list.length<1){
-			layui.msg.error('请至少选择一条记录');
-			return false;
-		}
-		var ids = new Array();
-		$.each(list,function(index,page){
-			ids.push(page.id);
-		});
-		layui.msg.confirm('您确定要删除该长租用户吗？确定删除请点击是，放弃删除请点击否。',function(){
-			layui.common.ajax({
-				url:'/admin/ent/rent/delete',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					layui.msg.error("网络异常");
-				}
-			});
-		}); 
-	});
+	
 });

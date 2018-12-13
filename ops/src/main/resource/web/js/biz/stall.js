@@ -229,8 +229,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          	mRender:function(mData,type,full){
 	          		 return new Date(mData).format('yyyy-MM-dd hh:mm');
 	          	}
-			},
-			{ sTitle: '创建人',   mData: 'createName'}
+			}
+			/*,{ sTitle: '创建人',   mData: 'createName'}*/
 			
 		],
 		orderIndex:6,

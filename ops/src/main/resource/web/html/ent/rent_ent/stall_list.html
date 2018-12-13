@@ -17,43 +17,40 @@
 	<link rel="stylesheet" type="text/css" href="/web/css/font/font.css" media="all"> 
 	<link rel="stylesheet" type="text/css" href="/web/css/ztree/css.css" media="all"> 
 	<link rel="stylesheet" type="text/css" href="/web/css/common.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/web/css/select/public.css" media="all"> 
 	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/datatable.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/console.css" media="all">
 </head>
-<body> 
+<body class="childrenBody"> 
 <div class="linkmore-grid linkmore-wrapper"> 
 	<div style=" text-align:right;">  
         <div class="layui-inline"> 
-			<button id="add-button" class="layui-btn linkmore-acl layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe608;</i> 添加</button>
-		</div>
-        <div class="layui-inline"> 
-			<button id="view-button" class="layui-btn linkmore-acl layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe705;</i> 查看</button>
+			<button type="button" id="add-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe608;</i>添加</button>
 		</div>
 		<div class="layui-inline">
-			<button id="edit-button"  class="layui-btn linkmore-acl layui-btn-small recommend" style="background-color:#5FB878"><i class="layui-icon">&#xe642;</i>编辑</button>
+			<button type="button" id="delete-button"  class="layui-btn layui-btn-small layui-btn-danger "><i class="layui-icon">&#xe640;</i>删除</button>
 		</div>
-
-		<div class="layui-inline">
-			<button id="open-button"  class="layui-btn linkmore-acl layui-btn-small recommend" style="background-color:#5FB878"><i class="layui-icon">&#xe652;</i>启用</button>
-		</div>		
-		<div class="layui-inline">
-			<button id="close-button"  class="layui-btn linkmore-acl layui-btn-small recommend layui-btn-warm" ><i class="layui-icon">&#xe651;</i>关闭</button>
-		</div>
-		<div class="layui-inline">
-			<button id="delete-button"  class="layui-btn linkmore-acl layui-btn-small recommend layui-btn-danger" ><i class="layui-icon">&#xe640;</i>删除</button>
-		</div>
-		
 		<div class="layui-inline"> 
-			<button id="import-button" class="layui-btn  linkmore-acl  layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe62f;</i> 车牌导入</button>
-		</div> 	
+			<button type="button" id="return-button" class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe603;</i>返回</button>
+		</div>
    	</div>
-   	<div class="row shortcut">
-    	<table class="table-box table-sort" id="strategy-time-table"></table>
-    </div>
+	<div class="row shortcut">
+	   	 <form class="layui-form" id="role-search-form">
+	    	<div style="margin:10px 0px 10px 0px;">  
+				<div class="layui-inline" style="margin:0px 35px 0px 5px">
+		             <input type="text"  id="search-stall-name" value="" placeholder="车位名称" class="form-control">
+		        </div>
+		        <div class="layui-inline" >
+		             <button type="button" class="layui-btn layui-btn-small search_btn"><i class="layui-icon">&#xe615;</i> 搜索</button>
+		        </div>  
+	    	</div>
+	   	</form> 
+   		<table class="table-box table-sort " id="stall-table"></table>
+   </div>
     <!-- 首页信息 -->
 </div>
 <!-- 加载js文件 -->
 <script type="text/javascript" src="/web/common/layui/layui.js"></script>    
-<script type="text/javascript" src="/web/js/biz/strategy_time.js"></script>
+<script type="text/javascript" src="/web/js/ent/rent_ent_stall.js"></script>  
 </body>
 </html>
