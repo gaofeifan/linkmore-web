@@ -169,9 +169,9 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          	mRender:function(mData,type,full){
 	          		var html = '';
 	          		if(0== mData){
-	          			html += '<label style="color:#FF00FF;">自营车位</label>';
-	          		}else if(1== mData){
-	          			html += '<label style="color:#FF4500;">临停车位</label>';
+	          			html += '<label style="color:#FF00FF;">临停车位</label>';
+//	          		}else if(1== mData){
+//	          			html += '<label style="color:#FF4500;">临停车位</label>';
 	          		}else if(2== mData){
 	          			html += '<label style="color:#FF4500;">固定车位</label>';
 	          		}
