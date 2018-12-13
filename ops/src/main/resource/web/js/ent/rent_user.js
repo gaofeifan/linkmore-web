@@ -233,6 +233,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		columns:[
 			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
 			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
+			/*
 			{
 				sTitle: '类型',
 	          	mData: 'type' , 
@@ -247,6 +248,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 	          	}
 			},
 			{ sTitle: '企业名称',   mData: 'entName'}, 
+		*/
 			{ sTitle: '车区ID',   mData: 'preId', bVisible:false}, 
 			{ sTitle: '车区名称',   mData: 'preName'}, 
 			{ sTitle: '车位ID',   mData: 'stallId', bVisible:false}, 
