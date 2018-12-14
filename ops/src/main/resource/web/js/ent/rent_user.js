@@ -194,6 +194,15 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		var searchPreName = $('#search-pre-name').val();
 		var searchMobile = $('#search-mobile').val();
 		var searchRealname = $('#search-realname').val();
+		var searchRentType = $('#search-rent-type').val();
+		
+		if(searchRentType!=''){
+			filter = new Object();
+			filter.property = 'type';
+			filter.value = searchRentType;
+			filters.push(filter);
+		}
+		
 		if(searchEntName!=''){
 			filter = new Object();
 			filter.property = 'entName';
@@ -221,6 +230,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			filter.value = '%'+searchRealname +'%';
 			filters.push(filter);
 		}
+
 		if(filters.length>0){
 			data.push({name:'filterJson',value:JSON.stringify({filters:filters})});
 		}
