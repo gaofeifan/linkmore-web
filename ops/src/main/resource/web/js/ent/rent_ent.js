@@ -63,7 +63,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		key:'id',
 		columns:[
 			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
-			{ sTitle: '公司名称',   mData: 'companyName'}, 
+			{ sTitle: '长租企业名称',   mData: 'companyName'}, 
 			{ sTitle: '车区名称',   mData: 'preName'},  
 			{
 				sTitle: '用户数量',

@@ -295,7 +295,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		$.each(list,function(index,page){
 			ids.push(page.id);
 		});
-		layui.msg.confirm('确认删除？',function(){
+		layui.msg.confirm('您确定要删除这个企业长租权益用户吗？</br>确定删除请点击【确认】</br>不删除请点击【取消】',function(){
 			layui.common.ajax({
 				url:'/admin/ent/rent-ent-user/ids',
 				data:JSON.stringify(ids),
