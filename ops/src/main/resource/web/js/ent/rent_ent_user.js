@@ -97,7 +97,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		key:'id',
 		columns:[ 
 			{ sTitle: 'id',   mData: 'id', bVisible:false}, 
-			{ sTitle: '公司名称',   mData: 'companyName'}, 
+			// { sTitle: '公司名称',   mData: 'companyName'}, 
 			{ sTitle: '用户名称',   mData: 'userName'}, 
 			{ sTitle: '手机号',   mData: 'mobile'}, 
 			{ sTitle: '车牌号',   mData: 'plate'}, 
@@ -332,10 +332,10 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 				url:'/admin/ent/rent-ent-user/importExcel',
 				data:data,
 				success:function(res){
-					if(res.success){   
+					if(res.success){
 						layui.layer.close(lindex);
 			    		layui.msg.success(res.content);
-    					window.setTimeout(query,1000);
+						window.setTimeout(query,5000);
 					}else{
 						layui.msg.error(res.content);
 					} 
