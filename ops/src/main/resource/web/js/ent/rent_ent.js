@@ -338,7 +338,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     	valid.id = "company-add-form";
     	valid.rules = {
     		companyName:{
-    			rangelength:[2,11],
+    			rangelength:[2,30],
     			required: true
     		},stallIds:{
     			rangelength:[1,255],  
@@ -351,7 +351,8 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
     	};
     	valid.messages = {
     		companyName:{
-    			required: '请填写公司名称'
+    			required: '请填写公司名称',
+    			rangelength:'名称长度应在[2,30]内'
     		},stallIds:{
     			rangelength:'请选择车位',  
     			required: '请选择车位'
