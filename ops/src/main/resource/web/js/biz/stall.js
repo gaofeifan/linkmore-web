@@ -564,14 +564,25 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 			layui.msg.error('请至少选择一条记录');
 			return false;
 		}
-		if(list[0].status == 4 && list[0].bindOrderStatus == 0 ){
-			layui.msg.error('请选择车位状态：空闲，订单状态正常车位');
+		var msg ;
+		var flag = true;
+		var param  =new Array();
+		$.each(list,function(index,dows){
+			if(dows.status == 4 && dows.bindOrderStatus == 0){
+				msg = '请选择车位状态：空闲，订单状态正常车位';
+				flag = false
+				return ;
+			}
+			param.push(dows.id);
+		});
+		if(!flag){
+			layui.msg.error(msg);
 			return false;
 		}
 		layui.msg.confirm('确定要下线？',function(){
 			layui.common.ajax({
 				url:base_url+'changed_down',
-				data:{"id":list[0].id},
+				data:JSON.stringify(param),
 				success:function(res){
 					if(res.success){  
 						layui.msg.success(res.content);
