@@ -582,6 +582,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		layui.msg.confirm('确定要下线？',function(){
 			layui.common.ajax({
 				url:base_url+'changed_down',
+				contentType:'application/json; charset=utf-8',
 				data:JSON.stringify(param),
 				success:function(res){
 					if(res.success){  
