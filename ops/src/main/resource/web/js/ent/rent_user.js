@@ -297,7 +297,15 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 				mRender:function(mData,type,full){
 					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'';
 				}
-			}
+			},{
+				sTitle: '创建时间',
+				mData: 'createTime' ,
+				bSortable: true,
+				mRender:function(mData,type,full){
+					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'';
+				}
+			},
+			{ sTitle: '创建人',   mData: 'createUserName'}
 		],
 		orderIndex:6,
 		orderType:'desc',
