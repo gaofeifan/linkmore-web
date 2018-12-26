@@ -29,6 +29,20 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	var layer = layui.layer;  
 	var $ = layui.jquery; 
 	var form = layui.form;   
+	var laydate = layui.laydate; 
+
+	laydate.render({
+	    elem: '#search-startTime',
+	    min: '2015-06-16 23:59:59',
+	    max: new Date().format('yyyy-MM-dd'),
+		istoday: false
+	});
+	laydate.render({
+	    elem: '#search-endTime',
+	    min: '2015-06-16 23:59:59',
+	    max: new Date().format('yyyy-MM-dd'),
+		istoday: false
+	}); 
 	
 	var setting = {
 		check: {
@@ -78,11 +92,28 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			filter.value = '%'+searchPreName +'%';
 			filters.push(filter);
 		}
+		
+		var searchStartTime = $('#search-startTime').val();
+		if(searchStartTime!=''){
+			filter = new Object();
+			filter.property = 'downTime';
+			filter.value = searchStartTime;
+			filters.push(filter);
+		}
+		var searchEndTime = $('#search-endTime').val();
+		if(searchEndTime!=''){
+			filter = new Object();
+			filter.property = 'leaveTime';
+			filter.value = searchEndTime;
+			filters.push(filter);
+		}
+		
+		
+		
 		if(filters.length>0){
 			data.push({name:'filterJson',value:JSON.stringify({filters:filters})});
 		}
 	};
-	var lastCheckedId = null;
 	
 	var datatable = layui.datatable.init({
 		id:'record-table',
@@ -126,4 +157,37 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	$('.search_btn').bind('click',function(){
 		query();
 	});  
+	
+	/*
+	 * 导出
+	 */
+	$('#export-button').bind('click',function(){
+		var data = new Object(); 
+		var searchEntName = $('#search-ent-name').val();
+		if(searchEntName!=''){
+			data.entName = '%'+searchEntName +'%';
+		}
+		var searchPreName = $('#search-pre-name').val();
+		if(searchPreName!=''){
+			data.preName = '%'+searchPreName +'%';
+		}
+		
+		var searchStartTime = $('#search-startTime').val();
+		if(searchStartTime!=''){
+			data.downTime = searchStartTime; 
+		}
+		var searchEndTime = $('#search-endTime').val();
+		if(searchEndTime!=''){
+			data.leaveTime = searchEndTime; 
+		}
+		
+        var url = '/admin/ent/rented-record/export';
+        data.time = new Date().getTime();
+        layui.common.download({
+          url:url,
+          data: data
+        }); 
+	}); 
+	
+	
 });

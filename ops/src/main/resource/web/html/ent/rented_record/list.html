@@ -32,6 +32,9 @@
 		<div class="layui-inline">
 			<button type="button" id="delete-button"  class="layui-btn linkmore-acl layui-btn-small layui-btn-danger "><i class="layui-icon">&#xe640;</i>删除</button>
 		</div>
+		<div class="layui-inline"> 
+			<button type="button" id="export-button" class="layui-btn  layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe61e;</i> 导出</button>
+		</div>
    	</div>
    			<div class="row shortcut">
 		    	<form class="layui-form" id="role-search-form">
@@ -42,6 +45,12 @@
 						<div class="layui-inline" style="margin:0px 35px 0px 5px">
 				             <input type="text"  id="search-pre-name" value="" placeholder="专区名称" class="form-control">
 				        </div>
+				        <div class="layui-inline">
+					        <input type="text" name="startTime" id="search-startTime"  placeholder="开始时间-起" autocomplete="off" class="layui-input" >
+					  	</div>
+					  	<div class="layui-inline" style="margin:0px 10px 0px 5px">
+					        <input type="text" name="endTime" id="search-endTime"  placeholder="结束时间-止" autocomplete="off" class="layui-input" >
+					  	</div>
 				        <div class="layui-inline" >
 				             <button type="button" class="layui-btn layui-btn-small search_btn"><i class="layui-icon">&#xe615;</i> 搜索</button>
 				        </div>  

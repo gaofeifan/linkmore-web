@@ -1,4 +1,4 @@
-layui.config({
+ layui.config({
 	base: '/web/js/lib/'
 }).extend({ 
 	msg:'msg',
@@ -480,4 +480,23 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
     	return false;
 
     });
+    
+    $('#download-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length!=1){
+			layui.msg.error('请选择一条记录');
+			return false;
+		}
+		if(list[0].status == 1){
+			layui.msg.error('当前分组已禁用！');
+			return false;
+		}
+        var url = '/admin/biz/strategy/group/download';
+        var data = new Object(); 
+        data.id = datatable.selected()[0].id;
+        layui.common.download({
+          url:url,
+          data: data
+        });
+	});
 });
