@@ -5,6 +5,14 @@ layui.config({
         common:'common', 
         datatable:'datatable' 
 });
+
+var URL_BASE = "/admin/account/group/user";
+var URL_LIST = URL_BASE + "/list";
+var URL_SAVE = URL_BASE + "/save";
+var URL_UPDATE = URL_BASE + "/update";
+var URL_DELETE = URL_BASE + "/delete";
+
+
 Date.prototype.format =function(format){
     var o = {
             "M+" : this.getMonth()+1, // month
@@ -29,9 +37,42 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
         var layer = layui.layer;  
         var $ = layui.jquery; 
         var form = layui.form; 
-        
         var laydate = layui.laydate; 
 
+    	var request = {
+    			QueryString : function(val) { 
+    				var uri = window.location.search; 
+    				var re = new RegExp("" +val+ "\=([^\&\?]*)", "ig"); 
+    				return ((uri.match(re))?(uri.match(re)[0].substr(val.length+1)):null); 
+    			}, 
+    			QueryStrings : function() { 
+    				var uri = window.location.search; 
+    				var re = /\w*\=([^\&\?]*)/ig; 
+    				var retval=[]; 
+    				while ((arr = re.exec(uri)) != null) 
+    					retval.push(arr[0]); 
+    				return retval; 
+    			}, 
+    			setQuery : function(val1, val2) { 
+    				var a = this.QueryStrings(); 
+    				var retval = ""; 
+    				var seted = false; 
+    				var re = new RegExp("^" +val1+ "\=([^\&\?]*)$", "ig"); 
+    				for(var i=0; i<a.length; i++) { 
+    					if (re.test(a[i])) { 
+    						seted = true; 
+    						a[i] = val1 +"="+ val2; 
+    					}
+    				}
+    				retval = a.join("&"); 
+    				return "?" +retval+ (seted ? "" : (retval ? "&" : "") +val1+ "=" +val2); 
+    			}
+    		}
+    	
+        var userGroupId = decodeURI(request.QueryString("userGroupId"));
+    	var userGroupName=decodeURI(request.QueryString("userGroupName"));
+        $("#userGroupName").html("分组名称："+userGroupName);
+        
     	laydate.render({
     	    elem: '#search-startTime',
     	    min: '2015-06-16 23:59:59',
@@ -53,6 +94,13 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
         var plateNo = $('#search-plateNo').val();
         var ordersCount = $('#search-order-count').val();
         var nature = $('#search-nature').val();
+        
+        if(userGroupId != ''){
+			filter = new Object();
+			filter.property = 'userGroupId';
+			filter.value = userGroupId ;
+			filters.push(filter);
+		}
         if(ordersCount!=''){
             filter = new Object();
             filter.property = 'ordersCount';
@@ -90,7 +138,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 	
 	var datatable = layui.datatable.init({
         id:'user-table',
-        url:'/admin/biz/user/list', 
+        url:URL_LIST, 
         key:'id',
         columns:[ 
                 { sTitle: '用户名',   mData: 'nickName'},  
@@ -108,6 +156,14 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
                 { 
                     sTitle: '最近下单时间',
                     mData: 'ordersTime' ,
+                    bSortable: true,
+                    mRender:function(mData,type,full){
+                             return new Date(mData).format('yyyy-MM-dd hh:mm');
+                    }
+                },
+                { 
+                    sTitle: '加入分组时间',
+                    mData: 'joinTime' ,
                     bSortable: true,
                     mRender:function(mData,type,full){
                              return new Date(mData).format('yyyy-MM-dd hh:mm');
@@ -157,7 +213,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 		});
 		layui.msg.confirm('您确定要删除',function(){
 			layui.common.ajax({
-				url:'/admin/biz/user/delete',
+				url:URL_DELETE,
 				data:JSON.stringify(ids),
 				contentType:'application/json; charset=utf-8',
 				success:function(res){
@@ -174,7 +230,11 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 			});
 		}); 
 	});
-
+	
+	$('#return-button').bind('click',function(){
+		window.location.href="list.html";
+	});
+	
 	$('#export-button').bind('click',function(){ 
 		  var filters = new Array();
 	        var filter = null; 
@@ -367,8 +427,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
             $('#add-group-button').bind('click',function(){
             if(validate.valid()){
                 layui.common.ajax({
-                   // url:'/admin/biz/user_group/save',
-                    url:'/admin/account/group/save',
+                    url:'/admin/biz/user_group/save',
                     data:$('#user-group-form').serialize(),
                     success:function(res){
                         if(res.success){

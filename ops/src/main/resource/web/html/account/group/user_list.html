@@ -21,18 +21,21 @@
 	<link rel="stylesheet" type="text/css" href="/web/theme/default/css/console.css" media="all">
 </head>
 <body> 
-<div class="linkmore-grid linkmore-wrapper"> 
-	<div style=" text-align:right;">  
-        <div class="layui-inline"> 
+<div class="linkmore-grid linkmore-wrapper">
+	<div class="layui-col-md9" >
+	      <label class="layui-form-label"><span id="userGroupName" style="white-space: nowrap;font-size:16px;">分组名称：</span></label>
+	</div>
+	<div style=" text-align:right;">
+        <div class="layui-inline">
 			<button id="add-button" class="layui-btn linkmore-acl layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe608;</i> 添加</button>
 		</div>
  		<div class="layui-inline"> 
 			<button id="delete-button"  class="layui-btn linkmore-acl layui-btn-small recommend layui-btn-danger" ><i class="layui-icon">&#xe640;</i>删除</button>
-		</div> 
-		<div class="layui-inline"> 
-			<button id="export-button" class="layui-btn linkmore-acl  layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe61e;</i> 导出</button>
 		</div>
-   		</div>
+		<div class="layui-inline"> 
+			<button id="return-button" class="layui-btn linkmore-acl  layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe61e;</i>返回</button>
+		</div>
+   	</div>
 		 <div style="margin:10px 0px 10px 0px;">
 		    <form class="layui-form layui-inline" >
 			    <div class="layui-input-inline" style="widows: 10%">
@@ -58,14 +61,11 @@
 			   <button type="button" id="search-button" class="layui-btn layui-btn-small"><i class="layui-icon">&#xe615;</i> 搜索</button>
 		    </div> 	
 		      </form>
-		      <!--
-		      <div class="layui-inline"  >
+		    <!--  
+		    <div class="layui-inline"  >
 			 <a style="padding-left: 20px;padding-right: 20px;" id="adv_query_but"><i class="layui-icon">&#xe630;</i> 高级搜索</a>
 		    </div>
-		      -->
- 			<div class="layui-inline"> 
-				<button id="group-button" class="layui-btn layui-btn-small layui-btn-normal" style="background-color:#2E8B57">生成用户组</button>
-			</div>	    	  
+ 			-->
 	   	 </div>
 	 	<div id="adv_query" style="border:2px solid #e2e2e2;margin: 15px 20% 15px 20%;background-color:#FFF;border-radius:10px;display: none;" data-status='1'>
 	    	<a id ="adv_close" style="float: right;"><i class="fa fa-2x fa-close" style="margin-right: 5px;color:#333"></i> </a>
@@ -176,6 +176,6 @@
 </div>
 <!-- 加载js文件 -->
 <script type="text/javascript" src="/web/common/layui/layui.js"></script>    
-<script type="text/javascript" src="/web/js/biz/user.js"></script>
+<script type="text/javascript" src="/web/js/account/group_user.js"></script>
 </body>
 </html>

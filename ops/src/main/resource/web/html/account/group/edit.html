@@ -1,0 +1,25 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="group-edit-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+		<input type="hidden" name="id" id="id"> 
+	   
+		<div class="layui-tab-content">
+			<div class="layui-form-item">
+				<label class="layui-form-label">分组名称</label>
+				<div class="layui-input-block">
+					<input type="text" id="name" name="name" placeholder="请输入分组名称" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+		        <label class="layui-form-label">分组简介</label>
+		        <div class="layui-input-block">
+		           <textarea name="content" placeholder="请输入分组简介" class="layui-textarea"></textarea>
+		        </div>
+		    </div>
+		</div>
+	    <div class="hr-line-dashed"></div>
+	</form>  
+	<div class="layui-form-item text-center">
+      	<button class="layui-btn" id="group-edit-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="group-cancel-button" type='button' data-confirm="确定取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>

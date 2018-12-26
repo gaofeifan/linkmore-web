@@ -1,0 +1,31 @@
+<div style="width: 100%; margin: 0 auto; padding: 0 auto;">
+	<form id="excel-add-form" class="layui-form layui-box"
+		style='padding: 25px 30px 20px 0;' action="#" data-auto="true"
+		method="post" enctype="multipart/form-data">
+		<input type="hidden" id="userGroupId" name="userGroupId" value="0">
+		<!--  
+		<div style="float: left; width: 60%;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">选择车区</label>
+				<div class="layui-input-block">
+					<select id="prefectureId" name="prefectureId" class="prefectureId">
+					</select>
+				</div>
+			</div>
+		</div>
+-->
+		<div class="layui-form-item">
+			<label class="layui-form-label">选择</label>
+			<div class="layui-input-block">
+				<input type="file" name="file" />
+			</div>
+		</div>
+		<div class="hr-line-dashed"></div>
+
+	</form>
+	<div class="layui-form-item text-center">
+		<button class="layui-btn" id="excel-add-button" type='button'>保存数据</button>
+		<button class="layui-btn layui-btn-danger" id="excel-cancel-button"
+			type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+	</div>
+</div>
