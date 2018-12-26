@@ -4,14 +4,15 @@
 	        <label class="layui-form-label">时段名称</label>
 	        <div class="layui-input-block">
 	        <input type="hidden" name="chargeId"  id="chargeId" placeholder="请输入名称……" class="layui-input">
-	        <input type="text" name="periodName" placeholder="请输入名称……" class="layui-input">
+	        <input type="text" name="periodName" style="width: 200px;" placeholder="请输入名称……" class="layui-input">
 
 	        </div>
 	    </div>
 	       <div class="layui-form-item">
 	        <label class="layui-form-label">封顶金额</label>
-	        <div class="layui-input-block">
-	         <input type="text" name="limitFee" placeholder="请输入封顶金额" class="layui-input">
+	        <div class="layui-input-block" style="display: fix;">
+	         <input type="text" name="limitFee" value="0" style="width: 200px;" placeholder="请输入封顶金额" class="layui-input">
+	        <b style="color: red">不可为空，0为无封顶</b>
 	        </div>
 	    </div>
 	    

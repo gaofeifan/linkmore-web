@@ -101,9 +101,17 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         			rangelength:[1,32] ,
         			required: true,
         		},beginTime:{
-    		 		required: true
+    		 		required: true,
+    		 		custom: function (value, elemen){
+    					var a = /^(20|21|22|23|[0-1]\d):[0-5]\d$/;
+    					return a.test(value.value);
+    				}
     		 	},endTime:{
-    		 		required: true
+    		 		required: true,
+    		 		custom: function (value, elemen){
+    					var a = /^(20|21|22|23|[0-1]\d):[0-5]\d$/;
+    					return a.test(value.value);
+    				}
     		 	},chargeFee:{
     		 		required: true
     		 	}
@@ -113,8 +121,10 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         			rangelength:'名称长度应在[1,32]内', 
         			required: '请填写时段名称'
         		},beginTime:{
+        			custom:'正确的开始时间如[00:00]',
         			required: '请填写开始时间'
         		},endTime:{
+        			custom:'正确的结束时间如[23:59]',
         			required: '请填写结束时间'
         		},chargeFee:{
     		 		required: '请填写计时金额'
@@ -317,9 +327,17 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         			rangelength:[1,32] ,
         			required: true,
         		},beginTime:{
-    		 		required: true
+    		 		required: true,
+    		 		custom: function (value, elemen){
+    					var a = /^(20|21|22|23|[0-1]\d):[0-5]\d$/;
+    					return a.test(value.value);
+    				}
     		 	},endTime:{
-    		 		required: true
+    		 		required: true,
+    		 		custom: function (value, elemen){
+    					var a = /^(20|21|22|23|[0-1]\d):[0-5]\d$/;
+    					return a.test(value.value);
+    				}
     		 	},chargeFee:{
     		 		required: true
     		 	}
@@ -329,9 +347,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         			rangelength:'名称长度应在[1,32]内', 
         			required: '请填写时段名称'
         		},beginTime:{
-        			required: '请填写开始时间'
+        			custom:'正确的开始时间如[00:00]',
+        			required: '请填写开始时间如[00:00]'
         		},endTime:{
-        			required: '请填写结束时间'
+        			custom:'正确的结束时间如[23:59]',
+        			required: '请填写结束时间如[23:59]'
         		},chargeFee:{
     		 		required: '请填写计时金额'
     		 	}
