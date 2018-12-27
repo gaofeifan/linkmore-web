@@ -199,11 +199,11 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			{ sTitle: '计费单位',  mRender:function(mData,type,full){
 				var html = '无设置';
 				if(full.chargeHourFree!=null){
-					if(full.criticalUnit == 1){// 分钟
+					if(full.criticalUnit == 1 && full.chargeHourFree > 0 ){// 分钟
 						var sum = 60/full.chargeHourFree;
 						html = (full.chargeFee/sum)+'元/'+full.chargeHourFree+'分钟';
 					}
-					if(full.criticalUnit == 2){// 小时
+					if(full.criticalUnit == 2 && full.chargeHourFree > 0){// 小时
 						html = full.chargeFee/sum+'元/'+full.chargeHourFree+'小时';
 					}
 				}
