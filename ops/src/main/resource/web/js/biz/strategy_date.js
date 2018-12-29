@@ -23,6 +23,20 @@ Date.prototype.format =function(format){
     }
     return format;
 };
+
+var URL_BASE = "/admin/biz/strategy/date";
+var URL_LIST = URL_BASE + "/list";
+var URL_SAVE = URL_BASE + "/save";
+var URL_GET = URL_BASE + "/get";
+var URL_UPDATE = URL_BASE + "/update";
+var URL_DELETE = URL_BASE + "/delete";
+var URL_STATUS_OPEN =  URL_BASE + "/status/open";
+var URL_STATUS_CLOSE = URL_BASE + "/status/close";
+var URL_PUBLIC_OPEN =  URL_BASE + "/public/open";
+var URL_PUBLIC_CLOSE = URL_BASE + "/public/close";
+
+
+
 layui.use(['layer','msg','form', 'common','validate','datatable','laydate','element'], function() {
 	var validate = layui.validate; 
 	var layer = layui.layer;  
@@ -49,7 +63,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 	};
 	var datatable = layui.datatable.init({
 		id:'strategy-date-table',
-		url:'/admin/biz/strategy/date/list', 
+		url:URL_LIST, 
 		key:'id',
 		columns:[
 			{ sTitle: '编号',   mData: 'id'},
@@ -68,6 +82,17 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			} ,
 
 			{ sTitle: '操作人',   mData: 'updateUserName'} ,
+			{ sTitle: '范围',   mData: 'isPublic',
+	          	mRender:function(mData,type,full){
+	          		var html = '<label style="color:gray">私有</label>';
+	          		if(mData==0){
+	          			html = '<label style="color:gray">私有</label>'; 
+	          		}else if(mData==1){
+	          			html = '<label style="color:blue">公有</label>'; 
+	          		}
+	          		return html;
+	          	}
+			} ,
 			{ sTitle: '状态',   mData: 'status',
 	          	mRender:function(mData,type,full){
 	          		var html = '<label style="color:gray">未知</label>';
@@ -104,6 +129,24 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		query();
 	});  
 
+	var httpRequestJson = function(url,data){
+		layui.common.ajax({
+			url: url,
+			contentType:'application/json; charset=utf-8',
+			data:data,
+			success:function(res){
+				if(res.success){
+					layui.msg.success(res.content);
+					window.setTimeout(query,3000);
+				}else{
+					layui.msg.error(res.content);
+				}
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
+	}
+	
 	$('#delete-button').bind('click',function(){
 		var list = datatable.selected(); 
 		if(list.length<1){
@@ -115,21 +158,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			ids.push(dg.id);
 		});
 		layui.msg.confirm('您确定要删除这个分期策略吗?<br>确定删除请点击【确认】<br>不删除请点击【取消】!',function(){
-			layui.common.ajax({
-				url:'/admin/biz/strategy/date/delete',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-				},error:function(){
-					
-				}
-			});
+			httpRequestJson(URL_DELETE,JSON.stringify(ids));
 		}); 
 	});
 
@@ -151,22 +180,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			ids.push(dg.id);
 		});
 		layui.msg.confirm('确定启用策略？',function(){
-			layui.common.ajax({
-				url:'/admin/biz/strategy/date/status/open',
-				contentType:'application/json; charset=utf-8',
-				//data:JSON.stringify(list[0].id),
-				data:JSON.stringify(ids),
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,3000);
-					}else{
-						layui.msg.error(res.content);
-					}
-				},error:function(){
-					layui.msg.error("网络异常");
-				}
-			});
+			httpRequestJson(URL_STATUS_OPEN,JSON.stringify(ids));
 		}); 
 	});
 	
@@ -188,24 +202,46 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			ids.push(dg.id);
 		});
 		layui.msg.confirm('确定关闭策略？',function(){
-			layui.common.ajax({
-				url:'/admin/biz/strategy/date/status/close',
-				contentType:'application/json; charset=utf-8',
-				//data:JSON.stringify(list[0].id),
-				data:JSON.stringify(ids),
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,3000);
-					}else{
-						layui.msg.error(res.content);
-					}
-				},error:function(){
-					layui.msg.error("网络异常");
-				}
-			});
+			httpRequestJson(URL_STATUS_CLOSE,JSON.stringify(ids));
 		}); 
 	});
+
+	/**
+	 * 设置为公用
+	 */
+	$('#open-public-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定将策略设置为公用吗？</br>设置为公用，其它用户都可以使用该策略。</br>确定请点击【确认】</br>否则请点击【取消】',function(){
+			httpRequestJson(URL_PUBLIC_OPEN,JSON.stringify(ids));
+		}); 
+	});
+	
+	/**
+	 * 设置为私有
+	 */
+	$('#close-public-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定将策略设置为私有吗？</br>设置为私有，只有当前用户有权限使用该策略。</br>确定请点击【确认】</br>否则请点击【取消】',function(){
+			httpRequestJson(URL_PUBLIC_CLOSE,JSON.stringify(ids));
+		}); 
+	});
+
 	/**
 	 * 计算时间间隔 参数格式: hh:mm:ss
 	 */
@@ -354,7 +390,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
         		}
         		$('input[name="dateGroup"]').val(JSON.stringify(dategroup))
         		layui.common.ajax({
-        			url:'/admin/biz/strategy/date/save',
+        			url:URL_SAVE,
         			data:$('#add-form-date').serialize(),
         			success:function(res){
         				if(res.success){
@@ -383,7 +419,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 
         		$('input[name="dateGroup"]').val(JSON.stringify(dategroup))
         		layui.common.ajax({
-        			url:'/admin/biz/strategy/date/save',
+        			url:URL_SAVE,
         			data:$('#add-form-week').serialize(),
         			success:function(res){
         				if(res.success){
@@ -463,7 +499,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
     var viewInit = function(validate,lindex){
     	var list = datatable.selected();
     	layui.common.ajax({
-			url:'/admin/biz/strategy/date/get',
+			url:URL_GET,
 			contentType:'application/json; charset=utf-8',
 			data:JSON.stringify(list[0].id),
 			success:function(res){
@@ -569,7 +605,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 		renderDate();
 		var list = datatable.selected();
 		layui.common.ajax({
-			url:'/admin/biz/strategy/date/get',
+			url:URL_GET,
 			contentType:'application/json; charset=utf-8',
 			//data:JSON.stringify(list[0].id),
 			data:JSON.stringify(list[0].id),
@@ -687,9 +723,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
         			dategroup.push(obj);
         		}
         		$('input[name="dateGroup"]').val(JSON.stringify(dategroup))
-        		
         		layui.common.ajax({
-        			url:'/admin/biz/strategy/date/update',
+        			url:URL_UPDATE,
         			data:$('#edit-form-date').serialize(),
         			success:function(res){
         				if(res.success){
@@ -699,6 +734,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
         				}
         			} 
         		});
+        		
         	}
         });
 		
@@ -717,7 +753,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
         		}
         		$('input[name="dateGroup"]').val(JSON.stringify(dategroup))
         		layui.common.ajax({
-        			url:'/admin/biz/strategy/date/update',
+        			url:URL_UPDATE,
         			data:$('#edit-form-week').serialize(),
         			success:function(res){
         				if(res.success){
@@ -727,6 +763,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
         				}
         			} 
         		});
+
         	}
         });		
 		
@@ -792,7 +829,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
     	param.init = editInit;
     	layui.common.modal(param);  
     });
-    
-    
+
     
 });

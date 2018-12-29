@@ -281,6 +281,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 	});
 	
 	$('#strategy-group-add-button').bind('click',function(){
+		/*
 		if($("#select2 option").size()<=0){
 			//layui.msg.error("您还没有选择车位");
 			layer.msg('您还没有选择车位', {
@@ -289,7 +290,7 @@ layui.use(['layer','msg','form', 'common','element','ztree'], function() {
 			
 			return false;
 		}
-		
+		*/
 		layui.msg.confirm('您确定要添加这些车位吗?</br>确定添加请请击【确认】</br>不添加请点击【取消】',function(){
 			var stallGroup = new Array();
 			$("#select2 option").each(function() {

@@ -24,6 +24,18 @@ Date.prototype.format =function(format){
     return format;
 };
 
+var URL_BASE = "/admin/biz/strategy/time";
+var URL_LIST = URL_BASE + "/list";
+var URL_SAVE = URL_BASE + "/save";
+var URL_GET = URL_BASE + "/get";
+var URL_UPDATE = URL_BASE + "/update";
+var URL_DELETE = URL_BASE + "/delete";
+var URL_STATUS_OPEN =  URL_BASE + "/status/open";
+var URL_STATUS_CLOSE = URL_BASE + "/status/close";
+var URL_PUBLIC_OPEN =  URL_BASE + "/public/open";
+var URL_PUBLIC_CLOSE = URL_BASE + "/public/close";
+
+
 layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], function() {
 	var validate = layui.validate; 
 	var layer = layui.layer;
@@ -49,13 +61,24 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	};
 	var datatable = layui.datatable.init({
 		id:'strategy-time-table',
-		url:'/admin/biz/strategy/time/list', 
+		url:URL_LIST, 
 		key:'id',
 		columns:[
 			{ sTitle: '编号',   mData: 'id'},
 			{ sTitle: '分时策略名称',   mData: 'name'},
 			{ sTitle: '策略简介',   mData: 'detail'},
 			{ sTitle: '操作人',   mData: 'updateUserName'} ,
+			{ sTitle: '范围',   mData: 'isPublic',
+	          	mRender:function(mData,type,full){
+	          		var html = '<label style="color:gray">私有</label>';
+	          		if(mData==0){
+	          			html = '<label style="color:gray">私有</label>'; 
+	          		}else if(mData==1){
+	          			html = '<label style="color:blue">公有</label>'; 
+	          		}
+	          		return html;
+	          	}
+			} ,
 			{ sTitle: '状态',   mData: 'status',
 	          	mRender:function(mData,type,full){
 	          		var html = '<label style="color:gray">未知</label>';
@@ -101,7 +124,25 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	$('.search_btn').bind('click',function(){
 		query();
 	});  
-	 
+	
+	var httpRequestJson = function(url,data){
+		layui.common.ajax({
+			url: url,
+			contentType:'application/json; charset=utf-8',
+			data:data,
+			success:function(res){
+				if(res.success){
+					layui.msg.success(res.content);
+					window.setTimeout(query,3000);
+				}else{
+					layui.msg.error(res.content);
+				}
+			},error:function(){
+				layui.msg.error("网络异常");
+			}
+		});
+	}
+
 	$('#delete-button').bind('click',function(){
 		var list = datatable.selected(); 
 		if(list.length<1){
@@ -113,25 +154,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			ids.push(dg.id);
 		});
 		layui.msg.confirm('您确定要删除这个分时策略吗?<br>确定删除请点击【确认】<br>不删除请点击【取消】!',function(){
-			layui.common.ajax({
-				url:'/admin/biz/strategy/time/delete',
-				data:JSON.stringify(ids),
-				contentType:'application/json; charset=utf-8',
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					}
-					
-				},error:function(){
-					
-				}
-			});
+			httpRequestJson(URL_DELETE,JSON.stringify(ids));
 		}); 
 	});
+	
 
+	
 	/**
 	 * 启用策略
 	 */
@@ -150,25 +178,10 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			ids.push(dg.id);
 		});
 		layui.msg.confirm('确定启用策略？',function(){
-			layui.common.ajax({
-				url:'/admin/biz/strategy/time/status/open',
-				contentType:'application/json; charset=utf-8',
-				//data:JSON.stringify(list[0].id),
-				data:JSON.stringify(ids),
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,3000);
-					}else{
-						layui.msg.error(res.content);
-					}
-				},error:function(){
-					layui.msg.error("网络异常");
-				}
-			});
+			httpRequestJson(URL_STATUS_OPEN,JSON.stringify(ids));
 		}); 
 	});
-	
+
 	/**
 	 * 关闭策略
 	 */
@@ -187,24 +200,51 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			ids.push(dg.id);
 		});
 		layui.msg.confirm('确定关闭策略？',function(){
-			layui.common.ajax({
-				url:'/admin/biz/strategy/time/status/close',
-				contentType:'application/json; charset=utf-8',
-				//data:JSON.stringify(list[0].id),
-				data:JSON.stringify(ids),
-				success:function(res){
-					if(res.success){  
-						layui.msg.success(res.content);
-						window.setTimeout(query,3000);
-					}else{
-						layui.msg.error(res.content);
-					}
-				},error:function(){
-					layui.msg.error("网络异常");
-				}
-			});
+			httpRequestJson(URL_STATUS_CLOSE,JSON.stringify(ids));
 		}); 
 	});
+
+
+
+	/**
+	 * 设置为公用
+	 */
+	$('#open-public-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定将策略设置为公用吗？</br>设置为公用，其它用户都可以使用该策略。</br>确定请点击【确认】</br>否则请点击【取消】',function(){
+			httpRequestJson(URL_PUBLIC_OPEN,JSON.stringify(ids));
+		}); 
+	});
+	
+	/**
+	 * 设置为私有
+	 */
+	$('#close-public-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		layui.msg.confirm('确定将策略设置为私有吗？</br>设置为私有，只有当前用户有权限使用该策略。</br>确定请点击【确认】</br>否则请点击【取消】',function(){
+			httpRequestJson(URL_PUBLIC_CLOSE,JSON.stringify(ids));
+		}); 
+	});
+	
+	
+	
+	
 	/**
 	 * 计算时间间隔 参数格式: hh:mm:ss
 	 */
@@ -308,9 +348,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         			timegroup.push(obj);
         		}
         		$('input[name="timeGroup"]').val(JSON.stringify(timegroup))
-        		
         		layui.common.ajax({
-        			url:'/admin/biz/strategy/time/save',
+        			url:URL_SAVE,
         			data:$('#add-form').serialize(),
         			success:function(res){
         				if(res.success){
@@ -320,6 +359,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         				}
         			} 
         		});
+
         	}
         });
 	};
@@ -377,7 +417,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     var viewInit = function(validate,lindex){
     	var list = datatable.selected();
     	layui.common.ajax({
-			url:'/admin/biz/strategy/time/get',
+			url:URL_GET,
 			contentType:'application/json; charset=utf-8',
 			data:JSON.stringify(list[0].id),
 			success:function(res){
@@ -390,6 +430,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 				layui.msg.error("网络异常");
 			}
 		});
+		
 		var callback=function(res){
 			layui.common.set({
 				id:'edit-form',
@@ -445,7 +486,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		var list = datatable.selected(); 
 		
 		layui.common.ajax({
-			url:'/admin/biz/strategy/time/get',
+			url:URL_GET,
 			contentType:'application/json; charset=utf-8',
 			//data:JSON.stringify(list[0].id),
 			data:JSON.stringify(list[0].id),
@@ -522,7 +563,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
         		$('input[name="timeGroup"]').val(JSON.stringify(timegroup))
         		
         		layui.common.ajax({
-        			url:'/admin/biz/strategy/time/update',
+        			url:URL_UPDATE,
         			data:$('#edit-form').serialize(),
         			success:function(res){
         				if(res.success){
@@ -592,58 +633,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     	param.init = editInit;
     	layui.common.modal(param);  
     });
-    
-    
-    var addFileInit = function(validate,lindex){
-    	
-    	var initPrefectureId=function(){
-    		layui.common.ajax({
-    			url:'/admin/biz/prefecture/selectListByUser',
-    			//contentType:'application/json; charset=utf-8',
-    			success:function(data){
-    				if(data!=null){
-    					arrayStrategyDate=data;
-    					$("#prefectureId").empty();
-    					for(var i=0;i<data.length;i++){
-    						$("#prefectureId").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
-    					}
-    					form.render('select');
-    					//form.render();
-    					initStrategyFee();
-    				}
-    			},error:function(){
-    				
-    			}
-    		});
-    	};
-    	initPrefectureId();
-    	
-		$('#excel-cancel-button').bind('click',function(){
-			layui.layer.close(lindex);
-		});
-		$('#excel-add-button').bind('click',function(){
-			var data = new FormData($( "#excel-add-form" )[0]); 
-			layui.common.upload({
-				url:'/admin/ent/rent-ent-user/importExcel',
-				data:data,
-				success:function(res){
-					if(res.success){   
-						layui.layer.close(lindex);
-			    		layui.msg.success(res.content);
-    					window.setTimeout(query,1000);
-					}else{
-						layui.msg.error(res.content);
-					} 
-				} 
-			}); 
-        });
-	};
-    $('#import-button').bind('click',function(){
-    	var param = new Object();
-    	param.url = 'add_excel.html';
-    	param.title = '导入车牌';  
-    	param.width = 600;
-    	param.init = addFileInit;
-    	layui.common.modal(param);  
-    });
+
+ 
 });
