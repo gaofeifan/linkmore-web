@@ -154,9 +154,18 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','elem
 			return false;
 		}
 		var ids = new Array();
-		$.each(list,function(index,dg){
-			ids.push(dg.id);
+		var flag = false;
+		$.each(list,function(index,page){
+			ids.push(page.id);
+			if(page.status == 2){
+				flag = true;
+				return false;
+			}
 		});
+		if(flag){
+			layui.msg.error('启用状态下禁止删除');
+			return false;
+		}
 		layui.msg.confirm('您确定要删除这个分期策略吗?<br>确定删除请点击【确认】<br>不删除请点击【取消】!',function(){
 			httpRequestJson(URL_DELETE,JSON.stringify(ids));
 		}); 
