@@ -1,0 +1,45 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="ele-edit-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	   <input type="hidden" value="" name="id"/>
+	   <div class="layui-form-item">
+	        <label class="layui-form-label">元素类型</label>
+			<div class="layui-input-block">
+			  <input type="radio" name="eleType" value="button" title="按钮" checked>
+			  <input type="radio" name="eleType" value="img" title="图片" >
+			</div>
+	    </div>
+	   <div class="layui-form-item">
+	        <label class="layui-form-label">车位名称</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="eleName" placeholder="请输入车位名称" class="layui-input">
+	        </div>
+	    </div>
+	    
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">横坐标x</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="eleX" placeholder="请输入元素初始横坐标x" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">纵坐标y</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="eleY" placeholder="请输入元素纵坐标y" class="layui-input">
+	        </div>
+	    </div>
+	    
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">宽度</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="eleWidth" placeholder="请输入元素初始横坐标x" class="layui-input">
+	        </div>
+	        <label class="layui-form-label">高度</label>
+	        <div class="layui-input-inline">
+	            <input type="text" name="eleHeight" placeholder="请输入元素纵坐标y" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="hr-line-dashed"></div>
+	</form> 
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="ele-update-button" type='button'>更新数据</button>
+        <button class="layui-btn layui-btn-danger" id="ele-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>
