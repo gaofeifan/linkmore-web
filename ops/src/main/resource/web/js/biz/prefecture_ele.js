@@ -120,6 +120,32 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	$('.search_btn').bind('click',function(){
 		query();
 	}); 
+	
+	/**
+	 * 添加
+	 */
+	// 添加路线指引图片
+    function addViewImage(){
+    	var formData = new FormData($("#add-view-image-form")[0]); 
+		 $.ajax({
+			url: '/api/common/attach/image_upload',
+			type: "POST",
+			data: formData,  
+			enctype: 'multipart/form-data',
+		    processData: false,
+		    contentType: false,
+		    success: function (msg) {
+		    	if(msg.success){
+		    		layui.msg.success(msg.content);
+					$('#add_view_image').attr('src', 'http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
+	        		$('#eleSrc').val('http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
+	        		window.setTimeout(query,1000);
+	        	}else{
+	        		layui.msg.error(msg.content);
+	        	}
+		    } 
+		});
+    }
 
 	var addInit = function(validate,lindex){
 		$('#ele-add-form input[name=elePreId]').val(selectedEntId);
@@ -129,10 +155,31 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		form.render('radio');
 		form.on('radio', function(data){
 			console.log(data.value); //被点击的radio的value值
-		});  
+			if(data.value == 'button'){
+				$('#pic').hide();
+				$('#ele_name').show();
+			}else{
+				$('#pic').show();
+				$('#ele_name').hide();
+			}
+		}); 
+		
+		$("#add_view_image_file").unbind("change").bind("change",addViewImage);
 
 		$('#ele-add-button').bind('click',function(){
         	if(validate.valid()){
+        		var eleType=$('input:radio[name="eleType"]:checked').val();
+        		if(eleType =='button'){
+        			if($("#eleName").val() == ''){
+        				layui.msg.tips('请填写车位名称!');
+        				return;
+        			}
+        		}else{
+        			if($("#eleSrc").val() == ''){
+        				layui.msg.tips('请上传图片!');
+        				return;
+        			}
+        		}
         		layui.common.ajax({
         			url:base_url+'save',
         			data:$('#ele-add-form').serialize(),
@@ -154,17 +201,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     	var valid = new Object();
     	valid.id = "ele-add-form";
     	valid.rules = {
-    		/*stallName:{
-    			required: true,
-    			remote:{
-    				url:base_url+"check",  
-    				data:{
-    					preId:function(){return selectedEntId }
-    				}
-    			}
-    		},*/
     		eleName:{
-				required:true,
 				rangelength: [1,10]
     		},
     		eleX:{
@@ -189,12 +226,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     		}
     	};
     	valid.messages = {
-    		/*stallName:{
-    			required: '请填写名称',
-    			remote:'名称已经存在'
-    		},*/
     		eleName:{
-    			required:"请填写车位名称",
     			rangelength:'车位名称长度应在[1,10]内'
     		},
     		eleX:{
@@ -225,6 +257,32 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     	layui.common.modal(param);  
     });
     
+    /*
+	 * 编辑
+	 */
+    // 修改图片
+    function editViewImage(){
+    	var formData = new FormData($("#edit-view-image-form")[0]); 
+		 $.ajax({
+			url: '/api/common/attach/image_upload',
+			type: "POST",
+			data: formData,  
+			enctype: 'multipart/form-data',
+		    processData: false,
+		    contentType: false,
+		    success: function (msg) {
+		    	if(msg.success){
+		    		layui.msg.success(msg.content);
+					$('#edit_view_image').attr('src', 'http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
+	        		$('#eleSrc').val('http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
+	        		window.setTimeout(query,1000);
+	        	}else{
+	        		layui.msg.error(msg.content);
+	        	}
+		    } 
+		});
+    }
+    
     var editInit = function(validate,lindex){
     	var list = datatable.selected();  	 
 		layui.common.set({
@@ -234,11 +292,49 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		$('#ele-edit-form select[name=id]').html(list[0].id);
 		form.render('checkbox');
 		form.render('radio');
+		
+		var eleType=$('input:radio[name="eleType"]:checked').val();
+		if(eleType =='button'){
+			$('#pic').hide();
+			$('#ele_name').show();
+		}else{
+			$('#pic').show();
+			$('#ele_name').hide();
+		}
+		form.on('radio', function(data){
+			console.log(data.value); //被点击的radio的value值
+			if(data.value == 'button'){
+				$('#pic').hide();
+				$('#ele_name').show();
+			}else{
+				$('#pic').show();
+				$('#ele_name').hide();
+			}
+		}); 
+		
+		$("#edit_view_image").attr('src',list[0].viewImage);
+		// 添加图片的按钮绑定
+		$("#edit_view_image_file").unbind("change").bind("change",editViewImage);
+		
 		$('#ele-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
 		$('#ele-update-button').bind('click',function(){
         	if(validate.valid()){  
+        		
+        		var eleType=$('input:radio[name="eleType"]:checked').val();
+        		if(eleType =='button'){
+        			if($("#eleName").val() == ''){
+        				layui.msg.tips('请填写车位名称!');
+        				return;
+        			}
+        		}else{
+        			if($("#eleSrc").val() == ''){
+        				layui.msg.tips('请上传图片!');
+        				return;
+        			}
+        		}
+        		
         		layui.common.ajax({
         			url:base_url+'update',
         			data:$('#ele-edit-form').serialize(),
@@ -268,17 +364,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     	var valid = new Object();
     	valid.id = "ele-edit-form";
     	valid.rules = {
-        		/*stallName:{
-        			required: true,
-        			remote:{
-        				url:base_url+"check",  
-        				data:{
-        					preId:function(){return selectedEntId }
-        				}
-        			}
-        		},*/
         		eleName:{
-    				required:true,
     				rangelength: [1,10]
         		},
         		eleX:{
@@ -303,12 +389,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
         		}
         	};
         	valid.messages = {
-        		/*stallName:{
-        			required: '请填写名称',
-        			remote:'名称已经存在'
-        		},*/
         		eleName:{
-        			required:"请填写车位名称",
         			rangelength:'车位名称长度应在[1,10]内'
         		},
         		eleX:{
@@ -371,18 +452,5 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 			});
 		}); 
 	});
-	
-		
-		
-	/*layui.common.ajax({
-		url:base_url+'detail',
-		data:{"id":id},
-		success:function(res){ 
-		if(null != res.lockId){
-			$('#sn-list-div input[value='+res.lockId+']').prop('checked',true);
-		}
-		form.render('checkbox');
-		} 
-	});*/
 	
 });
