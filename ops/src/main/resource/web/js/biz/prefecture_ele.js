@@ -312,7 +312,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 			}
 		}); 
 		
-		$("#edit_view_image").attr('src',list[0].viewImage);
+		$("#edit_view_image").attr('src',list[0].eleSrc);
 		// 添加图片的按钮绑定
 		$("#edit_view_image_file").unbind("change").bind("change",editViewImage);
 		
