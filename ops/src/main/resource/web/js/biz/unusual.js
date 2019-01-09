@@ -29,13 +29,27 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	var $ = layui.jquery; 
 	var form = layui.form;  
 	var addServerParams = function(data){   
-		var searchType = $('#search-type').val();
 		var filters = new Array();
 		var filter = null; 
+		var searchType = $('#search-type').val();
 		if(searchType!=0){
 			filter = new Object();
 			filter.property = 'system';
 			filter.value = searchType;
+			filters.push(filter);
+		}
+		var searchVersion = $('#search-version').val();
+		if(searchVersion!=null){
+			filter = new Object();
+			filter.property = 'appVersion';
+			filter.value = searchVersion;
+			filters.push(filter);
+		}
+		var searchStartTime = $('#search-startTime').val();
+		if(searchStartTime != null){
+			filter = new Object();
+			filter.property = 'startTime';
+			filter.value = searchStartTime;
 			filters.push(filter);
 		}
 		if(filters.length>0){
