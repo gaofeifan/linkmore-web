@@ -28,6 +28,13 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	var layer = layui.layer;  
 	var $ = layui.jquery; 
 	var form = layui.form;  
+	var laydate = layui.laydate; 
+	laydate.render({
+	    elem: '#search-startTime',
+	    min: '2015-06-16 23:59:59',
+	    max: new Date().format('yyyy-MM-dd'),
+		istoday: false
+	});
 	var addServerParams = function(data){   
 		var filters = new Array();
 		var filter = null; 
@@ -46,7 +53,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			filters.push(filter);
 		}
 		var searchStartTime = $('#search-startTime').val();
-		if(searchStartTime != null){
+		if(searchStartTime != null || searchStartTime != ''){
 			filter = new Object();
 			filter.property = 'startTime';
 			filter.value = searchStartTime;
