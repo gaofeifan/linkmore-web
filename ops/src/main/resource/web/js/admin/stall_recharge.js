@@ -92,7 +92,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 	          	mData: 'voltage' ,
 	          	bSortable: true,
 	          	mRender:function(mData,type,full){
-	          		 return full.voltage + ' v';
+	          		if(full.voltage != null ){
+	          			 return full.voltage + ' v';
+	          		}else{
+	          			return "";
+	          		}
 	          	}
 			},
 			{
@@ -100,7 +104,11 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 	          	mData: 'totalNum' ,
 	          	bSortable: true,
 	          	mRender:function(mData,type,full){
-	          		 return full.totalNum + ' 次';
+	          		if(full.totalNum != null ){
+	          			return full.totalNum + ' 次';
+	          		}else{
+	          			return "";
+	          		}
 	          	}
 			},
 			{

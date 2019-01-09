@@ -139,7 +139,9 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		    				layui.layer.close(lindex);
 		    				layui.msg.success(res.content);
 		    				window.setTimeout(query,1000);
-		    			}
+		    			}else{
+							layui.msg.error(res.content);
+						}
 	        		}
 	        	});
 			}
@@ -212,7 +214,9 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
         					window.setTimeout(function(){
         						location.reload(false);
         					},1000);
-        				}
+        				}else{
+    						layui.msg.error(res.content);
+    					}
         			} 
         		});
         	}
