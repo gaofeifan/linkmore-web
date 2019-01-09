@@ -12,6 +12,7 @@
 	<form id="add-form-date" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
 	    <input type="hidden" name="dateGroup" >
 	    <input type="hidden" name="datetype" value="1" >
+	    <input type="hidden" name="isPublic" value="0" >
 		<div style="float:left;width:80%;">
 		    <div class="layui-form-item">
 			    <label class="layui-form-label">策略名称</label>
@@ -50,7 +51,6 @@
               <textarea name="detail" placeholder="请输入策略简介" class="layui-textarea"></textarea>
             </div>
         </div>
-	    <div class="hr-line-dashed"></div>
 	</form>
 	<div class="layui-form-item text-center">
         <button class="layui-btn" id="strategy-date-add-button" type='button'>保存数据</button>
@@ -64,6 +64,7 @@
 	<form id="add-form-week" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
 	    <input type="hidden" name="dateGroup" >
 	    <input type="hidden" name="datetype" value="2" >
+	    <input type="hidden" name="isPublic" value="0" >
 		<div style="float:left;width:80%;">
 		    <div class="layui-form-item">
 			    <label class="layui-form-label">策略名称</label>
@@ -141,7 +142,6 @@
               <textarea name="detail" placeholder="请输入策略简介" class="layui-textarea"></textarea>
             </div>
         </div>
-	    <div class="hr-line-dashed"></div>
 	</form>
 	<div class="layui-form-item text-center">
         <button class="layui-btn" id="strategy-week-add-button" type='button'>保存数据</button>
