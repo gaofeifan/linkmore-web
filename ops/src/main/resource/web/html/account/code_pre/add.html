@@ -1,0 +1,74 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="app-version-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true"
+	 method="post">
+		<div class="layui-form-item">
+			<label class="layui-form-label">车场</label>
+			<div class="layui-input-block">
+				<select id="pre-select" name="preId" lay-filter="type" class="input-sm form-control">
+					<option value="N">选择车场</option> 
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">帐号类型</label>
+			<div class="layui-input-block">
+				<select name="type" lay-filter="type" class="input-sm form-control">
+					<option value="N">选择账户类型</option>
+					<option value="wx">微信帐号</option>
+					<option value="zfb">支付宝帐号</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+				<label class="layui-form-label">name</label>
+				<div class="layui-input-block">
+					<input type="text" name="name" placeholder="请输入名称" class="layui-input">
+				</div>
+			</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">appid</label>
+			<div class="layui-input-block">
+				<input type="text" name="appId" placeholder="请输入名称" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">商户号</label>
+			<div class="layui-input-block">
+				<input type="text" name="mchId" placeholder="请输入版本" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item" id="appSecret" >
+			<label class="layui-form-label">appSecret</label>
+			<div class="layui-input-block">
+				<input type="text" name="appSecret" placeholder="请输入编号" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item" id="mchKey">
+			<label class="layui-form-label">商户密钥</label>
+			<div class="layui-input-block">
+				<input type="text" id="mchKey"  name="mchKey" placeholder="请输入编号" class="layui-input">
+			</div>
+		</div>
+
+		<div class="layui-form-item" id="pubKey" >
+			<label class="layui-form-label">公钥</label>
+			<div class="layui-input-block">
+				<input type="text"  name="pubKey" placeholder="请输入编号" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item" id="priKey" >
+			<label class="layui-form-label">私钥</label>
+			<div class="layui-input-block">
+				<input type="text"  name="priKey" placeholder="请输入编号" class="layui-input">
+			</div>
+		</div>
+
+		<div class="hr-line-dashed"></div>
+
+	</form>
+	<div class="layui-form-item text-center">
+		<button class="layui-btn" id="app-version-add-button" type='button'>保存数据</button>
+		<button class="layui-btn layui-btn-danger" id="app-version-cancel-button" type='button' data-confirm="确定要取消编辑吗？"
+		 data-close>取消编辑</button>
+	</div>
+</div>

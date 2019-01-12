@@ -194,7 +194,6 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		var searchPreName = $('#search-pre-name').val();
 		var searchMobile = $('#search-mobile').val();
 		var searchRealname = $('#search-realname').val();
-		var searchPlateNo = $('#search-plateno').val();
 		var searchRentType = $('#search-rent-type').val();
 		
 		if(searchRentType!=''){
@@ -214,31 +213,23 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		if(searchPreName!=''){
 			filter = new Object();
 			filter.property = 'preName';
-			filter.value = '%'+$.trim(searchPreName) +'%';
+			filter.value = '%'+searchPreName +'%';
 			filters.push(filter);
 		}
 		
 		if(searchMobile!=''){
 			filter = new Object();
 			filter.property = 'mobile';
-			filter.value = '%'+$.trim(searchMobile) +'%';
+			filter.value = '%'+searchMobile +'%';
 			filters.push(filter);
 		}
 		
 		if(searchRealname!=''){
 			filter = new Object();
 			filter.property = 'realname';
-			filter.value = '%'+$.trim(searchRealname) +'%';
+			filter.value = '%'+searchRealname +'%';
 			filters.push(filter);
 		}
-		
-		if(searchPlateNo!=''){
-			filter = new Object();
-			filter.property = 'plateNo';
-			filter.value = '%'+$.trim(searchPlateNo) +'%';
-			filters.push(filter);
-		}
-
 
 		if(filters.length>0){
 			data.push({name:'filterJson',value:JSON.stringify({filters:filters})});

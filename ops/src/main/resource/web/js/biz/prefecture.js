@@ -389,7 +389,6 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		$('#prefecture-add-form select[name=cityId]').html(cityHtml);
 		form.render('select');
 		form.render('checkbox');
-		form.render('radio');
 		// 添加图片的按钮绑定
 		$("#add_route_guidance_file").unbind("change").bind("change",addRoute);
 		$("#add_pre_image_file").unbind("change").bind("change",addImage);
@@ -496,15 +495,6 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			businessTime:{
 		 		required: true,
 		 		rangelength: [1,12]
-		 	},
-		 	totalStallNum:{
-		 		required: true,
-		 		digits:true,
-		 		rangelength: [1,5]
-		 	},
-		 	region:{
-		 		required: true,
-		 		rangelength: [2,6]
 		 	}
     	};
     	valid.messages = {
@@ -585,15 +575,6 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			businessTime: {
 				required: "请输入营业时间",
 				rangelength: "文字长度必须是1~12之间"
-		 	},
-		 	totalStallNum: {
-				required: "请输入车场所有车位总数",
-				digits:"请输入正整数",
-				rangelength: "长度必须是1~5之间"
-		 	},
-		 	region: {
-				required: "请输入车场所在位置",
-				rangelength: "文字长度必须是2~6之间"
 		 	}
     	}; 
     	param.validate = valid;
@@ -696,7 +677,6 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
     		});
     		form.render('checkbox');
     		form.render('select');
-    		form.render('radio');
     		// 格式化日期
     		$('#prefecture-edit-form input[name=dateContract]').val(dataf(preDetail.dateContract));
     		$('#prefecture-edit-form input[name=validTime]').val(dataf(preDetail.validTime));
@@ -845,15 +825,6 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			businessTime:{
 		 		required: true,
 		 		rangelength: [1,12]
-		 	},
-		 	totalStallNum:{
-		 		required: true,
-		 		digits:true,
-		 		rangelength: [1,5]
-		 	},
-		 	region:{
-		 		required: true,
-		 		rangelength: [2,6]
 		 	}
     	};
     	valid.messages = {
@@ -934,15 +905,6 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 			businessTime: {
 				required: "请输入营业时间",
 				rangelength: "文字长度必须是1~12之间"
-		 	},
-		 	totalStallNum: {
-				required: "请输入车场所有车位总数",
-				digits:"请输入正整数",
-				rangelength: "长度必须是1~5之间"
-		 	},
-		 	region: {
-				required: "请输入车场所在位置",
-				rangelength: "文字长度必须是2~6之间"
 		 	}
     	}; 
     	param.validate = valid;
