@@ -134,6 +134,13 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		query();
 	});  
 	
+	var getDateDiff= function (startDate,endDate){  
+	    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
+	    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
+	    var dates = (endTime-startTime)/(1000*60*60*24);     
+	    return  dates;
+	}
+	
 	/**
 	 * 启用策略
 	 */
@@ -143,10 +150,21 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			layui.msg.error('请至少选择一条记录');
 			return false;
 		}
-		if(list[0].status == 2){
-			layui.msg.error('该公司已启用');
-			return false;
+		for(i= 0,len=list.length; i < len; i++) {
+		    if(list[i].status == 2){
+		    	layui.msg.error('公司已启用');
+				return false;
+		    }
+		    if(list[i].status == 3){
+				layui.msg.error('过期的无法启用');
+				return false;
+			}
+		    if(getDateDiff(new Date(list[i].startTime).format('yyyy-MM-dd'),new Date().format('yyyy-MM-dd'))>0 && getDateDiff(new Date().format('yyyy-MM-dd'),new Date(list[i].endTime).format('yyyy-MM-dd'))<=0 ){
+		    	layui.msg.error('日期过期的无法启用');
+				return false;
+		    }
 		}
+		
 		var ids = new Array();
 		$.each(list,function(index,dg){
 			ids.push(dg.id);

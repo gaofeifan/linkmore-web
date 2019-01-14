@@ -168,9 +168,9 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			httpRequestJson(URL_DELETE,JSON.stringify(ids));
 		}); 
 	});
-	
 
-	
+
+
 	/**
 	 * 启用策略
 	 */

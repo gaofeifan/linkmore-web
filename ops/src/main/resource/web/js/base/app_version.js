@@ -75,7 +75,29 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          		} 
 	          		return html;
 	          	}
-			},{
+			},
+			{
+				sTitle: '升级范围',
+	          	mData: 'scope' ,
+	          	bSortable: true,
+	          	mRender:function(mData,scope,full){
+	          		var html = '<label style="color:green;">所有用户</label>';
+	          		if(full.scope==2){
+	          			html = '<label style = "color:red;">分组用户</label>';
+	          		} 
+	          		return html;
+	          	}
+			},
+			{
+				sTitle: '用户分组',
+	          //	mData: 'id' ,
+	         // 	bSortable: true,
+	          	mRender:function(mData,type,full){
+	          		 var html = '<a href="user_group_list.html?versionId='+full.id +'">查看</a>'; 
+	          		 return html;
+	          	}
+			} ,
+			{
 				sTitle: '状态',
 	          	mData: 'status' ,
 	          	bSortable: true,
