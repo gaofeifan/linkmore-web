@@ -194,6 +194,7 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 		var searchPreName = $('#search-pre-name').val();
 		var searchMobile = $('#search-mobile').val();
 		var searchRealname = $('#search-realname').val();
+		var searchPlateNo = $('#search-plateno').val();
 		var searchRentType = $('#search-rent-type').val();
 		
 		if(searchRentType!=''){
@@ -228,6 +229,13 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 			filter = new Object();
 			filter.property = 'realname';
 			filter.value = '%'+searchRealname +'%';
+			filters.push(filter);
+		}
+		
+		if(searchPlateNo!=''){
+			filter = new Object();
+			filter.property = 'plateNo';
+			filter.value = '%'+$.trim(searchPlateNo) +'%';
 			filters.push(filter);
 		}
 
