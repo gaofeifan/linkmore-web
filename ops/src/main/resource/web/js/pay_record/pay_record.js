@@ -100,6 +100,17 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 			},error:function(){layui.msg.error("网络异常");}
 		});
 	}
+
+	function timestampToTime(timestamp) {
+		var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+		Y = date.getFullYear() + '-';
+		M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+		D = date.getDate() + ' ';
+		h = date.getHours() + ':';
+		m = date.getMinutes();
+		s = date.getSeconds();
+		return Y+M+D+h+m;
+	}
 	
 	var tempId = null;
     var detailInit = function(validate,lindex){
@@ -122,8 +133,12 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 				}
 				html+='<td>'+element.amount +'</td>';
 				html+='<td>'+element.openId +'</td>';
-				html+='<td>'+element.entranceTime +'</td>';
-				html+='<td>'+element.finishTime +'</td>';
+
+				var ent =timestampToTime(element.entranceTime);
+				var fin =timestampToTime(element.finishTime);
+
+				html+='<td>'+ent +'</td>';
+				html+='<td>'+fin +'</td>';
 				html+='</tr>';
 			});	
 

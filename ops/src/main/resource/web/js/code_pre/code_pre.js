@@ -260,7 +260,11 @@ layui.use(['layer', 'msg', 'form', 'common', 'laydate', 'datatable'], function (
 			layui.layer.close(lindex);
 		});
 
+
 		form.on('select(type)', function(data) {
+			var options=$("#pre-select option:selected");
+			$("#nameText").val(options.text());
+			
 			var type = data.value;  
 			$('#priKey').show();
 			$('#pubKey').show();
