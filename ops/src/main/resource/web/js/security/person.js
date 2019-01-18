@@ -277,10 +277,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			layui.msg.error('请选择一条记录进行编辑');
 			return false;
 		}
+		/*
 		if(list[0].type!=1){
 			layui.msg.error('请选择系统账户进行操作');
 			return false;
 		}
+		*/
     	var param = new Object();
     	param.url = 'edit.html';
     	param.title = '编辑信息'; 
@@ -375,6 +377,12 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     			} 
     		});
     	});
+    	
+    	$('#bind-cancel-button').bind('click',function(){
+    		layui.layer.close(lindex);
+    	});
+    	
+    	
     };
     $('#bind-button').bind('click',function(){
     	var list = datatable.selected(); 
