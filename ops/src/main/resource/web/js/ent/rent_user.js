@@ -313,7 +313,8 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'';
 				}
 			},
-			{ sTitle: '创建人',   mData: 'createUserName'}
+			{ sTitle: '创建用户账户',   mData: 'createUserName'},
+			{ sTitle: '创建车场账户',   mData: 'createEntName'}
 		],
 		orderIndex:6,
 		orderType:'desc',
