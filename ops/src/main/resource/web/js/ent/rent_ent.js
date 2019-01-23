@@ -94,7 +94,8 @@ layui.use(['element','layer','msg','form','ztree', 'common','datatable','laydate
 					return mData!=null?new Date(mData).format('yyyy-MM-dd'):'';
 				}
 			},
-			{ sTitle: '操作人',   mData: 'updateUserName'},
+			{ sTitle: '创建用户账号',   mData: 'createUserName'},
+			{ sTitle: '创建车场账号',   mData: 'entName'},
 			{ sTitle: '状态',   mData: 'status',
 	          	mRender:function(mData,type,full){
 	          		var html = '<label style="color:gray">未知</label>';
