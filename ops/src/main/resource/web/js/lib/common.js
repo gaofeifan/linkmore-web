@@ -197,6 +197,7 @@ layui.define(['layer','validate','jquery'], function(exports) {
 	                    area: param.width + 'px',
 	                    content: res,
 	                    title: param.title,
+	                    end: param.end,
 	                    success: function (dom, index) {
 	                    	layui.layer.close(zindex);
 	                    	var validate = null;

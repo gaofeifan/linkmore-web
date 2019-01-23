@@ -287,6 +287,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			layui.msg.confirm(msg,function(){
 				layui.msg.close(lindex);
 				layui.layer.close(lindex);
+				window.setTimeout(window.location.reload(),1000);
 			}, function(index){
 
 	        }, function(){
@@ -324,14 +325,12 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 							    	  query1();
 							      },
 							      btn2:function(){
+							    	  window.location.reload()
 							    	 // window.setTimeout(query,1000);
-							    	  layui.layer.close(lindex);
-							    	  window.setTimeout(window.location.reload(),1000);
-							    	 //window.location.reload();
+							    	  //layui.layer.close(lindex);
+							    	  //window.setTimeout(window.location.reload(),1000);
 							      }
 							});
-							//layui.msg.success(res.content);
-							//window.setTimeout(query,1000);
 						}else{
 							layui.msg.error(res.content);
 						}
@@ -400,7 +399,11 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	param.validate = valid;
     	param.width = 900;
     	param.init = addInit;
+    	param.end= function () {
+            location.reload();
+          }
     	layui.common.modal(param); 
+
     });
     /*
      * 编辑
