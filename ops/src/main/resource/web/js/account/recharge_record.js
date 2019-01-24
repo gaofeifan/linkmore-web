@@ -129,6 +129,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 						case 5:html+='<label style="color:#0099CC;">银联云闪付</label>';break; 
 						case 6:html+='<label style="color:#0099CC;">Huawei Pay</label>';break; 
 						case 7:html+='<label style="color:#0099CC;">Mi Pay</label>';break; 
+						case 8:html+='<label style="color:#0099CC;">龙支付</label>';break; 
 					}
 					return html;
 	          	}
