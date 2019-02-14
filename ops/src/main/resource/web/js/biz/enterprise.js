@@ -73,6 +73,26 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			
 		}
 	});
+	
+	// 车区列表
+	var preHtml = '';
+	var preMap = layui.common.map();
+	layui.common.ajax({
+		url:'/admin/biz/prefecture/selectList',
+		async:false,
+		success:function(list){
+			preHtml = '<option value="0">选择车区</option>';
+			$.each(list,function(index,pre){
+				preHtml += '<option value="'+pre.id+'">';
+				preHtml += pre.name;
+				preHtml += '</option>';
+				preMap.put(pre.id,pre);
+			});
+			$('#preId').html(preHtml);
+			form.render('select');
+		},error:function(){
+		}
+	});
 	var addServerParams = function(data){  
 		var searchName = $('#search-name').val();
 		var filters = new Array();
@@ -135,6 +155,19 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          	}
 			} ,
 			{
+				sTitle: '车区',
+	          	mData: 'preId' ,
+	          	bSortable: true,
+	          	mRender:function(mData,type,full){ 
+	          		var pre = preMap.get(mData);
+	          		var html = '';
+	          		if(pre!=null){
+	          			html = pre.name;
+	          		}
+	          		return html;
+	          	}
+			} ,
+			{
 				sTitle: '创建时间',
 	          	mData: 'createTime' ,
 	          	bSortable: true,
@@ -143,7 +176,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          	}
 			} 
 		],
-		orderIndex:6,
+		orderIndex:7,
 		orderType:'desc',
 		filter:addServerParams
 	});  
@@ -188,6 +221,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	var addInit = function(validate,lindex){   
 		$('#enterprise-add-form select[name=industry]').html(industryHtml);
 		$('#enterprise-add-form select[name=region]').html(regionHtml);
+		$('#enterprise-add-form select[name=preId]').html(preHtml);
 		form.render('select'); 
 		form.render('checkbox'); 
 		$('#enterprise-cancel-button').bind('click',function(){
@@ -286,6 +320,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
     var editInit = function(validate,lindex){  
     	$('#enterprise-edit-form select[name=industry]').html(industryHtml);
     	$('#enterprise-edit-form select[name=region]').html(regionHtml);
+    	$('#enterprise-edit-form select[name=preId]').html(preHtml);
 		var list = datatable.selected();  
 		layui.common.set({
 			id:'enterprise-edit-form',
