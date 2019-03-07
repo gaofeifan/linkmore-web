@@ -254,6 +254,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		$('#stall-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
+		form.render('checkbox');
 		form.render('radio');
 		form.on('radio', function(data){
 			console.log(data.value); //被点击的radio的value值
@@ -504,7 +505,46 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		}); 
 
 	});
-	
+	/**
+	 * 删除
+	 */
+	$('#delete-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var flag = false;
+		var ids = new Array();
+		$.each(list,function(index,page){
+			ids.push(page.id);
+			if(page.lockSn != null){
+				flag = true;
+			}
+			
+		});
+		if(flag){
+			return layui.msg.error('删除的车位内包含绑定锁编号车位');
+		}
+		layui.msg.confirm('您确定要删除',function(){
+			layui.common.ajax({
+				url:'/admin/biz/stall/delete',
+				data:JSON.stringify(ids),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+					layui.msg.error("网络异常");
+				}
+			});
+		}); 
+	});
 	/**
 	 * 上线
 	 */
