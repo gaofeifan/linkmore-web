@@ -254,6 +254,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		$('#stall-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
+		form.render('checkbox');
 		form.render('radio');
 		form.on('radio', function(data){
 			console.log(data.value); //被点击的radio的value值

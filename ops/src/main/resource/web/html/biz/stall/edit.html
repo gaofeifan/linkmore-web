@@ -24,11 +24,22 @@
 	        <label class="layui-form-label">车位类型</label>
 			<div class="layui-input-block">
 			  <input type="radio" name="type" value="0" title="临停" checked>
-<!-- 			  <input type="radio" name="type" value="1" title="临停"> -->
 			  <input type="radio" name="type" value="2" title="长租" >
 			</div>
 	    </div>
-
+		
+		 <div class="layui-form-item">
+	        <label class="layui-form-label">长租一对多</label>
+		    <div class="layui-input-inline">
+		    	<input type="checkbox" name="rentOmType" value="1" lay-skin="switch" lay-text="开启|关闭">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">长租多对一</label>
+		    <div class="layui-input-inline">
+		    	<input type="checkbox" name="rentMoType" value="1" lay-skin="switch" lay-text="开启|关闭">
+			</div>
+	    </div>
 	    <div class="hr-line-dashed"></div>
 	</form> 
 	<div class="layui-form-item text-center">
