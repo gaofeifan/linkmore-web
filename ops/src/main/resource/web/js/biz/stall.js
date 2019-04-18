@@ -521,7 +521,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 				flag = true;
 			}
 			
-		});
+		}); 
 		if(flag){
 			return layui.msg.error('删除的车位内包含绑定锁编号车位');
 		}

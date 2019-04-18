@@ -174,6 +174,39 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 			});
 		}); 
 	});
+	$('#reset-button').bind('click',function(){
+		var list = datatable.selected(); 
+		if(list.length<1){
+			layui.msg.error('请至少选择一条记录');
+			return false;
+		}
+		var obj = new Object();
+		var ids = new Array();
+		$.each(list,function(index,dg){
+			ids.push(dg.id);
+		});
+		obj.ids = ids;
+		layer.prompt({title: '请输入密码', formType: 1}, function(pass, index){
+			  layer.close(index);
+			  obj.password = pass;
+			  layui.common.ajax({
+				url:'/admin/biz/user/reset',
+				data:JSON.stringify({'ids': ids ,'password': pass}),
+				contentType:'application/json; charset=utf-8',
+				success:function(res){
+					if(res.success){  
+						layui.msg.success(res.content);
+						window.setTimeout(query,1000);
+					}else{
+						layui.msg.error(res.content);
+					}
+					
+				},error:function(){
+												
+				}
+			});
+		});
+	});
 
 	$('#export-button').bind('click',function(){ 
 		  var filters = new Array();

@@ -123,6 +123,21 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		columns:[ 
 			{ sTitle: '手机号',   mData: 'cellphone'}, 
 			{ sTitle: '姓名',   mData: 'realname'}, 
+			{ sTitle: '账号',   mData: 'accountName'}, 
+			{ sTitle: '密码',   mData: 'password'}, 
+			{ sTitle: '删除标识',   
+				mData: 'gatewayDelete'	
+				mRender:function(mData,type,full){
+					var heml = "";
+					if(mData == 0){
+						html += '<label style="color:green;">否</label>';
+					}else{
+						html += '<label style="color:green;">是</label>';
+						
+					}
+					return html;
+				}
+			}, 
 			{
 				sTitle: '创建时间',
 				mData: 'createTime' ,
@@ -201,7 +216,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	valid.rules = {
     		cellphone:{
     			rangelength:[11,11],
-    			required: true,
+    			required: false,
     			digits:true,
     			remote:{
     				url:"/admin/admin/admin_user/check",  
@@ -219,7 +234,6 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	valid.messages = {
     		cellphone:{
     			rangelength:'手机号长度有误', 
-    			required: '请填写手机号',
     			remote:'手机号已经存在',
     			digits:'手机号格式有误',
     		},realname:{
@@ -278,7 +292,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	valid.rules = {
     		cellphone:{
     			rangelength:[11,11],
-    			required: true,
+    			required: false,
     			digits:true,
     			remote:{
     				url:"/admin/admin/admin_user/check",  
@@ -296,7 +310,6 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
     	valid.messages = {
     		cellphone:{
     			rangelength:'手机号长度有误', 
-    			required: '请填写手机号',
     			remote:'手机号已经存在',
     			digits:'手机号格式有误',
     		},realname:{
