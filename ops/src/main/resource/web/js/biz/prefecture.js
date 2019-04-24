@@ -384,7 +384,7 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
         });
 		// 计费系统
 		billSystem();
-		changedEnt();
+		//changedEnt();
 		$('#prefecture-add-form select[name=baseDictId]').html(billSystemHtml);
 		$('#prefecture-add-form select[name=strategyId]').html(strategyHtml);
 		$('#prefecture-add-form select[name=cityId]').html(cityHtml);
