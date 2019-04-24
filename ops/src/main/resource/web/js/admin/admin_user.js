@@ -127,7 +127,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			{ sTitle: '密码',   mData: 'password'}, 
 			{ sTitle: '删除标识',   
 				mData: 'gatewayDelete'	
-				mRender:function(mData,type,full){
+				/*mRender:function(mData,type,full){
 					var heml = "";
 					if(mData == 0){
 						html += '<label style="color:green;">否</label>';
@@ -136,7 +136,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 						
 					}
 					return html;
-				}
+				}*/
 			}, 
 			{
 				sTitle: '创建时间',
@@ -188,6 +188,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	 */
 	var addInit = function(validate,lindex){
 		form.render('checkbox'); 
+		form.render('select'); 
 		$('#admin-user-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
