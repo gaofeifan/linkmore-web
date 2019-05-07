@@ -150,7 +150,21 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			},
 			{
 				sTitle: '编码',
-				mData: 'code' 
+				mData: 'code' ,
+				bSortable: true,
+	          	mRender:function(mData,type,full){
+	          		var html = '';
+	          		if(mData=='admin-all'){
+	          			html += '<label style="color:green;">全部权限</label>';
+	          		}else if(mData=='admin-stall'){
+	          			html += '<label style="color:red;">车位权限</label>';
+	          		}else if(mData=='admin-manage'){
+	          			html += '<label style="color:red;">管理权限</label>';
+	          		}else if(mData=='admin-order'){
+	          			html += '<label style="color:red;">运营权限</label>';
+	          		}
+	          		return html;
+	          	}
 			}
 		],
 		orderIndex:2,
@@ -170,6 +184,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	 * 添加
 	 */
 	var addInit = function(validate,lindex){
+		form.render('select'); 
 		form.render('checkbox'); 
 		$('#admin-auth-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);

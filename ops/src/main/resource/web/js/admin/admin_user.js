@@ -126,7 +126,17 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 			{ sTitle: '账号',   mData: 'accountName'}, 
 			{ sTitle: '密码',   mData: 'password'}, 
 			{ sTitle: '删除标识',   
-				mData: 'gatewayDelete'	
+				mData: 'gatewayDelete',
+					bSortable: true,
+		          	mRender:function(mData,type,full){
+		          		var html = '';
+		          		if(mData==1){
+		          			html += '<label style="color:green;">是</label>';
+		          		}else if(mData==0){
+		          			html += '<label style="color:red;">否</label>';
+		          		}
+		          		return html;
+		          	}
 				/*mRender:function(mData,type,full){
 					var heml = "";
 					if(mData == 0){
