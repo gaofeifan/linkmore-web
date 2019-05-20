@@ -122,7 +122,6 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		columns:[
 			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
 			{ sTitle: '车牌',   mData: 'plateNo'}, 
-			{ sTitle: '企业ID',   mData: 'entId', bVisible:false}, 
 			{ sTitle: '企业名称',   mData: 'entName'}, 
 			{ sTitle: '车区ID',  mData: 'preId', bVisible:false}, 
 			{ sTitle: '车区名称',   mData: 'preName'}, 
@@ -145,7 +144,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 				}
 			}
 		],
-		orderIndex:9,
+		orderIndex:8,
 		orderType:'desc',
 		filter:addServerParams
 	});  
