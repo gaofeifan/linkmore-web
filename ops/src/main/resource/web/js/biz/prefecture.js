@@ -506,6 +506,16 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	region:{
 		 		required: true,
 		 		rangelength: [2,6]
+		 	},
+		 	punish:{
+		 		required: true,
+		 		number:true,
+		 		rangelength: [0,3]
+		 	},
+		 	serviceFee:{
+		 		required: true,
+		 		digits:true,
+		 		rangelength: [0,2]
 		 	}
     	};
     	valid.messages = {
@@ -595,6 +605,16 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	region: {
 		 		required: "请输入车场所在位置",
 		 		rangelength: "文字长度必须是2~6之间"
+		 	},
+		 	punish: {
+		 		required: "请输入超时惩罚倍数",
+		 		number: "请输入正确的格式",
+		 		rangelength: "长度必须是1~4之间"
+		 	},
+		 	serviceFee: {
+		 		required: "请输入车场服务费",
+		 		digits:"请输入正整数",
+		 		rangelength: "长度必须是1~99之间"
 		 	}
     	}; 
     	param.validate = valid;
@@ -855,6 +875,16 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	region:{
 		 		required: true,
 		 		rangelength: [2,6]
+		 	},
+		 	punish:{
+		 		required: true,
+		 		number:true,
+		 		rangelength: [0,3]
+		 	},
+		 	serviceFee:{
+		 		required: true,
+		 		digits:true,
+		 		rangelength: [0,2]
 		 	}
     	};
     	valid.messages = {
@@ -944,6 +974,16 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		 	region: {
 		 		required: "请输入车场所在位置",
 		 		rangelength: "文字长度必须是2~6之间"
+		 	},
+		 	punish: {
+		 		required: "请输入超时惩罚倍数",
+		 		number: "请输入正确的格式",
+		 		rangelength: "长度必须是1~4之间"
+		 	},
+		 	serviceFee: {
+		 		required: "请输入车场服务费",
+		 		digits:"请输入正整数",
+		 		rangelength: "长度必须是1~99之间"
 		 	}
     	}; 
     	param.validate = valid;

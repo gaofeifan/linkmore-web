@@ -147,13 +147,6 @@
 	        <div class="layui-input-inline">
 	            <input type="text" name="businessTime" placeholder="请输入营业时间" class="layui-input">
 	        </div>
-	        <!-- <label class="layui-form-label">当前版本</label>
-	        <div class="layui-input-inline">
-	            <select name="version" class="input-sm form-control" >
-	             	<option value="A">A</option> 
-	             	<option value="B">B</option> 
-	             </select>
-	        </div> -->
 	    </div>
 		<div class="layui-form-item layui-form-text">
 		    <label class="layui-form-label">计费策略描述</label>
@@ -177,19 +170,24 @@
 		    <div class="layui-input-inline">
 		    	<input type="checkbox" name="pathFlag" value="1" lay-skin="switch" lay-text="开启|禁用">
 			</div>
-			<!-- <label class="layui-form-label">定制车区</label>
-		    <div class="layui-input-inline">
-		    	<input type="checkbox" name="type" value="0" checked=""  lay-skin="switch" lay-text="普通|定制" lay-filter="switch_add_ent">
-			</div> -->
 	    </div>
-	     <!-- <div class="layui-form-item" id="select_ent" style="display:none;">
-	        <label class="layui-form-label">选择定制企业</label>
-	        <div class="layui-input-inline">
-	             <select name="enterpriseId" class="input-sm form-control"  >
-	             	<option value="-1">请选择</option> 
-	             </select>
-	        </div>
-	    </div> -->
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">超时惩罚倍数</label>
+		    <div class="layui-input-inline">
+	            <input type="text" name="punish" placeholder="请输入超时惩罚倍数" class="layui-input">
+			</div>
+			
+			<label class="layui-form-label">长租出租标识</label>
+		    <div class="layui-input-inline">
+		    	<input type="checkbox" name="rentFlag" value="1" lay-skin="switch" lay-text="开启|禁用">
+			</div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">车场分成</label>
+		    <div class="layui-input-inline">
+		    	<input type="text" name="serviceFee" placeholder="请输入车场分成" class="layui-input">
+			</div>
+	    </div>
 	    <input type="hidden" id="add_route_guidance" name="routeGuidance" />
 	    <input type="hidden" id="add_pre_image_url" name="imageUrl" />
 	</form>
