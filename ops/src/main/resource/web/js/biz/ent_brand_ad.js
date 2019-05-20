@@ -273,8 +273,8 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		    success: function (msg) {
 		    	if(msg.success){
 		    		layui.msg.success(msg.content);
-					$('#add_view_image').attr('src', 'http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
-	        		$('#viewImage').val('http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
+					$('#add_view_image').attr('src', 'http://oss.linkmoretech.cn/'+msg.map.attach.compressUrl);
+	        		$('#viewImage').val('http://oss.linkmoretech.cn/'+msg.map.attach.compressUrl);
 	        		window.setTimeout(query,1000);
 	        	}else{
 	        		layui.msg.error(msg.content);
@@ -395,8 +395,8 @@ layui.use(['layer','msg','form', 'common','datatable','laydate'], function() {
 		    success: function (msg) {
 		    	if(msg.success){
 		    		layui.msg.success(msg.content);
-					$('#edit_view_image').attr('src', 'http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
-	        		$('#viewImage').val('http://oss.pabeitech.com/'+msg.map.attach.compressUrl);
+					$('#edit_view_image').attr('src', 'http://oss.linkmoretech.cn/'+msg.map.attach.compressUrl);
+	        		$('#viewImage').val('http://oss.linkmoretech.cn/'+msg.map.attach.compressUrl);
 	        		window.setTimeout(query,1000);
 	        	}else{
 	        		layui.msg.error(msg.content);
