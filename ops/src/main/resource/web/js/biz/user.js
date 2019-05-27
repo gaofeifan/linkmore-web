@@ -100,7 +100,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
                 { 
                     sTitle: '最近登录时间',
                     mData: 'loginTime' ,
-                    bSortable: true,
+                    /*bSortable: true,*/
                     mRender:function(mData,type,full){
                              return new Date(mData).format('yyyy-MM-dd hh:mm');
                     }
@@ -108,7 +108,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
                 { 
                     sTitle: '最近下单时间',
                     mData: 'ordersTime' ,
-                    bSortable: true,
+                    /*bSortable: true,*/
                     mRender:function(mData,type,full){
                              return new Date(mData).format('yyyy-MM-dd hh:mm');
                     }
