@@ -78,13 +78,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	var addServerParams = function(data){  
 		var filters = new Array();
 		var filter = null; 
-		var searchEntName = $('#search-ent-name').val();
-		if(searchEntName!=''){
-			filter = new Object();
-			filter.property = 'entName';
-			filter.value = '%'+searchEntName +'%';
-			filters.push(filter);
-		}
+		
 		var searchPreName = $('#search-pre-name').val();
 		if(searchPreName!=''){
 			filter = new Object();
@@ -122,7 +116,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		columns:[
 			{ sTitle: 'ID',   mData: 'id', bVisible:false}, 
 			{ sTitle: '车牌',   mData: 'plateNo'}, 
-			{ sTitle: '企业名称',   mData: 'entName'}, 
+			{ sTitle: '企业名称',   mData: 'entName',bVisible:false}, 
 			{ sTitle: '车区ID',  mData: 'preId', bVisible:false}, 
 			{ sTitle: '车区名称',   mData: 'preName'}, 
 			{ sTitle: '车位ID',  mData: 'stallId', bVisible:false}, 
@@ -162,10 +156,7 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 	 */
 	$('#export-button').bind('click',function(){
 		var data = new Object(); 
-		var searchEntName = $('#search-ent-name').val();
-		if(searchEntName!=''){
-			data.entName = '%'+searchEntName +'%';
-		}
+		
 		var searchPreName = $('#search-pre-name').val();
 		if(searchPreName!=''){
 			data.preName = '%'+searchPreName +'%';
@@ -174,6 +165,9 @@ layui.use(['layer','msg','form','ztree', 'common','datatable','laydate'], functi
 		var searchStartTime = $('#search-startTime').val();
 		if(searchStartTime!=''){
 			data.downTime = searchStartTime; 
+		}else{
+			layui.msg.error("请输入开始日期");
+			return false;
 		}
 		var searchEndTime = $('#search-endTime').val();
 		if(searchEndTime!=''){
