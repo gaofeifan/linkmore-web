@@ -192,8 +192,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			data:data,
 			success:function(res){
 				if(res.success){   
-					$('#add-logo-image').attr('src', 'http://oss.pabeitech.com/'+res.map.attach.originalUrl);
-	        		$('#theme-add-form input[name=logoUrl]').val('http://oss.pabeitech.com/'+res.map.attach.originalUrl); 
+					$('#add-logo-image').attr('src', 'http://oss.linkmoretech.cn/'+res.map.attach.originalUrl);
+	        		$('#theme-add-form input[name=logoUrl]').val('http://oss.linkmoretech.cn/'+res.map.attach.originalUrl); 
 				}else{
 					layui.msg.error(res.content);
 				} 
@@ -296,8 +296,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			data:data,
 			success:function(res){
 				if(res.success){   
-					$('#edit-logo-image').attr('src', 'http://oss.pabeitech.com/'+res.map.attach.originalUrl);
-	        		$('#theme-edit-form input[name=logoUrl]').val('http://oss.pabeitech.com/'+res.map.attach.originalUrl); 
+					$('#edit-logo-image').attr('src', 'http://oss.linkmoretech.cn/'+res.map.attach.originalUrl);
+	        		$('#theme-edit-form input[name=logoUrl]').val('http://oss.linkmoretech.cn/'+res.map.attach.originalUrl); 
 				}else{
 					layui.msg.error(res.content);
 				} 

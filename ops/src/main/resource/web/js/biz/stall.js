@@ -40,6 +40,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
  		if(level==1){
  			selectedEntId = treeNode.id; 
  			lastNode  = treeNode;
+ 			getFloor(selectedEntId);
  			query();
  		} else{
  			tree.selectNode(lastNode);  
@@ -47,6 +48,30 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
  			return true;
  		}
 	};
+	
+	var floorHtml = '';
+	var floorList = null;
+	function getFloor(preId){
+		layui.common.ajax({
+			url:'/admin/biz/prefecture/floor',
+			data:JSON.stringify(preId),
+			contentType:'application/json; charset=utf-8',
+			dataType:"json",
+			async:false,
+			success:function(list){
+				floorList = list;
+				floorHtml = '<option value="0">选择层</option>';
+				$.each(list,function(index,floor){
+					floorHtml += '<option value="'+floor+'">';
+					floorHtml += floor;
+					floorHtml += '</option>';
+				});
+				form.render('select');
+			},error:function(){
+				
+			}
+		});
+	}
 	
 	var setting = {
 		data: {
@@ -70,6 +95,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 				tree.selectNode(nodes[0].children[0]); 
 				selectedEntId = nodes[0].children[0].id; 
 				lastNode = nodes[0].children[0];
+				getFloor(selectedEntId);
 				query();
 			} 
 		},
@@ -206,20 +232,6 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          		return html;
 	          	}
 			},
-//			{
-//				sTitle: '释放操作',
-//	          	mData: 'bindOrderStatus',
-//	          	type:'status',
-//	          	mRender:function(mData,type,full){
-//	          		var html = '';
-//	          		if(mData !=0 && stemp ==2){
-//	          			html += '<label style="color:#32CD32;" >可以</label>';
-//	          		}else{
-//	          			html += '<label style="color:#666666;" >不可以</label>';
-//	          		}
-//	          		return html;
-//	          	}
-//			},
 			{
 				sTitle: '创建时间',
 	          	mData: 'createTime' ,
@@ -254,11 +266,14 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		$('#stall-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
+		$('#stall-add-form select[name=floor]').html(floorHtml);
 		form.render('checkbox');
 		form.render('radio');
+		form.render('select');
 		form.on('radio', function(data){
 			console.log(data.value); //被点击的radio的value值
 		});  
+		
 
 		$('#stall-add-button').bind('click',function(){
         	if(validate.valid()){
@@ -321,7 +336,8 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     });
     
     var editInit = function(validate,lindex){
-    	var list = datatable.selected();  	 
+    	var list = datatable.selected();  	
+    	$('#stall-edit-form select[name=floor]').html(floorHtml);
 		layui.common.set({
 			id:'stall-edit-form',
 			data:list[0]
@@ -329,6 +345,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 		$('#stall-edit-form select[name=id]').html(list[0].id);
 		form.render('checkbox');
 		form.render('radio');
+		form.render('select');
 		$('#stall-cancel-button').bind('click',function(){
 			layui.layer.close(lindex);
 		});
@@ -361,7 +378,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
     	param.url = 'edit.html';
     	param.title = '编辑信息'; 
     	var valid = new Object();
-    valid.id = "stall-edit-form";
+    	valid.id = "stall-edit-form";
     	valid.rules = {
     		stallName:{
     			required: true,
@@ -637,19 +654,5 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 			});
 		}); 
 	});
-	
-//	$('#stall-table input.checkboxes').bind('change',function(){
-//		var list = datatable.selected(); 
-//		$('.check-s').removeAttribute("disabled");
-//		if(list.length == 1 ){
-//			var os = list[0].bindOrderStatus
-//			var ls = list[0].status
-//			if(os == 0 && ls == 4){
-//			$('#down-button').setAttribute("disabled", true)
-//			}if(ls == 1){
-//			$('#up-button').setAttribute("disabled", true)
-//			}
-//		}
-//	});
 	
 });
