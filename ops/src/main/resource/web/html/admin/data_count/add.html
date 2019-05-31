@@ -1,0 +1,53 @@
+<div style="width:100%;margin:0 auto;padding:0 auto;">
+	<form id="data-count-add-form" class="layui-form layui-box" style='padding:25px 30px 20px 0;' action="#" data-auto="true" method="post">
+	   <input id="preName" type="hidden" name="preName">
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">选择所属车区</label>
+	        <div class="layui-input-block">
+	        	<select id="preId" name="preId" lay-filter="preId" class="input-sm form-control">
+				</select>
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">订单</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="orderConunt" placeholder="请输入订单数" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">订单收入</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="orderIncome" placeholder="请输入订单收入" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">固定车位数</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="fixed" placeholder="请输入固定车位数" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item">
+	        <label class="layui-form-label">固定车位使用次数</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="fixedNumberUse" placeholder="请输入固定车位使用次数" class="layui-input">
+	        </div>
+	    </div>
+      <div class="layui-form-item layui-form-text">
+	    <label class="layui-form-label">车位详情数据</label>
+	    <div class="layui-input-block">
+	      <textarea id="details" name="details" placeholder="请输入车位详情数据" class="layui-textarea"></textarea>
+	    </div>
+	  </div>
+	        <div class="layui-form-item layui-form-text">
+	    <label class="layui-form-label">车位报表数据</label>
+	    <div class="layui-input-block">
+	      <textarea id="reportForms"  name="reportForms" placeholder="请输入车位详情数据" class="layui-textarea"></textarea>
+	    </div>
+	  </div>
+	    <div class="hr-line-dashed"></div> 
+	</form>  
+	<div class="layui-form-item text-center">
+        <button class="layui-btn" id="data-count-add-button" type='button'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" id="data-count-cancel-button" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</div>
