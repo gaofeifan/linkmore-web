@@ -68,8 +68,21 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		key:'id',
 		columns:[ 
 			{ sTitle: '车区id',   mData: 'preId'}, 
+			{ sTitle: '车位类型',   mData: 'type',
+	          	mRender:function(mData,type,full){
+	          		if(full.type == 0){
+	          			return '<label style="color:gray;">临停</label>'
+	          		}else if(full.type == 2){
+	          			return '<label style="color:gray;">固定</label>'
+	          		}else if(full.type == 4){
+	          			return '<label style="color:gray;">全部</label>'
+	          		}else{
+	          			return '<label>再无数据/label>'
+	          		}
+	          	}
+			}, 
 			{ sTitle: '车区名称',   mData: 'preName'}, 
-			{ sTitle: '订单数',   mData: 'orderCount'}, 
+			{ sTitle: '订单数',   mData: 'orderConunt'}, 
 			{ sTitle: '订单收入',   mData: 'orderIncome'}, 
 			{ sTitle: '固定',   mData: 'fixed'}, 
 			{ sTitle: '固定使用数',   mData: 'fixedNumberUse'}, 
@@ -191,7 +204,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 					 var reportForms = "";
 					 var dataf = "#{固定车位数},#{固定车位数环比},#{固定使用次数},#{固定使用次数环比},#{固定自用},#{固定自用环比},#{固定授权},#{固定授权环比}";
 					 dataf += ",#{临停订单数},#{临停订单环比},#{临停收入},#{临停收入环比},#{临停预约收入},#{临停预约收入环比},#{临停扫码收入},#{临停扫码环比},#{临停分享收入},#{临停分享收入环比}";
-					 dataf +=",#{整体使用时长},#{整体使用时长环比},#{固定使用时长},#{固定使用时长环比},#{临停使用时长},#{临停使用时长环比}"
+					 dataf +=",#{整体使用时长},#{整体使用时长环比},#{固定使用时长},#{固定使用时长环比},#{临停使用时长},#{临停使用时长环比},#{固定自用车位数环比},#{固定授权车位数环比},#{临停预约订单环比},#{临停扫码订单环比},#{临停分享车位环比}"
 					 $.each(floors,function(index,f){
 						 var d = "#{"+f+"}";
 						 for(i = 0;i<3;i++){
