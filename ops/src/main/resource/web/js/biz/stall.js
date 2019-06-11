@@ -202,19 +202,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate','ztre
 	          		return html;
 	          	}
 			},
-			{
-				sTitle: '车位标识',
-	          	mData: 'brand',
-	          	mRender:function(mData,type,full){
-	          		var html = '';
-	          		if(0== mData){
-	          			html += '<label style="color:#FF00FF;">普通车位</label>';
-	          		}else if(1== mData){
-	          			html += '<label style="color:#FF4500;">品牌车位</label>';
-	          		}
-	          		return html;
-	          	}
-			},
+			{ sTitle: '所在楼层',   mData: 'floor'}, 
 			{
 				sTitle: '订单状态',
 	          	mData: 'bindOrderStatus',
