@@ -234,7 +234,7 @@ layui.use(['layer','msg','form', 'common','laydate', 'datatable' ], function() {
 		} 
 		var stallId = $('#search-stall').val();
 		var preId = $('#search-prefecture').val();
-		if(stallId!=0){
+		if(stallId!=0 && stallId != null){
 			data.stallId = stallId;
 		}else if(preId!=0){
 			data.preId = preId;
