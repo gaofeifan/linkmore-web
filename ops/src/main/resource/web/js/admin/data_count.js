@@ -77,7 +77,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	          		}else if(full.type == 4){
 	          			return '<label style="color:gray;">全部</label>'
 	          		}else{
-	          			return '<label>再无数据/label>'
+	          			return '<label>再无数据</label>'
 	          		}
 	          	}
 			}, 
@@ -111,7 +111,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 	});  
 	 
 	$('#start-button').bind('click',function(){
-		layui.msg.confirm('您确定要删除',function(){
+		layui.msg.confirm('您确定要启动',function(){
 			layui.common.ajax({
 				url:'/admin/admin/data-count/start',
 //				data:{}, 
@@ -130,7 +130,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		}); 
 	});
 	$('#stop-button').bind('click',function(){
-		layui.msg.confirm('您确定要删除',function(){
+		layui.msg.confirm('您确定要关闭',function(){
 			layui.common.ajax({
 				url:'/admin/admin/data-count/stop',
 //				data:{}, 
@@ -154,14 +154,13 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 			layui.msg.error('请选择一条记录');
 			return false;
 		}
-		var ids = new Array();
-		$.each(list,function(index,page){
-			ids.push(page.id);
-		});
+		console.log(list);
+		console.log(list[0].preId);
 		layui.msg.confirm('您确定要删除',function(){
 			layui.common.ajax({
 				url:'/admin/admin/data-count/delete',
-				data:{id:list[0].preId,time:new Date().getTime()}, 
+				data:JSON.stringify(list[0].preId), 
+				contentType:'application/json; charset=utf-8',
 				success:function(res){
 					if(res.success){  
 						layui.msg.success(res.content);
@@ -182,7 +181,7 @@ layui.use(['layer','msg','form', 'common','validate','datatable','laydate'], fun
 		 form.render('select');
 		 var floors = null;
 		 form.on('select(preId)', function(data) {
-			 $('#preName').val(preMap.get(data.value));
+			 $('#preName').val(preMap.get(data.value).name);
 				layui.common.ajax({
 					url:'/admin/biz/prefecture/data-count-floor',
 					data:JSON.stringify(data.value), 
